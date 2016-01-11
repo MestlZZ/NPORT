@@ -1,130 +1,112 @@
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using System.Xml;
-//using System.Web;
-//using System.Security.Cryptography;
-//using NPORT.Models.Database;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml;
+using System.Web;
+using System.Security.Cryptography;
+using NPORT.Models.Database;
 
-//namespace NPORT.Database.XMLDatabase
-//{
-//    public static class Roles
-//    {
-//        private static XmlDocument document;
-//        private static string Path = HttpContext.Current.Server.MapPath( "/App_Data/RoleDatabse.xml" );
+namespace NPORT.Database.XMLDatabase
+{
+    public static class Roles
+    {
+        private static XmlDocument document;
+        private static string Path = HttpContext.Current.Server.MapPath( "/App_Data/RoleDatabse.xml" );
 
-//        private static void OpenDatabase()
-//        {
-//            document = new XmlDocument();
-//            document.Load( Path );
-//        }
+        private static void OpenDatabase()
+        {
+            document = new XmlDocument();
+            document.Load( Path );
+        }
 
-//        public static List<Role> GetList()
-//        {
-//            OpenDatabase();
+        public static List<Role> GetList()
+        {
+            OpenDatabase();
 
-//            List<Role> users = new List<Role>();
+            List<Role> roles = new List<Role>();
 
-//            foreach (XmlNode note in document.SelectNodes( "RoleList/Role" ))
-//            {
-//                User user = new User();
-//                user.Id = Convert.ToString( note.Attributes["Id"].Value );
-//                user.Login = Convert.ToString( note.SelectSingleNode( "Login" ).Attributes["value"].Value );
-//                user.Password = Convert.ToString( note.SelectSingleNode( "Password" ).Attributes["value"].Value );
-//                user.Nickname = Convert.ToString( note.SelectSingleNode( "Nickname" ).Attributes["value"].Value );
-//                user.Phone = Convert.ToString( note.SelectSingleNode( "Phone" ).Attributes["value"].Value );
-//                user.Mail = Convert.ToString( note.SelectSingleNode( "Mail" ).Attributes["value"].Value );
-//                user.RegisterTime = Convert.ToString( note.SelectSingleNode( "RegisterDate" ).Attributes["value"].Value );
-//                user.UserRoleId = Convert.ToInt32( note.SelectSingleNode( "RoleId" ).Attributes["Id"].Value );
-//                user.Gender = Convert.ToBoolean( note.SelectSingleNode( "Gender" ).Attributes["value"].Value );
-//                users.Add( user );
-//            }
+            foreach (XmlNode note in document.SelectNodes( "RoleList/Role" ))
+            {
+                Role role = new Role();
+                role.Id = Convert.ToInt32( note.Attributes["Id"].Value );
+                role.Name = Convert.ToString( note.SelectSingleNode( "Name" ).Attributes["value"].Value );
+                var access = document.SelectSingleNode("Accesses");
+                role.Access_RemoveNews = Convert.ToBoolean(access.SelectSingleNode( "RemoveNews" ).Attributes["value"].Value);
+                role.Access_AddNews = Convert.ToBoolean( access.SelectSingleNode( "AddNews" ).Attributes["value"].Value );
+                role.Access_EditNews = Convert.ToBoolean( access.SelectSingleNode( "EditNews" ).Attributes["value"].Value );
+                roles.Add( role );
+            }
 
-//            return users;
-//        }
+            return roles;
+        }
 
-//        public static User Find( string Id )
-//        {
-//            OpenDatabase();
+        public static Role Find( string Id )
+        {
+            OpenDatabase();
 
-//            User user = null;
+            Role role = null;
 
-//            foreach (XmlNode note in document.SelectNodes( "UserList/User" ))
-//            {
-//                if (Id == Convert.ToString( note.Attributes["Id"].Value ))
-//                {
-//                    user = new User();
-//                    user.Id = Convert.ToString( note.Attributes["Id"].Value );
-//                    user.Login = Convert.ToString( note.SelectSingleNode( "Login" ).Attributes["value"].Value );
-//                    user.Password = Convert.ToString( note.SelectSingleNode( "Password" ).Attributes["value"].Value );
-//                    user.Nickname = Convert.ToString( note.SelectSingleNode( "Nickname" ).Attributes["value"].Value );
-//                    user.Phone = Convert.ToString( note.SelectSingleNode( "Phone" ).Attributes["value"].Value );
-//                    user.Mail = Convert.ToString( note.SelectSingleNode( "Mail" ).Attributes["value"].Value );
-//                    user.RegisterTime = Convert.ToString( note.SelectSingleNode( "RegisterDate" ).Attributes["value"].Value );
-//                    user.UserRoleId = Convert.ToInt32( note.SelectSingleNode( "RoleId" ).Attributes["Id"].Value );
-//                    user.Gender = Convert.ToBoolean( note.SelectSingleNode( "Gender" ).Attributes["value"].Value );
-//                    break;
-//                }
-//            }
+            foreach (XmlNode note in document.SelectNodes( "RoleList/Role" ))
+            {
+                if (Id == Convert.ToString( note.Attributes["Id"].Value ))
+                {
+                    role = new Role();
+                    role.Id = Convert.ToInt32( note.Attributes["Id"].Value );
+                    role.Name = Convert.ToString( note.SelectSingleNode( "Name" ).Attributes["value"].Value );
+                    var access = document.SelectSingleNode("Accesses");
+                    role.Access_RemoveNews = Convert.ToBoolean( access.SelectSingleNode( "RemoveNews" ).Attributes["value"].Value );
+                    role.Access_AddNews = Convert.ToBoolean( access.SelectSingleNode( "AddNews" ).Attributes["value"].Value );
+                    role.Access_EditNews = Convert.ToBoolean( access.SelectSingleNode( "EditNews" ).Attributes["value"].Value );
+                    break;
+                }
+            }
 
-//            return user;
-//        }
+            return role;
+        }
 
-//        public static void Register( User user )
-//        {
-//            OpenDatabase();
-//            user.Id = Guid.NewGuid().ToString();
+        public static int LastId()
+        {
+            OpenDatabase();
+            int id = 0;
+            foreach (XmlNode note in document.SelectNodes( "RoleList/Role" ))
+            {
+                id = Convert.ToInt32(note.Attributes["Id"].Value);
+            }
+            return id;
+        }
 
-//            XmlElement newUser = document.CreateElement("User");
-//            newUser.SetAttribute( "Id", user.Id );
+        public static void Register( Role role )
+        {
+            OpenDatabase();
+            role.Id = LastId() + 1;
 
-//            XmlElement element = document.CreateElement("Login");
-//            element.SetAttribute( "value", user.Login );
-//            newUser.AppendChild( element );
+            XmlElement newRole = document.CreateElement("Role");
+            newRole.SetAttribute( "Id", role.Id.ToString() );
 
-//            var md = MD5.Create();
-//            Encoding u8 = Encoding.UTF8;
+            XmlElement element = document.CreateElement("Name");
+            element.SetAttribute( "value", role.Name );
+            newRole.AppendChild( element );
 
-//            byte[] buff = u8.GetBytes(user.Password + user.Login);
-//            buff = md.ComputeHash( buff );
+            XmlElement access = document.CreateElement("Accesses");
 
-//            char[] chars = new char[buff.Length / sizeof(char)];
-//            System.Buffer.BlockCopy( buff, 0, chars, 0, buff.Length );
+            element = document.CreateElement("RemoveNews");
+            element.SetAttribute("value", role.Access_RemoveNews.ToString());
+            access.AppendChild( element );
 
-//            user.Password = new string( chars );
+            element = document.CreateElement( "AddNews" );
+            element.SetAttribute( "value", role.Access_AddNews.ToString() );
+            access.AppendChild( element );
 
-//            element = document.CreateElement( "Password" );
-//            element.SetAttribute( "value", user.Password );
-//            newUser.AppendChild( element );
+            element = document.CreateElement( "EditNews" );
+            element.SetAttribute( "value", role.Access_EditNews.ToString() );
+            access.AppendChild( element );
 
-//            element = document.CreateElement( "Nickname" );
-//            element.SetAttribute( "value", user.Nickname );
-//            newUser.AppendChild( element );
+            newRole.AppendChild( access );
 
-//            element = document.CreateElement( "Phone" );
-//            element.SetAttribute( "value", user.Phone );
-//            newUser.AppendChild( element );
-
-//            element = document.CreateElement( "Mail" );
-//            element.SetAttribute( "value", user.Mail );
-//            newUser.AppendChild( element );
-
-//            element = document.CreateElement( "RegisterDate" );
-//            element.SetAttribute( "value", user.RegisterTime );
-//            newUser.AppendChild( element );
-
-//            element = document.CreateElement( "RoleId" );
-//            element.SetAttribute( "Id", user.UserRoleId.ToString() );
-//            newUser.AppendChild( element );
-
-//            element = document.CreateElement( "Gender" );
-//            element.SetAttribute( "value", user.Gender.ToString() );
-//            newUser.AppendChild( element );
-
-//            document.DocumentElement.AppendChild( newUser );
-//            document.Save( Path );
-//        }
-//    }
-//}
+            document.DocumentElement.AppendChild( newRole );
+            document.Save( Path );
+        }
+    }
+}

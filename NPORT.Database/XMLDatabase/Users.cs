@@ -45,7 +45,7 @@ namespace NPORT.Database.XMLDatabase
             return users;
         }
 
-        public static User Find( string Id )
+        public static User Find( string Login )
         {
             OpenDatabase();
 
@@ -53,7 +53,35 @@ namespace NPORT.Database.XMLDatabase
 
             foreach (XmlNode note in document.SelectNodes( "UserList/User" ))
             {
-                if (Id == Convert.ToString( note.Attributes["Id"].Value ))
+                if (Login == Convert.ToString( note.SelectSingleNode("Login").Attributes["value"].Value ))
+                {
+                    user = new User();
+                    user.Id = Convert.ToString( note.Attributes["Id"].Value );
+                    user.Login = Convert.ToString( note.SelectSingleNode( "Login" ).Attributes["value"].Value );
+                    user.Password = Convert.ToString( note.SelectSingleNode( "Password" ).Attributes["value"].Value );
+                    user.Nickname = Convert.ToString( note.SelectSingleNode( "Nickname" ).Attributes["value"].Value );
+                    user.Phone = Convert.ToString( note.SelectSingleNode( "Phone" ).Attributes["value"].Value );
+                    user.Mail = Convert.ToString( note.SelectSingleNode( "Mail" ).Attributes["value"].Value );
+                    user.RegisterTime = Convert.ToString( note.SelectSingleNode( "RegisterDate" ).Attributes["value"].Value );
+                    user.UserRoleId = Convert.ToInt32( note.SelectSingleNode( "RoleId" ).Attributes["Id"].Value );
+                    user.Gender = Convert.ToBoolean( note.SelectSingleNode( "Gender" ).Attributes["value"].Value );
+                    break;
+                }
+            }
+
+            return user;
+        }
+
+        public static User Find( string Login, string Password )
+        {
+            OpenDatabase();
+
+            User user = null;
+
+            foreach (XmlNode note in document.SelectNodes( "UserList/User" ))
+            {
+                if (Login == Convert.ToString( note.SelectSingleNode( "Login" ).Attributes["value"].Value ) &&
+                    Password == Convert.ToString( note.SelectSingleNode( "Password" ).Attributes["value"].Value ))
                 {
                     user = new User();
                     user.Id = Convert.ToString( note.Attributes["Id"].Value );

@@ -1,3 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UserList>
+  <User Id="50fd3950-3598-4fb3-9d5d-be209df52319">
+    <Login value="Sasha" />
+    <Password value="榖뛡蘏夙䜊瑘ἲ" />
+    <Nickname value="ampersand" />
+    <Phone value="+380112223334" />
+    <Mail value="sasha@ukr.net" />
+    <RegisterDate value="" />
+    <RoleId Id="0" />
+    <Gender value="False" />
+  </User> 
 </UserList>
