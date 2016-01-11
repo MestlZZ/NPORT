@@ -26,7 +26,7 @@ namespace NPORT.Database.JSONDatabase
             else
             {
                 Type typ = Type.GetType("List<Models.Database.News>");
-                Newtonsoft.Json.Linq.JArray.;
+                //Newtonsoft.Json.Linq.JArray.;
                 newsList = (List<Models.Database.News>)json.Deserialize( text2, typ );
             }
 
