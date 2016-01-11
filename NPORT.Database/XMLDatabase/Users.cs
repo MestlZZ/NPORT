@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Web;
+using System.Security.Cryptography;
 using NPORT.Models.Database;
 
 namespace NPORT.Database.XMLDatabase
@@ -82,6 +83,17 @@ namespace NPORT.Database.XMLDatabase
             XmlElement element = document.CreateElement("Login");
             element.SetAttribute( "value", user.Login );
             newUser.AppendChild( element );
+
+            var md = MD5.Create();
+            Encoding u8 = Encoding.UTF8;
+
+            byte[] buff = u8.GetBytes(user.Password + user.Login);
+            buff = md.ComputeHash( buff );
+
+            char[] chars = new char[buff.Length / sizeof(char)];
+            System.Buffer.BlockCopy( buff, 0, chars, 0, buff.Length );
+
+            user.Password = new string(chars);
 
             element = document.CreateElement("Password");
             element.SetAttribute( "value", user.Password );
