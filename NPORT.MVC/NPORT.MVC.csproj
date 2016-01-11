@@ -82,9 +82,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\NPORT.Business\NPORT.Business.csproj">
       <Project>{2ead8ef9-6f4b-4938-9aa3-64301518b2f0}</Project>
