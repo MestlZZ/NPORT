@@ -16,7 +16,7 @@ namespace NPORT.Models.ViewModels
         [Display(Name = "User name (Email)")]
         public string Login { get; set; }
 
-        [Required]
+        //[Required]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }

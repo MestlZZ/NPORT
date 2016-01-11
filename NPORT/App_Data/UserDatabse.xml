@@ -9,5 +9,15 @@
     <RegisterDate value="" />
     <RoleId Id="0" />
     <Gender value="False" />
-  </User> 
+  </User>
+  <User Id="50fd3950-3598-4fb3-9d5d-be209df52319">
+    <Login value="123" />
+    <Password value="" />
+    <Nickname value="ampersand" />
+    <Phone value="+380112223334" />
+    <Mail value="sasha@ukr.net" />
+    <RegisterDate value="" />
+    <RoleId Id="0" />
+    <Gender value="False" />
+  </User>
 </UserList>
