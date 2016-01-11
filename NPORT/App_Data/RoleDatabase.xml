@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RoleList>
+  <Role Id="1">
+    <Name value="Administrator" />
+    <Accesses>
+      <RemoveNews value="true" />
+      <AddNews value="true"/>
+      <EditNews value="true"/>
+    </Accesses>
+  </Role>
+  <Role Id="2">
+    <Name value="Corespondent" />
+    <Accesses>
+      <RemoveNews value="false" />
+      <AddNews value="true"/>
+      <EditNews value="false"/>
+    </Accesses>
+  </Role>
+  <Role Id="3">
+    <Name value="Redactor" />
+    <Accesses>
+      <RemoveNews value="true" />
+      <AddNews value="false"/>
+      <EditNews value="true"/>
+    </Accesses>
+  </Role>
+</RoleList>
