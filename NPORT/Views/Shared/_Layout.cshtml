@@ -8,22 +8,26 @@
 </head>
 <body>
     <header>
+        <h1>Сайт новостей</h1>
     </header>
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
+    <div class="main">
+        <div class="body-content">
+            @RenderBody()
+        </div>
+        <nav class="menu">
+            <ul>
+                <li>
+                    @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </li>
+                <li>
+                    @Html.ActionLink("About us", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </li>
+                <li>
+                    @Html.ActionLink("Feedback", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </li>
+            </ul>
+        </nav>
     </div>
-    <nav class="menu">
-        <ul>
-            <li>
-                @Html.ActionLink( "Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" } )
-            </li>
-            <li>
-                @Html.ActionLink( "About us", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" } )
-            </li>
-        </ul>
-    </nav>
 
     <footer>
             <p>&copy; @DateTime.Now.Year - Students</p>
