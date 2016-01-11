@@ -13,13 +13,13 @@ namespace NPORT.MVC
     {
         public ActionResult Index()
         {
-            News news = new News();
-            news.AuthorId = "none";
-            news.Content = "My best news!!\n Returned ivano fiuleas";
-            news.Date = "16.12.2005";
-            news.Id = "guid";
-            news.Title = "Fantasy";
-            NewsJson.AddNews( news );
+            //News news = new News();
+            //news.AuthorId = "none";
+            //news.Content = "My best news!!\n Returned ivano fiuleas";
+            //news.Date = "16.12.2005";
+            //news.Id = "guid";
+            //news.Title = "Fantasy";
+            //NewsJson.AddNews( news );
             return View();
         }
     }

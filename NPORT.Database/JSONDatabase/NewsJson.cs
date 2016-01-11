@@ -17,8 +17,25 @@ namespace NPORT.Database.JSONDatabase
         public static void AddNews( Models.Database.News newNews )
         {
             var json = JsonSerializer.Create();
+
+            List<Models.Database.News> newsList;
+
+            StreamReader text2 = new StreamReader(Path);
+            if (text2.EndOfStream)
+                newsList = new List<Models.Database.News>();
+            else
+            {
+                Type typ = Type.GetType("List<Models.Database.News>");
+                Newtonsoft.Json.Linq.JArray.;
+                newsList = (List<Models.Database.News>)json.Deserialize( text2, typ );
+            }
+
+            newsList.Add( newNews );
+
+            text2.Close();
+
             StreamWriter text = new StreamWriter(Path);
-            json.Serialize( text, newNews );
+            json.Serialize( text, newsList );
             text.Close();
         }
     }
