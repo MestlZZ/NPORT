@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XMLDatabase\Roles.cs" />
     <Compile Include="XMLDatabase\Users.cs" />
   </ItemGroup>
   <ItemGroup>

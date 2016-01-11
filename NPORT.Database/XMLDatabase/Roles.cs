@@ -42,34 +42,39 @@ namespace NPORT.Database.XMLDatabase
             return roles;
         }
 
-        public static User Find( string Id )
+        public static Role Find( int Id )
         {
             OpenDatabase();
 
-            User user = null;
+            Role role = null;
 
-            foreach (XmlNode note in document.SelectNodes( "UserList/User" ))
+            foreach (XmlNode note in document.SelectNodes( "RoleList/Role" ))
             {
-                if (Id == Convert.ToString( note.Attributes["Id"].Value ))
+                if (Id == Convert.ToInt32( note.Attributes["Id"].Value ))
                 {
-                    user = new User();
-                    user.Id = Convert.ToString( note.Attributes["Id"].Value );
-                    user.Login = Convert.ToString( note.SelectSingleNode( "Login" ).Attributes["value"].Value );
-                    user.Password = Convert.ToString( note.SelectSingleNode( "Password" ).Attributes["value"].Value );
-                    user.Nickname = Convert.ToString( note.SelectSingleNode( "Nickname" ).Attributes["value"].Value );
-                    user.Phone = Convert.ToString( note.SelectSingleNode( "Phone" ).Attributes["value"].Value );
-                    user.Mail = Convert.ToString( note.SelectSingleNode( "Mail" ).Attributes["value"].Value );
-                    user.RegisterTime = Convert.ToString( note.SelectSingleNode( "RegisterDate" ).Attributes["value"].Value );
-                    user.UserRoleId = Convert.ToInt32( note.SelectSingleNode( "RoleId" ).Attributes["Id"].Value );
-                    user.Gender = Convert.ToBoolean( note.SelectSingleNode( "Gender" ).Attributes["value"].Value );
+                    role = new Role();
+                    role.Id = Convert.ToInt32( note.Attributes["Id"].Value );
+                    role.Name = Convert.ToString( note.SelectSingleNode( "Name" ).Attributes["value"].Value );
+                    var access = note.SelectSingleNode("Accesses");
+                    role.Access_RemoveNews = Convert.ToBoolean( access.SelectSingleNode( "RemoveNews" ).Attributes["value"].Value );
+                    role.Access_AddNews = Convert.ToBoolean( access.SelectSingleNode( "AddNews" ).Attributes["value"].Value );
+                    role.Access_EditNews = Convert.ToBoolean( access.SelectSingleNode( "EditNews" ).Attributes["value"].Value );
                     break;
                 }
             }
 
-            return user;
+            return role;
         }
 
-        public static void Register( User user )
+        public static int LastId()
+        {
+            OpenDatabase();
+
+            foreach (XmlNode note in document.SelectNodes( "RoleList/Role" ))
+            {
+            }
+
+        public static void Register( Role user )
         {
             OpenDatabase();
             user.Id = Guid.NewGuid().ToString();
