@@ -12,8 +12,7 @@ namespace NPORT.MVC
     public class HomeController : Controller
     {
         public ActionResult Index()
-        {
-            
+        {                        
             return View();
         }
     }
