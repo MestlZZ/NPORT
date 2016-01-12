@@ -11,7 +11,7 @@
     <div class="news">
         <h2 class="title">@news.Title</h2>
         <p class="content">@news.Content</p>
-        <a class="btn" href="#">Detailed...</a><br/>
+        @Html.ActionLink( "Detailed...", "Detailed", "Home", new { NewsId = news.Id }, null )<br/>
         <span class="author">&copy; @Author.Nickname</span>
         <span class="date">@news.Date</span>
     </div>

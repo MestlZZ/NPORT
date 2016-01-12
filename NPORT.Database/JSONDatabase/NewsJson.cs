@@ -35,6 +35,15 @@ namespace NPORT.Database.JSONDatabase
             file2.Close();
         }
 
+        public static Models.Database.News Find( string id )
+        {
+            var list = GetList();
+            foreach (var news in list)
+                if (news.Id == id)
+                    return news;
+            return null;
+        }
+
         public static List<Models.Database.News> GetList()
         {
             StreamReader file = new StreamReader(Path);

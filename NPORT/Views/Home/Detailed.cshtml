@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Detailed Page";
+    var news = NPORT.Database.JSONDatabase.NewsJson.Find(ViewBag.Id);
+    var Author = NPORT.Database.XMLDatabase.Users.Find( news.AuthorId );
+}
+
+<h2>Detailed</h2>
+<div class="news1">
+    <h2 class="title">@news.Title</h2>
+    <p class="content">@news.Content</p>
+    <span class="author">&copy; @Author.Nickname</span>
+    <span class="date">@news.Date</span>
+</div>
+

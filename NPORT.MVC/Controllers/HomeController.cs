@@ -26,5 +26,12 @@ namespace NPORT.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Detailed( string NewsId )
+        {
+            ViewBag.Id = NewsId;
+            return View();
+        }
     }
 }
