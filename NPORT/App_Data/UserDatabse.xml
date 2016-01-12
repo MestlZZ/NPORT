@@ -2,7 +2,7 @@
 <UserList>
   <User Id="50fd3950-3598-4fb3-9d5d-be209df52319">
     <Login value="Sasha" />
-    <Password value="榖뛡蘏夙䜊瑘ἲ" />
+    <Password value="111111" />
     <Nickname value="ampersand" />
     <Phone value="+380112223334" />
     <Mail value="sasha@ukr.net" />
@@ -11,11 +11,31 @@
     <Gender value="False" />
   </User>
   <User Id="50fd3950-3598-4fb3-9d5d-be209df52319">
-    <Login value="123" />
-    <Password value="" />
+    <Login value="Bogdan" />
+    <Password value="222222" />
     <Nickname value="ampersand" />
-    <Phone value="+380112223334" />
+    <Phone value="+380123456789" />
     <Mail value="sasha@ukr.net" />
+    <RegisterDate value="" />
+    <RoleId Id="0" />
+    <Gender value="False" />
+  </User>
+  <User Id="33e052f9-7979-4af8-91a3-e80bdb282450">
+    <Login value="man" />
+    <Password value="Qwerty_1" />
+    <Nickname value="" />
+    <Phone value="+380111111111" />
+    <Mail value="pasha@ukr.net" />
+    <RegisterDate value="" />
+    <RoleId Id="0" />
+    <Gender value="False" />
+  </User>
+  <User Id="baf866c4-126e-4fa6-82aa-d88791dfe408">
+    <Login value="+380123456789" />
+    <Password value="Qwerty_1" />
+    <Nickname value="" />
+    <Phone value="" />
+    <Mail value="alex@ukr.net" />
     <RegisterDate value="" />
     <RoleId Id="0" />
     <Gender value="False" />

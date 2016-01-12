@@ -35,7 +35,7 @@ namespace NPORT.Database.XMLDatabase
                 user.Password = Convert.ToString( note.SelectSingleNode( "Password" ).Attributes["value"].Value );
                 user.Nickname = Convert.ToString( note.SelectSingleNode( "Nickname" ).Attributes["value"].Value );
                 user.Phone = Convert.ToString( note.SelectSingleNode( "Phone" ).Attributes["value"].Value );
-                user.Mail = Convert.ToString( note.SelectSingleNode( "Mail" ).Attributes["value"].Value );
+                user.Email = Convert.ToString( note.SelectSingleNode( "Mail" ).Attributes["value"].Value );
                 user.RegisterTime = Convert.ToString( note.SelectSingleNode( "RegisterDate" ).Attributes["value"].Value );
                 user.UserRoleId = Convert.ToInt32( note.SelectSingleNode( "RoleId" ).Attributes["Id"].Value );
                 user.Gender = Convert.ToBoolean( note.SelectSingleNode( "Gender" ).Attributes["value"].Value );
@@ -62,7 +62,7 @@ namespace NPORT.Database.XMLDatabase
                     user.Password = Convert.ToString( note.SelectSingleNode( "Password" ).Attributes["value"].Value );
                     user.Nickname = Convert.ToString( note.SelectSingleNode( "Nickname" ).Attributes["value"].Value );
                     user.Phone = Convert.ToString( note.SelectSingleNode( "Phone" ).Attributes["value"].Value );
-                    user.Mail = Convert.ToString( note.SelectSingleNode( "Mail" ).Attributes["value"].Value );
+                    user.Email = Convert.ToString( note.SelectSingleNode( "Mail" ).Attributes["value"].Value );
                     user.RegisterTime = Convert.ToString( note.SelectSingleNode( "RegisterDate" ).Attributes["value"].Value );
                     user.UserRoleId = Convert.ToInt32( note.SelectSingleNode( "RoleId" ).Attributes["Id"].Value );
                     user.Gender = Convert.ToBoolean( note.SelectSingleNode( "Gender" ).Attributes["value"].Value );
@@ -90,7 +90,7 @@ namespace NPORT.Database.XMLDatabase
                     user.Password = Convert.ToString( note.SelectSingleNode( "Password" ).Attributes["value"].Value );
                     user.Nickname = Convert.ToString( note.SelectSingleNode( "Nickname" ).Attributes["value"].Value );
                     user.Phone = Convert.ToString( note.SelectSingleNode( "Phone" ).Attributes["value"].Value );
-                    user.Mail = Convert.ToString( note.SelectSingleNode( "Mail" ).Attributes["value"].Value );
+                    user.Email = Convert.ToString( note.SelectSingleNode( "Mail" ).Attributes["value"].Value );
                     user.RegisterTime = Convert.ToString( note.SelectSingleNode( "RegisterDate" ).Attributes["value"].Value );
                     user.UserRoleId = Convert.ToInt32( note.SelectSingleNode( "RoleId" ).Attributes["Id"].Value );
                     user.Gender = Convert.ToBoolean( note.SelectSingleNode( "Gender" ).Attributes["value"].Value );
@@ -122,7 +122,7 @@ namespace NPORT.Database.XMLDatabase
             char[] chars = new char[buff.Length / sizeof(char)];
             System.Buffer.BlockCopy( buff, 0, chars, 0, buff.Length );
 
-            user.Password = new string(chars);
+            //user.Password = new string(chars);
 
             element = document.CreateElement("Password");
             element.SetAttribute( "value", user.Password );
@@ -137,7 +137,7 @@ namespace NPORT.Database.XMLDatabase
             newUser.AppendChild( element );
 
             element = document.CreateElement("Mail");
-            element.SetAttribute( "value", user.Mail );
+            element.SetAttribute( "value", user.Email );
             newUser.AppendChild( element );
 
             element = document.CreateElement("RegisterDate");

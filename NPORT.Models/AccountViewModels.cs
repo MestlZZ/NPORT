@@ -49,9 +49,8 @@ namespace NPORT.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Адрес электронной почты")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Номер телефона ")]
+        public string Login { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -68,6 +67,11 @@ namespace NPORT.Models
         [EmailAddress]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
+
+
+        [Required]
+        [Display(Name = "Phone ")]
+        public string Phone { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]

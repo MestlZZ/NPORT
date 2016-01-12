@@ -11,6 +11,7 @@ namespace NPORT.Models.Database
 {
     public class User
     {
+        public User () { }
         public string Id { get; set; }
 
         public string Login { get; set; }
@@ -21,7 +22,7 @@ namespace NPORT.Models.Database
 
         public string Phone { get; set; }
 
-        public string Mail { get; set; }
+        public string Email { get; set; }
 
         public bool Gender { get; set; }
 
