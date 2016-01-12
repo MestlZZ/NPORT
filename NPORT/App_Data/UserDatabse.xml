@@ -40,4 +40,34 @@
     <RoleId Id="0" />
     <Gender value="False" />
   </User>
+  <User Id="f02a6fc7-1554-4b41-b2e3-8034551c044a">
+    <Login value="+380123456789987654321" />
+    <Password value="Qwerty_1" />
+    <Nickname value="" />
+    <Phone value="" />
+    <Mail value="god@ukr.net" />
+    <RegisterDate value="" />
+    <RoleId Id="0" />
+    <Gender value="False" />
+  </User>
+  <User Id="854a1dbf-ed68-424f-8093-5ba6717142e7">
+    <Login value="+380987654321" />
+    <Password value="Qwerty_1" />
+    <Nickname value="" />
+    <Phone value="" />
+    <Mail value="god@ukr.net" />
+    <RegisterDate value="" />
+    <RoleId Id="0" />
+    <Gender value="False" />
+  </User>
+  <User Id="cb1a94b2-cf89-49e6-9a41-5f756c02648e">
+    <Login value="+380111111111" />
+    <Password value="Qwerty_1" />
+    <Nickname value="" />
+    <Phone value="" />
+    <Mail value="man@ukr.net" />
+    <RegisterDate value="" />
+    <RoleId Id="0" />
+    <Gender value="False" />
+  </User>
 </UserList>
