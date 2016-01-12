@@ -28,14 +28,12 @@ namespace NPORT.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Correspondent")]
         public ActionResult AddNews()
         {
             return View();
         }
 
         [Authorize( Roles = "Admin" )]
-        [Authorize( Roles = "Correspondent" )]
         [HttpPost]
         public ActionResult AddNews(NPORT.Models.Database.News news)
         {
