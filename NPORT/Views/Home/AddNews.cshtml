@@ -1,0 +1,11 @@
+﻿@model NPORT.Models.Database.News
+@{
+    ViewBag.Title = "AddNews";
+}
+
+<h2>AddNews</h2>
+<form method="post">
+@Html.EditorForModel();
+    <input class="btn" type="submit" />
+</form>
+

@@ -26,6 +26,24 @@ namespace NPORT.Controllers
 
             return View();
         }
+        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "correspondent")]
+        public ActionResult AddNews()
+        {
+            return View();
+        }
+        [Authorize( Roles = "admin" )]
+        [Authorize( Roles = "correspondent" )]
+        [HttpPost]
+        public ActionResult AddNews(NPORT.Models.Database.News news)
+        {
+            if (ModelState.IsValid)
+            {
+                NPORT.Database.JSONDatabase.NewsJson.Add( news );
+                return RedirectToAction("Index");
+            }
+            return View( news );
+        }
 
         [HttpGet]
         public ActionResult Detailed( string NewsId )
