@@ -49,7 +49,7 @@ namespace NPORT.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Login ")]
+        [Display(Name = "Номер телефона ")]
         public string Login { get; set; }
 
         [Required]
@@ -68,9 +68,6 @@ namespace NPORT.Models
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
 
-        [Required]
-        [Display(Name = "Login ")]
-        public string Login { get; set; }
 
         [Required]
         [Display(Name = "Phone ")]

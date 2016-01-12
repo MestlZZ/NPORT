@@ -153,7 +153,7 @@ namespace NPORT.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Login, Email = model.Email, PhoneNumber=model.Phone};
+                var user = new ApplicationUser { UserName = model.Phone, Email = model.Email};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -164,12 +164,11 @@ namespace NPORT.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
-                    //User userb = new User();
-                    //userb.Email = model.Email;
-                    //userb.Phone = model.Phone;
-                    //userb.Login = model.Login;
-                    //userb.Password = model.Password;
-                    //Users.Register(userb);
+                    User userb = new User();
+                    userb.Email = model.Email;
+                    userb.Login = model.Phone;
+                    userb.Password = model.Password;
+                    Users.Register(userb);
 
                     return RedirectToAction("Index", "Home");
                 }
