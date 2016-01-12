@@ -4,7 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nport | @ViewBag.Title</title>
-    <link href="~/Content/css/Site.css" rel="stylesheet" type="text/css" />
+    @Styles.Render( "~/Content/css" )
+    @Scripts.Render( "~/bundles/modernizr" )
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <header>
@@ -15,22 +19,20 @@
             @RenderBody()
         </div>
         <nav class="menu">
-            <ul>
-                <li>
-                    @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </li>
-                <li>
-                    @Html.ActionLink("About us", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </li>
-                <li>
-                    @Html.ActionLink("Feedback", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </li>
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink( "Домашняя страница", "Index", "Home" )</li>
+                <li>@Html.ActionLink( "О программе", "About", "Home" )</li>
+                <li>@Html.ActionLink( "Контакт", "Contact", "Home" )</li>
             </ul>
+            @Html.Partial( "_LoginPartial" )
         </nav>
     </div>
 
     <footer>
             <p>&copy; @DateTime.Now.Year - Students</p>
     </footer>
+    @Scripts.Render( "~/bundles/jquery" )
+    @Scripts.Render( "~/bundles/bootstrap" )
+    @RenderSection( "scripts", required: false )
 </body>
 </html>
