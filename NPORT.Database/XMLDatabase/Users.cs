@@ -53,7 +53,8 @@ namespace NPORT.Database.XMLDatabase
 
             foreach (XmlNode note in document.SelectNodes( "UserList/User" ))
             {
-                if (Login == Convert.ToString( note.SelectSingleNode("Login").Attributes["value"].Value ))
+                if (Login == Convert.ToString( note.SelectSingleNode("Login").Attributes["value"].Value ) ||
+                    Login == Convert.ToString( note.Attributes["Id"].Value ))
                 {
                     user = new User();
                     user.Id = Convert.ToString( note.Attributes["Id"].Value );

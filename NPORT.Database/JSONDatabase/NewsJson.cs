@@ -14,29 +14,37 @@ namespace NPORT.Database.JSONDatabase
     {
         private static string Path = HttpContext.Current.Server.MapPath( "/App_Data/NewsDatabase.json" );
 
-        public static void AddNews( Models.Database.News newNews )
+        public static void Add( Models.Database.News newNews )
         {
-            var json = JsonSerializer.Create();
+            StreamReader file = new StreamReader(Path);
 
-            List<Models.Database.News> newsList;
+            string json = file.ReadToEnd();
+            List<Models.Database.News> items = JsonConvert.DeserializeObject<List<Models.Database.News>>(json);
 
-            StreamReader text2 = new StreamReader(Path);
-            if (text2.EndOfStream)
-                newsList = new List<Models.Database.News>();
-            else
-            {
-                Type typ = Type.GetType("List<Models.Database.News>");
-                //Newtonsoft.Json.Linq.JArray.;
-                newsList = (List<Models.Database.News>)json.Deserialize( text2, typ );
-            }
+            if (items == null)
+                items = new List<Models.Database.News>();
 
-            newsList.Add( newNews );
+            file.Close();
 
-            text2.Close();
+            items.Add( newNews );
 
-            StreamWriter text = new StreamWriter(Path);
-            json.Serialize( text, newsList );
-            text.Close();
+            StreamWriter file2 = new StreamWriter(Path);
+
+            file2.Write(JsonConvert.SerializeObject(items));
+
+            file2.Close();
+        }
+
+        public static List<Models.Database.News> GetList()
+        {
+            StreamReader file = new StreamReader(Path);
+
+            string json = file.ReadToEnd();
+            List<Models.Database.News> items = JsonConvert.DeserializeObject<List<Models.Database.News>>(json);
+            
+            file.Close();
+
+            return items;
         }
     }
 }
