@@ -116,6 +116,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-Nport-20160112123928.mdf" />
+    <Content Include="App_Data\aspnet-Nport-20160112123928_log.ldf">
+      <DependentUpon>aspnet-Nport-20160112123928.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\RoleDatabase.xml" />
     <Content Include="App_Data\UserDatabse.xml" />
     <Content Include="Content\bootstrap.css" />
