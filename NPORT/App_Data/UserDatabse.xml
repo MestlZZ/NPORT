@@ -70,4 +70,24 @@
     <RoleId Id="0" />
     <Gender value="False" />
   </User>
+  <User Id="87ff2a03-16bb-43ca-b426-787a46beb5db">
+    <Login value="+380930808372" />
+    <Password value="Boger7771_" />
+    <Nickname value="" />
+    <Phone value="" />
+    <Mail value="mestl_z@ukr.net" />
+    <RegisterDate value="" />
+    <RoleId Id="0" />
+    <Gender value="False" />
+  </User>
+  <User Id="0cc0b16c-4c1d-4af2-86b8-606d1bc44eca">
+    <Login value="+380930808372" />
+    <Password value="Boger7771_" />
+    <Nickname value="Mestl" />
+    <Phone value="+380930808372" />
+    <Mail value="mestl_zz@ukr.net" />
+    <RegisterDate value="" />
+    <RoleId Id="1" />
+    <Gender value="False" />
+  </User>
 </UserList>

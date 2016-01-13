@@ -16,6 +16,9 @@ namespace NPORT.Database.JSONDatabase
 
         public static void Add( Models.Database.News newNews )
         {
+            newNews.Date = DateTime.UtcNow.ToString();
+            newNews.Id = Guid.NewGuid().ToString();
+
             StreamReader file = new StreamReader(Path);
 
             string json = file.ReadToEnd();

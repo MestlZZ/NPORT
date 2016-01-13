@@ -74,6 +74,7 @@ div.main div.body-content{
     display: inline-block;
     border-right: 2px dashed black;
     width: 72%;
+    min-height:360px;
     padding: 10px 30px;
 }
 
@@ -156,38 +157,68 @@ div.main nav.menu ul li.user a{
     background-color: #50505a;
     color: white;
     text-decoration: none;
+    -webkit-transition: all 0.2s ease-out;
+     -moz-transition: all 0.2s ease-out;
+     -o-transition: all 0.2s ease-out;
+     transition: all 0.2s ease-out;
 }
 
 .btn:hover{
     background-color: #70707a;
+    transform: scale(1.1);
 }
+
 .news{
-    width: 40%;
-    float: left;
+    width: 45%;
+    float: right;
     padding: 0 10px;
     border: 1px dashed black;
     padding-bottom: 10px;
+    margin-bottom: 15px;
 }
+
+.news .break-line{
+    display: none;
+}
+
 .news .title{
     text-align: center;
 }
+
 .news a{
     float: right;
 }
+
 .news .author{
     color: red;
     font-weight: bold;
 }
+
 .news a::after{
-    content: "";
-    display: table;
+    content: "...";
+    display: inline;
     clear: both;
 }
+
 .news:nth-child(2n){
-    float: right;
+    float: left;
 }
-.news:nth-child(2n)::after{
+
+.news:nth-child(2n+1)::after{
     content: "";
     display: table;
     clear: both;
+}
+
+.news:nth-child(2n):last-child{
+    width: 666px;
+}
+
+.news p.content{
+    display: block;
+    height: 60px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-indent: 20px;
+    text-align: justify;
 }
