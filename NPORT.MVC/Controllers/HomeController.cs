@@ -4,11 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using System.Web.UI;
 
 namespace NPORT.Controllers
 {
     public class HomeController : Controller
     {
+        [OutputCache(Duration = 60, Location = OutputCacheLocation.Any)]
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
