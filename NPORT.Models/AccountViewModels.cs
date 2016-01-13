@@ -63,18 +63,19 @@ namespace NPORT.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Please fill 'Email' field")]
+        [EmailAddress(ErrorMessage = "Please enter Email in the correct form: myEmail@gmail.net for example")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Please fill 'Phone' field")]
+        [RegularExpression(@"[+]{1}[0-9]{12}", ErrorMessage = "Please, enter phone number in this format: +123456789123 for example")]
         [Display(Name = "Phone ")]
         public string Phone { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "Password must have more than {2} symbols", MinimumLength = 6)]
+        [Required(ErrorMessage = "Please fill 'Password' field")]
+        [StringLength(16, ErrorMessage = "Password must have more than {2} symbols and less than 16 symbols", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

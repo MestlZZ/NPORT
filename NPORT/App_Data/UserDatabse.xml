@@ -90,4 +90,24 @@
     <RoleId Id="1" />
     <Gender value="False" />
   </User>
+  <User Id="b6194e7e-8da8-4405-b5e6-93c7c64e8c36">
+    <Login value="+3805" />
+    <Password value="qWERTY_1" />
+    <Nickname value="" />
+    <Phone value="" />
+    <Mail value="Yulya@ukr.net" />
+    <RegisterDate value="" />
+    <RoleId Id="0" />
+    <Gender value="False" />
+  </User>
+  <User Id="f54c4eb3-6d5f-489c-9077-83a10393a5c4">
+    <Login value="123" />
+    <Password value="qWERTY_1" />
+    <Nickname value="" />
+    <Phone value="" />
+    <Mail value="Yulya@ukr.net" />
+    <RegisterDate value="" />
+    <RoleId Id="0" />
+    <Gender value="False" />
+  </User>
 </UserList>
