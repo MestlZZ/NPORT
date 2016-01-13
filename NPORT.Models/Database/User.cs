@@ -11,7 +11,6 @@ namespace NPORT.Models.Database
 {
     public class User
     {
-        public User () { }
         public string Id { get; set; }
 
         public string Login { get; set; }
