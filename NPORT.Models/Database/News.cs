@@ -10,7 +10,7 @@ namespace NPORT.Models.Database
 {
     public class News
     {
-        [ScaffoldColumn(false)]
+        [HiddenInput(DisplayValue = false)]
         public string Id { get; set; }
 
         [Required]
@@ -19,10 +19,10 @@ namespace NPORT.Models.Database
         [Required]
         public string Content { get; set; }
 
-        [ScaffoldColumn( false )]
+        [HiddenInput(DisplayValue = false)]
         public string AuthorId { get; set; }
 
-        [ScaffoldColumn( false )]
+        [HiddenInput(DisplayValue = false)]
         public string Date { get; set; }
     }
 }

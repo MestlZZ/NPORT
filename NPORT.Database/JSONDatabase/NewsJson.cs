@@ -58,5 +58,34 @@ namespace NPORT.Database.JSONDatabase
 
             return items;
         }
+        public static void Edit(Models.Database.News news)
+        {
+            List<Models.Database.News> bufferList = GetList();
+            for (int i=0; i<bufferList.Count; i++)
+            {
+                if(bufferList[i].Id==news.Id)
+                {
+                    bufferList[i] = news;
+                }
+            }
+            StreamWriter file2 = new StreamWriter(Path);
+
+            file2.Write(JsonConvert.SerializeObject(bufferList));
+
+            file2.Close();
+        }
+        public static void Remove(string NewsId)
+        {
+            List<Models.Database.News> bufferList = GetList();
+            foreach (var news in bufferList)
+                if (news.Id == NewsId)
+                {
+                    bufferList.Remove(news);
+                    break;
+                }            
+            StreamWriter file2 = new StreamWriter(Path);
+            file2.Write(JsonConvert.SerializeObject(bufferList));
+            file2.Close();
+        }
     }
 }

@@ -1,13 +1,30 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+@{
     ViewBag.Title = "Detailed Page";
     var news = NPORT.Database.JSONDatabase.NewsJson.Find(ViewBag.Id);
-    var Author = NPORT.Database.XMLDatabase.Users.Find( news.AuthorId );
+    var Author = NPORT.Database.XMLDatabase.Users.Find(news.AuthorId);
 }
 
 <div class="news1">
     <h2 class="title">@news.Title</h2>
     <p class="content">@news.Content</p>
-    <span class="author">&copy; @Author.Nickname</span>
+    @*<span class="author">&copy; @Author.Nickname</span>*@
     <span class="date">@news.Date</span>
+    <p>
+        @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+            {
+            <br>
+            @Html.ActionLink("Редактировать", "Edit", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
+            <br>
+            @Html.ActionLink("Удалить новость", "Remove", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
+        }
+        @if (User.IsInRole("Correspondent") && news.AuthorId == User.Identity.GetUserId())
+        {
+            <br>
+            @Html.ActionLink("Редактировать", "Edit", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
+            <br>
+            @Html.ActionLink("Удалить новость", "Remove", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
+        }
+    </p>
 </div>
 

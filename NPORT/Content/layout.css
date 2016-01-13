@@ -167,7 +167,12 @@ div.main nav.menu ul li.user a{
     background-color: #70707a;
     transform: scale(1.1);
 }
-
+.btn-edit {
+    margin: 10px;
+}
+.date{
+    clear:both;
+}
 .news{
     width: 45%;
     float: right;

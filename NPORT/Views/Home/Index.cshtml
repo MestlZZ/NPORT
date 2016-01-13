@@ -1,23 +1,30 @@
 ﻿@using NPORT.Database.JSONDatabase;
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Home Page";
     var newsList = NewsJson.GetList();
 }
 
 <h1>News</h1>
-@foreach (var news in newsList)
+@if (newsList != null)
 {
-    var Author = NPORT.Database.XMLDatabase.Users.Find( news.AuthorId );
+    foreach (var news in newsList)
+    {
+        var Author = NPORT.Database.XMLDatabase.Users.Find(news.AuthorId);
     <div class="news">
         <h2 class="title">@news.Title</h2>
         <p class="content">@news.Content</p>
-        @Html.ActionLink( "Detailed", "Detailed", "Home", new { NewsId = news.Id }, new { @class = "btn" } )<br/>
+        <p>
+            @Html.ActionLink("Детально", "Detailed", "Home", new { NewsId = news.Id }, new { @class = "btn" })<br />
+           
+        </p>
         <span class="author">&copy;
-        @if(Author != null)
-        {     
+        @if (Author != null)
+        {
             @Author.Nickname
         }
         </span>
         <span class="date">@news.Date </span>
     </div>
+    }
 }

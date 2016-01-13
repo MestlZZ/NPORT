@@ -27,6 +27,7 @@ namespace NPORT.Controllers
 
             return View();
         }
+
         [Authorize(Roles = "Admin, Correspondent")]
         public ActionResult AddNews()
         {
@@ -50,6 +51,40 @@ namespace NPORT.Controllers
         {
             ViewBag.Id = NewsId;
             return View();
+        }
+        [Authorize(Roles = "Admin, Correspondent, Editor")]
+        [HttpGet]
+        public ActionResult Edit (string NewsId)
+        {
+            var model = NPORT.Database.JSONDatabase.NewsJson.Find(NewsId);
+            return View(model);
+        }
+
+        [Authorize(Roles = "Admin, Correspondent, Editor")]
+        [HttpPost]
+        public ActionResult Edit(NPORT.Models.Database.News news)
+        {
+            if (ModelState.IsValid)
+            {
+                NPORT.Database.JSONDatabase.NewsJson.Edit(news);
+                return RedirectToAction("Index");
+            }
+            return View(news);
+        }
+        //[Authorize(Roles = "Admin, Correspondent, Editor")]
+        //[HttpGet]
+        //public ActionResult Remove(string NewsId)
+        //{
+        //    var model = NPORT.Database.JSONDatabase.NewsJson.Find(NewsId);
+        //    return View(model);
+        //}
+
+        [Authorize(Roles = "Admin, Correspondent, Editor")]
+        [HttpGet]
+        public ActionResult Remove(string NewsId)
+        {
+            NPORT.Database.JSONDatabase.NewsJson.Remove(NewsId);
+            return RedirectToAction("Index");
         }
     }
 }

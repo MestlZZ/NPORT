@@ -10,7 +10,10 @@
             @Html.ActionLink("Здравствуйте, " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
-        <li>@Html.ActionLink( "Добавить новость", "AddNews", "Home" )</li>
+        @if (User.IsInRole("Correspondent") || User.IsInRole("Admin"))
+        {
+            <li>@Html.ActionLink("Добавить новость", "AddNews", "Home")</li>
+        }       
     </ul>
     }
 }
