@@ -14,16 +14,16 @@
         @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
             {
             <br>
-            @Html.ActionLink("Редактировать", "Edit", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
+            @Html.ActionLink("Edit", "Edit", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
             <br>
-            @Html.ActionLink("Удалить новость", "Remove", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
+            @Html.ActionLink("Remove news", "Remove", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
         }
         @if (User.IsInRole("Correspondent") && news.AuthorId == User.Identity.GetUserId())
         {
             <br>
-            @Html.ActionLink("Редактировать", "Edit", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
+            @Html.ActionLink("Edit", "Edit", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
             <br>
-            @Html.ActionLink("Удалить новость", "Remove", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
+            @Html.ActionLink("Remove news", "Remove", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
         }
     </p>
 </div>

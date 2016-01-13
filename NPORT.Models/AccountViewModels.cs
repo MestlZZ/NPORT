@@ -49,15 +49,15 @@ namespace NPORT.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Номер телефона ")]
+        [Display(Name = "Phone number ")]
         public string Login { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Запомнить меня")]
+        [Display(Name = "Remember me")]
         public bool RememberMe { get; set; }
     }
 
@@ -65,7 +65,7 @@ namespace NPORT.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Адрес электронной почты")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
 
@@ -74,14 +74,14 @@ namespace NPORT.Models
         public string Phone { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Password must have more than {2} symbols", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Подтверждение пароля")]
-        [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
+        [Display(Name = "Repeat password")]
+        [Compare("Password", ErrorMessage = "Passwords are not equal.")]
         public string ConfirmPassword { get; set; }
     }
 

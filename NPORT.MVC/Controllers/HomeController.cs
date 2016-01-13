@@ -70,21 +70,15 @@ namespace NPORT.Controllers
                 return RedirectToAction("Index");
             }
             return View(news);
-        }
-        //[Authorize(Roles = "Admin, Correspondent, Editor")]
-        //[HttpGet]
-        //public ActionResult Remove(string NewsId)
-        //{
-        //    var model = NPORT.Database.JSONDatabase.NewsJson.Find(NewsId);
-        //    return View(model);
-        //}
+        }        
 
         [Authorize(Roles = "Admin, Correspondent, Editor")]
         [HttpGet]
         public ActionResult Remove(string NewsId)
         {
             NPORT.Database.JSONDatabase.NewsJson.Remove(NewsId);
-            return RedirectToAction("Index");
+            return View();
+            //return RedirectToAction("Index");
         }
     }
 }
