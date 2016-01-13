@@ -163,10 +163,11 @@ div.main nav.menu ul li.user a{
 }
 .news{
     width: 40%;
-    float: left;
+    float: right;
     padding: 0 10px;
     border: 1px dashed black;
     padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 .news .title{
     text-align: center;
@@ -184,10 +185,14 @@ div.main nav.menu ul li.user a{
     clear: both;
 }
 .news:nth-child(2n){
-    float: right;
+    float: left;
 }
-.news:nth-child(2n)::after{
+.news:nth-child(2n)::after,
+.news:nth-child(2n):last-child::after{
     content: "";
     display: table;
     clear: both;
+}
+.news:nth-child(2n):last-child{
+    margin-left: 29%;
 }
