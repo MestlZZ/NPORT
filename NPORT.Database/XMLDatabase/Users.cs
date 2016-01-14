@@ -31,45 +31,6 @@ namespace NPORT.Database.XMLDatabase
             }
         }
 
-        //public static ApplicationUser Find( string username )
-        //{
-        //    var users = GetList();
-
-        //    foreach(var user in users)
-        //    {
-        //        if (user.UserName == username)
-        //            return user;
-        //    }
-        //    return null;
-        //}
-
-        //public static ApplicationUser Find( string login, string password )
-        //{
-        //    var users = GetList();
-
-        //    foreach (var user in users)
-        //    {
-        //        if (user.UserName == login && user.PasswordHash == HashPassword(password))
-        //            return user;
-        //    }
-        //    return null;
-        //}
-
-        //public static string HashPassword( string password )
-        //{
-        //    PasswordHasher s = new PasswordHasher();
-        //    return s.HashPassword( password );
-        //}
-
-        //public static void Register( ApplicationUser user )
-        //{
-        //    var users = GetList();
-
-        //    users.Add( user );
-
-        //    Update( users );            
-        //}
-
         public static void Update( List<ApplicationUser> users )
         {
             using (StreamWriter fs = new StreamWriter( Path ))
