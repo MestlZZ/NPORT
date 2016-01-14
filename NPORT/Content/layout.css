@@ -226,6 +226,7 @@ div.main nav.menu ul li.user a{
 .news p.content{
     display: block;
     height: 60px;
+    margin-top: -70px;
     text-overflow: ellipsis;
     overflow: hidden;
     text-indent: 20px;
@@ -235,4 +236,26 @@ div.main nav.menu ul li.user a{
     display: table;
     content: "";
     clear: both;
+}
+.news-detailed .author{
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}
+.news-detailed .date{
+    float: right;
+    font-weight: bold;
+    font-size: 17px;
+}
+.news-detailed .date::after, .news-detailed .btn-remove::after{
+    content: "";
+    display:table;
+    clear: both;
+}
+.news-detailed .btn-edit, .news-detailed .btn-remove{
+    width: 100px;
+    height: 20px;
+}
+.news-detailed .btn-remove{
+    float: right;
 }

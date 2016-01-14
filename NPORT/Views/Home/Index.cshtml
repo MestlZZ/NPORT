@@ -15,7 +15,7 @@
         <h2 class="title">@Html.Raw(news.Title)</h2>
         <p class="content">@Html.Raw( news.Content )</p>
         <p class="details-link">
-            @Html.ActionLink("Детально", "Detailed", "Home", new { NewsId = news.Id }, new { @class = "btn" })<br />
+            @Html.ActionLink("Details", "Detailed", "Home", new { NewsId = news.Id }, new { @class = "btn" })<br />
            
         </p>
         <span class="author">&copy;

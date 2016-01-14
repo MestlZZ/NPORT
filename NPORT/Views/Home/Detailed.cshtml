@@ -12,6 +12,8 @@
         Role.Access_AddNews = false;
         Role.Access_EditNews = false;
         Role.Access_RemoveNews = false;
+        user = new ApplicationUser();
+        user.Id = "Guest";
     }
     else
     {
@@ -25,21 +27,19 @@
     }
 }
 
-<div class="news1">
-    <h2 class="title">@news.Title</h2>
-    <p class="content">@news.Content</p>
+<div class="news-detailed">
+    <h2 class="title">@Html.Raw(news.Title)</h2>
+    <p class="content">@Html.Raw(news.Content)</p>
     <span class="author">&copy; @Author.UserName</span>
     <span class="date">@news.Date</span>
-    <p>
+    <p class="detailed-btn">
         @if (Role.Access_EditNews || news.AuthorId == user.Id)
         {
-            <br>
-            @Html.ActionLink( "Редактировать", "Edit", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" } )
+            @Html.ActionLink( "Edit", "Edit", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" } )
         }
         @if (Role.Access_RemoveNews || news.AuthorId == user.Id)
         {
-            <br>
-            @Html.ActionLink("Удалить новость", "Remove", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
+            @Html.ActionLink("Remove", "Remove", "Home", new { NewsId = news.Id }, new { @class = "btn btn-remove" })
         }
     </p>
 </div>
