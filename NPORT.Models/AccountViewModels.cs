@@ -6,8 +6,8 @@ namespace NPORT.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Адрес электронной почты")]
-        public string Email { get; set; }
+        [Display(Name = "Телефон")]
+        public string Phone { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -20,7 +20,6 @@ namespace NPORT.Models
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
         public string ReturnUrl { get; set; }
-        public bool RememberMe { get; set; }
     }
 
     public class VerifyCodeViewModel
@@ -35,8 +34,6 @@ namespace NPORT.Models
 
         [Display(Name = "Запомнить браузер?")]
         public bool RememberBrowser { get; set; }
-
-        public bool RememberMe { get; set; }
     }
 
     public class ForgotViewModel
@@ -56,22 +53,17 @@ namespace NPORT.Models
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
-
-        [Display(Name = "Запомнить меня")]
-        public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Адрес электронной почты")]
-        public string Email { get; set; }
-
-
-        [Required]
         [Display(Name = "Phone ")]
         public string Phone { get; set; }
+
+        [Required]
+        [Display( Name = "Желательный логин" )]
+        public string NickName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]
@@ -89,8 +81,8 @@ namespace NPORT.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Адрес электронной почты")]
-        public string Email { get; set; }
+        [Display(Name = "Телефон")]
+        public string Phone { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]
@@ -110,7 +102,7 @@ namespace NPORT.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Почта")]
-        public string Email { get; set; }
+        [Display(Name = "Телефон")]
+        public string Phone { get; set; }
     }
 }

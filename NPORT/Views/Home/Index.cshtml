@@ -10,7 +10,7 @@
 {
     foreach (var news in newsList)
     {
-        var Author = NPORT.Database.XMLDatabase.Users.Find(news.AuthorId);
+        //var Author = NPORT.Database.XMLDatabase.Users.GetList().Find(news.AuthorId);
     <div class="news">
         <h2 class="title">@news.Title</h2>
         <p class="content">@news.Content</p>
@@ -18,12 +18,12 @@
             @Html.ActionLink("Детально", "Detailed", "Home", new { NewsId = news.Id }, new { @class = "btn" })<br />
            
         </p>
-        <span class="author">&copy;
+        @*<span class="author">&copy;
         @if (Author != null)
         {
             @Author.Nickname
         }
-        </span>
+        </span>*@
         <span class="date">@news.Date </span>
     </div>
     }

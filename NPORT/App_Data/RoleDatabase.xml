@@ -24,4 +24,12 @@
       <EditNews value="true"/>
     </Accesses>
   </Role>
+<Role Id="4">
+    <Name value="User" />
+    <Accesses>
+      <RemoveNews value="false" />
+      <AddNews value="false"/>
+      <EditNews value="false"/>
+    </Accesses>
+  </Role>
 </RoleList>

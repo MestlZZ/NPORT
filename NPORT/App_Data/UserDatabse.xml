@@ -1,93 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<UserList>
-  <User Id="50fd3950-3598-4fb3-9d5d-be209df52319">
-    <Login value="Sasha" />
-    <Password value="111111" />
-    <Nickname value="ampersand" />
-    <Phone value="+380112223334" />
-    <Mail value="sasha@ukr.net" />
-    <RegisterDate value="" />
-    <RoleId Id="0" />
-    <Gender value="False" />
-  </User>
-  <User Id="50fd3950-3598-4fb3-9d5d-be209df52319">
-    <Login value="Bogdan" />
-    <Password value="222222" />
-    <Nickname value="ampersand" />
-    <Phone value="+380123456789" />
-    <Mail value="sasha@ukr.net" />
-    <RegisterDate value="" />
-    <RoleId Id="0" />
-    <Gender value="False" />
-  </User>
-  <User Id="33e052f9-7979-4af8-91a3-e80bdb282450">
-    <Login value="man" />
-    <Password value="Qwerty_1" />
-    <Nickname value="" />
-    <Phone value="+380111111111" />
-    <Mail value="pasha@ukr.net" />
-    <RegisterDate value="" />
-    <RoleId Id="0" />
-    <Gender value="False" />
-  </User>
-  <User Id="baf866c4-126e-4fa6-82aa-d88791dfe408">
-    <Login value="+380123456789" />
-    <Password value="Qwerty_1" />
-    <Nickname value="" />
-    <Phone value="" />
-    <Mail value="alex@ukr.net" />
-    <RegisterDate value="" />
-    <RoleId Id="0" />
-    <Gender value="False" />
-  </User>
-  <User Id="f02a6fc7-1554-4b41-b2e3-8034551c044a">
-    <Login value="+380123456789987654321" />
-    <Password value="Qwerty_1" />
-    <Nickname value="" />
-    <Phone value="" />
-    <Mail value="god@ukr.net" />
-    <RegisterDate value="" />
-    <RoleId Id="0" />
-    <Gender value="False" />
-  </User>
-  <User Id="854a1dbf-ed68-424f-8093-5ba6717142e7">
-    <Login value="+380987654321" />
-    <Password value="Qwerty_1" />
-    <Nickname value="" />
-    <Phone value="" />
-    <Mail value="god@ukr.net" />
-    <RegisterDate value="" />
-    <RoleId Id="0" />
-    <Gender value="False" />
-  </User>
-  <User Id="cb1a94b2-cf89-49e6-9a41-5f756c02648e">
-    <Login value="+380111111111" />
-    <Password value="Qwerty_1" />
-    <Nickname value="" />
-    <Phone value="" />
-    <Mail value="man@ukr.net" />
-    <RegisterDate value="" />
-    <RoleId Id="0" />
-    <Gender value="False" />
-  </User>
-  <User Id="87ff2a03-16bb-43ca-b426-787a46beb5db">
-    <Login value="+380930808372" />
-    <Password value="Boger7771_" />
-    <Nickname value="" />
-    <Phone value="" />
-    <Mail value="mestl_z@ukr.net" />
-    <RegisterDate value="" />
-    <RoleId Id="0" />
-    <Gender value="False" />
-  </User>
-  <User Id="0cc0b16c-4c1d-4af2-86b8-606d1bc44eca">
-    <Login value="+380930808372" />
-    <Password value="Boger7771_" />
-    <Nickname value="Mestl" />
-    <Phone value="+380930808372" />
-    <Mail value="mestl_zz@ukr.net" />
-    <RegisterDate value="" />
-    <RoleId Id="1" />
-    <Gender value="False" />
-  </User>
-</UserList>
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfApplicationUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ApplicationUser>
+    <Id>bb190182-de2c-4e8b-b382-41ab72fe4436</Id>
+    <UserName>Bogdan</UserName>
+    <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
+    <Phone>+380930808372</Phone>
+    <Role>1</Role>
+  </ApplicationUser>
+  <ApplicationUser>
+    <Id>afa22611-bac9-4542-b0d0-3799ba94de5f</Id>
+    <UserName>Vanya</UserName>
+    <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
+    <Phone>+380930808373</Phone>
+    <Role>2</Role>
+  </ApplicationUser>
+  <ApplicationUser>
+    <Id>73957c96-137a-4074-a1a7-8714dc403749</Id>
+    <UserName>Vanya</UserName>
+    <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
+    <Phone>+380930808374</Phone>
+    <Role>3</Role>
+  </ApplicationUser>
+</ArrayOfApplicationUser>
