@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-
+using System.Web.UI;
+using System.ComponentModel.DataAnnotations;
 namespace NPORT.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
-        {
+        {            
             return View();
         }
 
@@ -33,6 +34,7 @@ namespace NPORT.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult AddNews(NPORT.Models.Database.News news)
         {
             if (ModelState.IsValid)
@@ -58,6 +60,7 @@ namespace NPORT.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(NPORT.Models.Database.News news)
         {
             if (ModelState.IsValid)
@@ -66,20 +69,14 @@ namespace NPORT.Controllers
                 return RedirectToAction("Index");
             }
             return View(news);
-        }
-        //[Authorize(Roles = "Admin, Correspondent, Editor")]
-        //[HttpGet]
-        //public ActionResult Remove(string NewsId)
-        //{
-        //    var model = NPORT.Database.JSONDatabase.NewsJson.Find(NewsId);
-        //    return View(model);
-        //}
+        }        
 
         [HttpGet]
         public ActionResult Remove(string NewsId)
         {
             NPORT.Database.JSONDatabase.NewsJson.Remove(NewsId);
-            return RedirectToAction("Index");
+            return View();
+            //return RedirectToAction("Index");
         }
     }
 }
