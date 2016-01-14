@@ -27,13 +27,11 @@ namespace NPORT.Controllers
 
             return View();
         }
-
-        [Authorize(Roles = "Admin, Correspondent")]
+        
         public ActionResult AddNews()
         {
             return View();
         }
-        [Authorize( Roles = "Admin, Correspondent")]
         [HttpPost]
         public ActionResult AddNews(NPORT.Models.Database.News news)
         {
@@ -52,7 +50,6 @@ namespace NPORT.Controllers
             ViewBag.Id = NewsId;
             return View();
         }
-        [Authorize(Roles = "Admin, Correspondent, Editor")]
         [HttpGet]
         public ActionResult Edit (string NewsId)
         {
@@ -60,7 +57,6 @@ namespace NPORT.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Admin, Correspondent, Editor")]
         [HttpPost]
         public ActionResult Edit(NPORT.Models.Database.News news)
         {
@@ -79,7 +75,6 @@ namespace NPORT.Controllers
         //    return View(model);
         //}
 
-        [Authorize(Roles = "Admin, Correspondent, Editor")]
         [HttpGet]
         public ActionResult Remove(string NewsId)
         {

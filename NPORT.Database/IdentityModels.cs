@@ -40,6 +40,17 @@ namespace NPORT
             return userIdentity;
         }
 
+        public NPORT.Models.Database.ApplicationUser GetUser()
+        {
+            NPORT.Models.Database.ApplicationUser user = new Models.Database.ApplicationUser();
+            user.UserName = this.UserName;
+            user.Role = this.Role;
+            user.Phone = this.Phone;
+            user.PasswordHash = this.PasswordHash;
+            user.Id = this.Id;
+            return user;
+        }
+
         public string Id { get; set; }
 
         public string UserName { get; set; }

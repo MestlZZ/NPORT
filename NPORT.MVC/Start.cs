@@ -15,9 +15,5 @@ namespace NPORT.MVC
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes( RouteTable.Routes );
         }
-        protected void Application_AuthorizeRequest()
-        {
-            int i = 0;
-        }
     }
 }

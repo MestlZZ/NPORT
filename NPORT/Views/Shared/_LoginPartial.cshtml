@@ -10,7 +10,21 @@
             @Html.ActionLink("Здравствуйте, " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
-        @if (User.IsInRole("Correspondent") || User.IsInRole("Admin"))
+        @{ 
+            var s = User.Identity.GetUserId();
+            var roles = NPORT.Database.XMLDatabase.Roles.GetList();
+            var user = NPORT.Database.XMLDatabase.Users.Find( User.Identity.GetUserId() );
+            NPORT.Models.Database.Role role1 = null;
+            foreach ( var role in roles )
+            {
+                if (user.Role == role.Id)
+                {
+                    role1 = role;
+                }
+
+            }
+        }
+        @if (role1.Access_AddNews)
         {
             <li>@Html.ActionLink("Добавить новость", "AddNews", "Home")</li>
         }       

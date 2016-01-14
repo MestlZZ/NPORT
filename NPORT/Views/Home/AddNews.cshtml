@@ -3,9 +3,16 @@
     ViewBag.Title = "AddNews";
 }
 
+@if (Request.IsAuthenticated)
+{
 <h2>AddNews</h2>
 <form method="post">
 @Html.EditorForModel()
     <input class="btn" type="submit" />
 </form>
+}
+else
+{
+    <h1>You do not have access to add news</h1>
+}
 

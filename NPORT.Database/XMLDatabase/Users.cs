@@ -9,7 +9,7 @@ namespace NPORT.Database.XMLDatabase
 {
     public static class Users
     {
-        private static string Path = HttpContext.Current.Server.MapPath( "/App_Data/UserDatabse.xml" );
+        private static string Path = HttpContext.Current.Server.MapPath( "/App_Data/UserDatabase.xml" );
         private static XmlSerializer formatter = new XmlSerializer(typeof(List<ApplicationUser>));
 
         public static List<ApplicationUser> GetList()
@@ -18,7 +18,7 @@ namespace NPORT.Database.XMLDatabase
             //List<ApplicationUser> users = new List<ApplicationUser>();
             //var user = new ApplicationUser("Bogdan", "123456", "+380930808372", 1);
             //users.Add( user );
-            //user = new ApplicationUser( "Vanya", "123456", "+380930808373", 2);
+            //user = new ApplicationUser( "Vanya", "123456", "+380930808373", 2 );
             //users.Add( user );
             //user = new ApplicationUser( "Vanya", "123456", "+380930808374", 3 );
             //users.Add( user );
@@ -29,6 +29,15 @@ namespace NPORT.Database.XMLDatabase
                 fs.Close();
                 return result;
             }
+        }
+
+        public static ApplicationUser Find( string Id )
+        {
+            var users = GetList();
+            foreach (var user in users)
+                if (user.Id == Id)
+                    return user;
+            return null;
         }
 
         public static void Update( List<ApplicationUser> users )

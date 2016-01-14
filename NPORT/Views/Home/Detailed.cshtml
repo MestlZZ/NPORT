@@ -2,7 +2,17 @@
 @{
     ViewBag.Title = "Detailed Page";
     var news = NPORT.Database.JSONDatabase.NewsJson.Find(ViewBag.Id);
-    var Author = NPORT.Database.XMLDatabase.Users.Find(news.AuthorId);
+    ApplicationUser Author = NPORT.Database.XMLDatabase.Users.Find(news.AuthorId);
+    NPORT.Models.Database.Role Role = null;
+    var user = NPORT.Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
+    var role = NPORT.Database.XMLDatabase.Roles.GetList();
+    foreach (var rol in role)
+    {
+        if (user.Role == rol.Id)
+        {
+            Role = rol;
+        }
+    }
 }
 
 <div class="news1">
@@ -11,17 +21,13 @@
     @*<span class="author">&copy; @Author.Nickname</span>*@
     <span class="date">@news.Date</span>
     <p>
-        @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
-            {
-            <br>
-            @Html.ActionLink("Редактировать", "Edit", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
-            <br>
-            @Html.ActionLink("Удалить новость", "Remove", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
-        }
-        @if (User.IsInRole("Correspondent") && news.AuthorId == User.Identity.GetUserId())
+        @if (Role.Access_EditNews || news.AuthorId == user.Id)
         {
             <br>
-            @Html.ActionLink("Редактировать", "Edit", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
+            @Html.ActionLink( "Редактировать", "Edit", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" } )
+        }
+        @if (Role.Access_RemoveNews || news.AuthorId == user.Id)
+        {
             <br>
             @Html.ActionLink("Удалить новость", "Remove", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" })
         }

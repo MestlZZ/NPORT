@@ -1,35 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<RoleList>
-  <Role Id="1">
-    <Name value="Administrator" />
-    <Accesses>
-      <RemoveNews value="true" />
-      <AddNews value="true"/>
-      <EditNews value="true"/>
-    </Accesses>
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfRole xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Role>
+    <Id>1</Id>
+    <Name>Admin</Name>
+    <Access_RemoveNews>true</Access_RemoveNews>
+    <Access_AddNews>true</Access_AddNews>
+    <Access_EditNews>true</Access_EditNews>
   </Role>
-  <Role Id="2">
-    <Name value="Corespondent" />
-    <Accesses>
-      <RemoveNews value="false" />
-      <AddNews value="true"/>
-      <EditNews value="false"/>
-    </Accesses>
+  <Role>
+    <Id>2</Id>
+    <Name>Editor</Name>
+    <Access_RemoveNews>true</Access_RemoveNews>
+    <Access_AddNews>false</Access_AddNews>
+    <Access_EditNews>true</Access_EditNews>
   </Role>
-  <Role Id="3">
-    <Name value="Redactor" />
-    <Accesses>
-      <RemoveNews value="true" />
-      <AddNews value="false"/>
-      <EditNews value="true"/>
-    </Accesses>
+  <Role>
+    <Id>3</Id>
+    <Name>Correspondent</Name>
+    <Access_RemoveNews>false</Access_RemoveNews>
+    <Access_AddNews>true</Access_AddNews>
+    <Access_EditNews>false</Access_EditNews>
   </Role>
-<Role Id="4">
-    <Name value="User" />
-    <Accesses>
-      <RemoveNews value="false" />
-      <AddNews value="false"/>
-      <EditNews value="false"/>
-    </Accesses>
+  <Role>
+    <Id>4</Id>
+    <Name>User</Name>
+    <Access_RemoveNews>false</Access_RemoveNews>
+    <Access_AddNews>false</Access_AddNews>
+    <Access_EditNews>false</Access_EditNews>
   </Role>
-</RoleList>
+</ArrayOfRole>
