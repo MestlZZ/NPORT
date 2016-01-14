@@ -1,159 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 using System.Web;
-using System.Security.Cryptography;
-using NPORT.Models.Database;
+using System.IO;
+using NPORT.Models;
+using Microsoft.AspNet.Identity;
 
 namespace NPORT.Database.XMLDatabase
 {
     public static class Users
     {
-        private static XmlDocument document;
         private static string Path = HttpContext.Current.Server.MapPath( "/App_Data/UserDatabse.xml" );
-        
-        private static void OpenDatabase()
+        private static XmlSerializer formatter = new XmlSerializer(typeof(List<ApplicationUser>));
+
+        public static List<ApplicationUser> GetList()
         {
-            document = new XmlDocument();
-            document.Load( Path );
-        } 
-
-        public static List<User> GetList()
-        {
-            OpenDatabase();
-
-            List<User> users = new List<User>();
-
-            foreach(XmlNode note in document.SelectNodes("UserList/User"))
+            
+            //List<ApplicationUser> users = new List<ApplicationUser>();
+            //var user = new ApplicationUser("Bogdan", "123", "+380930808372");
+            //users.Add( user );
+            //user = new ApplicationUser("Vanya", "123", "+380930808370");
+            //users.Add( user );
+            //Update( users );
+            using (StreamReader fs = new StreamReader( Path ))
             {
-                User user = new User();
-                user.Id = Convert.ToString(note.Attributes["Id"].Value);
-                user.Login = Convert.ToString( note.SelectSingleNode( "Login" ).Attributes["value"].Value );
-                user.Password = Convert.ToString( note.SelectSingleNode( "Password" ).Attributes["value"].Value );
-                user.Nickname = Convert.ToString( note.SelectSingleNode( "Nickname" ).Attributes["value"].Value );
-                user.Phone = Convert.ToString( note.SelectSingleNode( "Phone" ).Attributes["value"].Value );
-                user.Email = Convert.ToString( note.SelectSingleNode( "Mail" ).Attributes["value"].Value );
-                user.RegisterTime = Convert.ToString( note.SelectSingleNode( "RegisterDate" ).Attributes["value"].Value );
-                user.UserRoleId = Convert.ToInt32( note.SelectSingleNode( "RoleId" ).Attributes["Id"].Value );
-                user.Gender = Convert.ToBoolean( note.SelectSingleNode( "Gender" ).Attributes["value"].Value );
-                users.Add( user );
+                var result = (List<ApplicationUser>)formatter.Deserialize( fs );
+                fs.Close();
+                return result;
             }
-
-            return users;
         }
 
-        public static User Find( string Login )
+        //public static ApplicationUser Find( string username )
+        //{
+        //    var users = GetList();
+
+        //    foreach(var user in users)
+        //    {
+        //        if (user.UserName == username)
+        //            return user;
+        //    }
+        //    return null;
+        //}
+
+        //public static ApplicationUser Find( string login, string password )
+        //{
+        //    var users = GetList();
+
+        //    foreach (var user in users)
+        //    {
+        //        if (user.UserName == login && user.PasswordHash == HashPassword(password))
+        //            return user;
+        //    }
+        //    return null;
+        //}
+
+        //public static string HashPassword( string password )
+        //{
+        //    PasswordHasher s = new PasswordHasher();
+        //    return s.HashPassword( password );
+        //}
+
+        //public static void Register( ApplicationUser user )
+        //{
+        //    var users = GetList();
+
+        //    users.Add( user );
+
+        //    Update( users );            
+        //}
+
+        public static void Update( List<ApplicationUser> users )
         {
-            OpenDatabase();
-
-            User user = null;
-
-            foreach (XmlNode note in document.SelectNodes( "UserList/User" ))
+            using (StreamWriter fs = new StreamWriter( Path ))
             {
-                if (Login == Convert.ToString( note.SelectSingleNode("Login").Attributes["value"].Value ) ||
-                    Login == Convert.ToString( note.Attributes["Id"].Value ))
-                {
-                    user = new User();
-                    user.Id = Convert.ToString( note.Attributes["Id"].Value );
-                    user.Login = Convert.ToString( note.SelectSingleNode( "Login" ).Attributes["value"].Value );
-                    user.Password = Convert.ToString( note.SelectSingleNode( "Password" ).Attributes["value"].Value );
-                    user.Nickname = Convert.ToString( note.SelectSingleNode( "Nickname" ).Attributes["value"].Value );
-                    user.Phone = Convert.ToString( note.SelectSingleNode( "Phone" ).Attributes["value"].Value );
-                    user.Email = Convert.ToString( note.SelectSingleNode( "Mail" ).Attributes["value"].Value );
-                    user.RegisterTime = Convert.ToString( note.SelectSingleNode( "RegisterDate" ).Attributes["value"].Value );
-                    user.UserRoleId = Convert.ToInt32( note.SelectSingleNode( "RoleId" ).Attributes["Id"].Value );
-                    user.Gender = Convert.ToBoolean( note.SelectSingleNode( "Gender" ).Attributes["value"].Value );
-                    break;
-                }
+                formatter.Serialize( fs, users );
+                fs.Close();
             }
-
-            return user;
-        }
-
-        public static User Find( string Login, string Password )
-        {
-            OpenDatabase();
-
-            User user = null;
-
-            foreach (XmlNode note in document.SelectNodes( "UserList/User" ))
-            {
-                if (Login == Convert.ToString( note.SelectSingleNode( "Login" ).Attributes["value"].Value ) &&
-                    Password == Convert.ToString( note.SelectSingleNode( "Password" ).Attributes["value"].Value ))
-                {
-                    user = new User();
-                    user.Id = Convert.ToString( note.Attributes["Id"].Value );
-                    user.Login = Convert.ToString( note.SelectSingleNode( "Login" ).Attributes["value"].Value );
-                    user.Password = Convert.ToString( note.SelectSingleNode( "Password" ).Attributes["value"].Value );
-                    user.Nickname = Convert.ToString( note.SelectSingleNode( "Nickname" ).Attributes["value"].Value );
-                    user.Phone = Convert.ToString( note.SelectSingleNode( "Phone" ).Attributes["value"].Value );
-                    user.Email = Convert.ToString( note.SelectSingleNode( "Mail" ).Attributes["value"].Value );
-                    user.RegisterTime = Convert.ToString( note.SelectSingleNode( "RegisterDate" ).Attributes["value"].Value );
-                    user.UserRoleId = Convert.ToInt32( note.SelectSingleNode( "RoleId" ).Attributes["Id"].Value );
-                    user.Gender = Convert.ToBoolean( note.SelectSingleNode( "Gender" ).Attributes["value"].Value );
-                    break;
-                }
-            }
-
-            return user;
-        }
-
-        public static void Register(User user)
-        {
-            OpenDatabase();
-            user.Id = Guid.NewGuid().ToString();
-
-            XmlElement newUser = document.CreateElement("User");
-            newUser.SetAttribute("Id", user.Id );
-
-            XmlElement element = document.CreateElement("Login");
-            element.SetAttribute( "value", user.Login );
-            newUser.AppendChild( element );
-
-            var md = MD5.Create();
-            Encoding u8 = Encoding.UTF8;
-
-            byte[] buff = u8.GetBytes(user.Password + user.Login);
-            buff = md.ComputeHash( buff );
-
-            char[] chars = new char[buff.Length / sizeof(char)];
-            System.Buffer.BlockCopy( buff, 0, chars, 0, buff.Length );
-
-            //user.Password = new string(chars);
-
-            element = document.CreateElement("Password");
-            element.SetAttribute( "value", user.Password );
-            newUser.AppendChild( element );
-
-            element = document.CreateElement("Nickname");
-            element.SetAttribute( "value", user.Nickname );
-            newUser.AppendChild( element );
-
-            element = document.CreateElement("Phone");
-            element.SetAttribute( "value", user.Phone );
-            newUser.AppendChild( element );
-
-            element = document.CreateElement("Mail");
-            element.SetAttribute( "value", user.Email );
-            newUser.AppendChild( element );
-
-            element = document.CreateElement("RegisterDate");
-            element.SetAttribute( "value", user.RegisterTime );
-            newUser.AppendChild( element );
-
-            element = document.CreateElement("RoleId");
-            element.SetAttribute( "Id", user.UserRoleId.ToString() );
-            newUser.AppendChild( element );
-
-            element = document.CreateElement("Gender");
-            element.SetAttribute( "value", user.Gender.ToString() );
-            newUser.AppendChild( element );
-
-            document.DocumentElement.AppendChild( newUser );
-            document.Save( Path );
         }
     }
 }
