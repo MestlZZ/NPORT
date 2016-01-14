@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "Редактирование";
 }
-
+<script src="../../Content/tinymce/js/tinymce/tinymce.min.js"></script>
+<script>tinymce.init({ selector:'input[type="text"]' });</script>
 
 <form method="post">
    @Html.EditorForModel()

@@ -1,4 +1,5 @@
 ﻿@using NPORT.Database.JSONDatabase;
+@using System.Text;
 @using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Home Page";
@@ -11,20 +12,27 @@
     foreach (var news in newsList)
     {
         var Author = NPORT.Database.XMLDatabase.Users.Find(news.AuthorId);
-    <div class="news">
-        <h2 class="title">@news.Title</h2>
-        <p class="content">@news.Content</p>
-        <p>
-            @Html.ActionLink("Detaile", "Detailed", "Home", new { NewsId = news.Id }, new { @class = "btn" })<br />
-           
-        </p>
-        <span class="author">&copy;
+    <div class="news">      
+        @Html.Raw(news.Title)
+        @Html.Raw(news.Content)
+    @*@{
+            string s = " <div class=\"news\">";
+            s += news.Title;
+            s += "</div>";
+            Response.Write( s );
+        }*@
+    <p>
+        @Html.ActionLink("Detaile", "Detailed", "Home", new { NewsId = news.Id }, new { @class = "btn" })<br />
+
+    </p>
+    <span class="author">
+        &copy;
         @if (Author != null)
         {
             @Author.Nickname
         }
-        </span>
-        <span class="date">@news.Date </span>
-    </div>
+    </span>
+    <span class="date">@news.Date </span>
+</div>
     }
 }

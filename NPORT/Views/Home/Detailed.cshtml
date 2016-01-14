@@ -6,8 +6,8 @@
 }
 
 <div class="news1">
-    <h2 class="title">@news.Title</h2>
-    <p class="content">@news.Content</p>
+    @Html.Raw(news.Title)
+    @Html.Raw(news.Content)
     @*<span class="author">&copy; @Author.Nickname</span>*@
     <span class="date">@news.Date</span>
     <p>

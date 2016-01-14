@@ -5,15 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using System.Web.UI;
-
+using System.ComponentModel.DataAnnotations;
 namespace NPORT.Controllers
 {
     public class HomeController : Controller
     {
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Any)]
-        [HttpGet]
         public ActionResult Index()
-        {
+        {            
             return View();
         }
 
@@ -38,6 +36,7 @@ namespace NPORT.Controllers
         }
         [Authorize( Roles = "Admin, Correspondent")]
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult AddNews(NPORT.Models.Database.News news)
         {
             if (ModelState.IsValid)
@@ -65,6 +64,7 @@ namespace NPORT.Controllers
 
         [Authorize(Roles = "Admin, Correspondent, Editor")]
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(NPORT.Models.Database.News news)
         {
             if (ModelState.IsValid)
