@@ -7,12 +7,26 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li class="user">
-            @Html.ActionLink("Здравствуйте, " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink("Hello, " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
-        @if (User.IsInRole("Correspondent") || User.IsInRole("Admin"))
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Exit</a></li>
+        @{ 
+            var s = User.Identity.GetUserId();
+            var roles = NPORT.Database.XMLDatabase.Roles.GetList();
+            var user = NPORT.Database.XMLDatabase.Users.Find( User.Identity.GetUserId() );
+            NPORT.Models.Database.Role role1 = null;
+            foreach ( var role in roles )
+            {
+                if (user.Role == role.Id)
+                {
+                    role1 = role;
+                }
+
+            }
+        }
+        @if (role1.Access_AddNews)
         {
-            <li>@Html.ActionLink("Добавить новость", "AddNews", "Home")</li>
+            <li>@Html.ActionLink("Add news", "AddNews", "Home")</li>
         }       
     </ul>
     }
@@ -20,7 +34,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Выполнить вход", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Registration", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("LogIn", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

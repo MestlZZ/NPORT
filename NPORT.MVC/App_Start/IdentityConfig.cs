@@ -27,6 +27,15 @@ namespace NPORT
             return base.SignInAsync( user, isPersistent, rememberBrowser );
         }
 
+        public override async Task<SignInStatus> PasswordSignInAsync( string userName, string password, bool isPersistent, bool shouldLockout )
+        {
+            ApplicationUser user = this.UserManager.FindByName(userName);
+            
+            var result = await base.PasswordSignInAsync(userName, password, isPersistent, shouldLockout);
+
+            return (result);
+        }
+
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
             return new ApplicationSignInManager(context.GetUserManager<CustomUserManager>(), context.Authentication);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -6,7 +7,7 @@ using NPORT.Models;
 
 namespace NPORT.Models
 {
-    public class CustomUserStore : IUserStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>
+    public class CustomUserStore : IUserStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>, IUserLockoutStore<ApplicationUser, string>, IUserTwoFactorStore<ApplicationUser, string>
     {
         private List<ApplicationUser> Users = NPORT.Database.XMLDatabase.Users.GetList();
 
@@ -71,6 +72,61 @@ namespace NPORT.Models
         {
             var user = Users.FirstOrDefault( u => u.Phone == userName );
             return Task<ApplicationUser>.Factory.StartNew( () => Users.FirstOrDefault( u => u.Phone == userName ) );
+        }
+
+        public Task<DateTimeOffset> GetLockoutEndDateAsync( ApplicationUser user )
+        {
+            DateTime date = new DateTime(2000, 03, 23);
+            return Task<DateTimeOffset>.Factory.StartNew( () => date );
+        }
+
+        public Task SetLockoutEndDateAsync( ApplicationUser user, DateTimeOffset lockoutEnd )
+        {
+            return Task.Factory.StartNew( () => Nothing() );
+        }
+
+        private void Nothing()
+        { }
+
+
+        public Task<int> IncrementAccessFailedCountAsync( ApplicationUser user )
+        {
+            int s = 1;
+            return Task<int>.Factory.StartNew( () => s );
+        }
+
+        public Task ResetAccessFailedCountAsync( ApplicationUser user )
+        {
+            int s = 0;
+            return Task.Factory.StartNew( () => Nothing() );
+        }
+
+        public Task<int> GetAccessFailedCountAsync( ApplicationUser user )
+        {
+            int s = 0;
+            return Task<int>.Factory.StartNew( () => s );
+        }
+
+        public Task<bool> GetLockoutEnabledAsync( ApplicationUser user )
+        {
+            bool s = false;
+            return Task<bool>.Factory.StartNew( () => s );
+        }
+
+        public Task SetLockoutEnabledAsync( ApplicationUser user, bool enabled )
+        {
+            return Task.Factory.StartNew( () => Nothing() );
+        }
+
+        public Task SetTwoFactorEnabledAsync( ApplicationUser user, bool enabled )
+        {
+            return Task.Factory.StartNew( () => Nothing() );
+        }
+
+        public Task<bool> GetTwoFactorEnabledAsync( ApplicationUser user )
+        {
+            bool s = false;
+            return Task<bool>.Factory.StartNew( () => s );
         }
     }
 }

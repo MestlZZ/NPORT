@@ -76,19 +76,33 @@ namespace NPORT.Controllers
                 return View( model );
             }
 
-            var user = await UserManager.FindAsync( model.Login, model.Password );
-            if (user != null)
+            //var user = await UserManager.FindAsync( model.Login, model.Password );
+            //if (user != null)
+            //{
+            //    string[] roles = new string[1];
+            //    roles[0] = "Admin";
+            //    MyUserIdentity ident = new MyUserIdentity(user.Phone, "Basic authentication", true, user.Id );
+            //    HttpContext.User = new GenericPrincipal( ident, roles );
+            //    return RedirectToLocal( returnUrl );
+            //}
+            //else
+            //{
+            //    ModelState.AddModelError( "", "Неудачная попытка входа." );
+            //    return View( model );
+            //}
+            var result = await SignInManager.PasswordSignInAsync(model.Login, model.Password, false, shouldLockout: false);
+            switch (result)
             {
-                string[] roles = new string[1];
-                roles[0] = "Admin";
-                MyUserIdentity ident = new MyUserIdentity(user.Phone, "Basic authentication", true, user.Id );
-                HttpContext.User = new GenericPrincipal( ident, roles );
-                return RedirectToLocal( returnUrl );
-            }
-            else
-            {
-                ModelState.AddModelError( "", "Неудачная попытка входа." );
-                return View( model );
+                case SignInStatus.Success:
+                    return RedirectToLocal( returnUrl );
+                case SignInStatus.LockedOut:
+                    return View( "Lockout" );
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction( "SendCode", new { ReturnUrl = returnUrl, RememberMe = false } );
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError( "", "Неудачная попытка входа." );
+                    return View( model );
             }
         }
 
@@ -109,7 +123,7 @@ namespace NPORT.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser(model.NickName, model.Password, model.Phone);
+                var user = new ApplicationUser(model.NickName, model.Password, model.Phone, 4);
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

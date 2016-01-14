@@ -12,16 +12,16 @@
     {
         //var Author = NPORT.Database.XMLDatabase.Users.GetList().Find(news.AuthorId);
     <div class="news">
-        <h2 class="title">@news.Title</h2>
-        <p class="content">@news.Content</p>
-        <p>
-            @Html.ActionLink("Детально", "Detailed", "Home", new { NewsId = news.Id }, new { @class = "btn" })<br />
+        <h2 class="title">@Html.Raw(news.Title)</h2>
+        <p class="content">@Html.Raw( news.Content )</p>
+        <p class="details-link">
+            @Html.ActionLink("Details", "Detailed", "Home", new { NewsId = news.Id }, new { @class = "btn" })<br />
            
         </p>
         @*<span class="author">&copy;
         @if (Author != null)
         {
-            @Author.Nickname
+            @Author.UserName
         }
         </span>*@
         <span class="date">@news.Date </span>

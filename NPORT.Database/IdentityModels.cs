@@ -12,7 +12,7 @@ namespace NPORT
         public ApplicationUser()
         { }
 
-        public ApplicationUser( string name, string password, string phone )
+        public ApplicationUser( string name, string password, string phone, int role )
         {
             Id = Guid.NewGuid().ToString();
             UserName = name;
@@ -29,6 +29,8 @@ namespace NPORT
             PasswordHash = new string( chars );
 
             Phone = phone;
+
+            Role = role;
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync( CustomUserManager manager )
@@ -38,6 +40,17 @@ namespace NPORT
             return userIdentity;
         }
 
+        public NPORT.Models.Database.ApplicationUser GetUser()
+        {
+            NPORT.Models.Database.ApplicationUser user = new Models.Database.ApplicationUser();
+            user.UserName = this.UserName;
+            user.Role = this.Role;
+            user.Phone = this.Phone;
+            user.PasswordHash = this.PasswordHash;
+            user.Id = this.Id;
+            return user;
+        }
+
         public string Id { get; set; }
 
         public string UserName { get; set; }
@@ -45,5 +58,7 @@ namespace NPORT
         public string PasswordHash { get; set; }
 
         public string Phone { get; set; }
+
+        public int Role { get; set; }
     }
 }

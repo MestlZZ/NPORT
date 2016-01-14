@@ -141,12 +141,13 @@ div.main nav.menu ul li a{
 }
 
 div.main nav.menu ul li.user{
-    height: 40px;
-    line-height: 20px;
+    min-height: 20px;
 }
 
 div.main nav.menu ul li.user a{
         white-space: normal;
+    vertical-align: middle;
+    line-height: 20px;
 }
 
 .btn{
@@ -161,6 +162,9 @@ div.main nav.menu ul li.user a{
      -moz-transition: all 0.2s ease-out;
      -o-transition: all 0.2s ease-out;
      transition: all 0.2s ease-out;
+     margin: 10px;
+     text-align: center;
+     
 }
 
 .btn:hover{
@@ -168,7 +172,7 @@ div.main nav.menu ul li.user a{
     transform: scale(1.1);
 }
 .btn-edit {
-    margin: 10px;
+    width: 100px;
 }
 .date{
     clear:both;
@@ -222,8 +226,36 @@ div.main nav.menu ul li.user a{
 .news p.content{
     display: block;
     height: 60px;
+    margin-top: -70px;
     text-overflow: ellipsis;
     overflow: hidden;
     text-indent: 20px;
     text-align: justify;
+}
+.news p.details-child::after{
+    display: table;
+    content: "";
+    clear: both;
+}
+.news-detailed .author{
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}
+.news-detailed .date{
+    float: right;
+    font-weight: bold;
+    font-size: 17px;
+}
+.news-detailed .date::after, .news-detailed .btn-remove::after{
+    content: "";
+    display:table;
+    clear: both;
+}
+.news-detailed .btn-edit, .news-detailed .btn-remove{
+    width: 100px;
+    height: 20px;
+}
+.news-detailed .btn-remove{
+    float: right;
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfApplicationUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ApplicationUser>
+    <Id>ca2fb8dc-c52d-4e27-8137-3b16ab8fe95f</Id>
+    <UserName>Bogdan</UserName>
+    <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
+    <Phone>+380930808372</Phone>
+    <Role>1</Role>
+  </ApplicationUser>
+  <ApplicationUser>
+    <Id>8136d584-4a3c-4f18-97c0-42881ef4650b</Id>
+    <UserName>Vanya</UserName>
+    <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
+    <Phone>+380930808373</Phone>
+    <Role>2</Role>
+  </ApplicationUser>
+  <ApplicationUser>
+    <Id>3a89e4f0-e155-47d4-86c6-3093758df43e</Id>
+    <UserName>Vanya</UserName>
+    <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
+    <Phone>+380930808374</Phone>
+    <Role>3</Role>
+  </ApplicationUser>
+  <ApplicationUser>
+    <Id>faa45b60-0fb3-4693-a8a2-e708393f8efa</Id>
+    <UserName>Mestl12</UserName>
+    <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
+    <Phone>+380930808333</Phone>
+    <Role>4</Role>
+  </ApplicationUser>
+</ArrayOfApplicationUser>
