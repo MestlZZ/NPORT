@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "AddNews";
 }
-
+<script src="../../Content/tinymce/js/tinymce/tinymce.min.js"></script>
+<script>tinymce.init({ selector:'input[type="text"]' });</script>
 @if (Request.IsAuthenticated)
 {
 <h2>AddNews</h2>

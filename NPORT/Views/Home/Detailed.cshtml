@@ -6,11 +6,21 @@
     NPORT.Models.Database.Role Role = null;
     var user = NPORT.Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
     var role = NPORT.Database.XMLDatabase.Roles.GetList();
-    foreach (var rol in role)
+    if (user == null)
     {
-        if (user.Role == rol.Id)
+        Role = new NPORT.Models.Database.Role();
+        Role.Access_AddNews = false;
+        Role.Access_EditNews = false;
+        Role.Access_RemoveNews = false;
+    }
+    else
+    {
+        foreach (var rol in role)
         {
-            Role = rol;
+            if (user.Role == rol.Id)
+            {
+                Role = rol;
+            }
         }
     }
 }
@@ -18,7 +28,7 @@
 <div class="news1">
     <h2 class="title">@news.Title</h2>
     <p class="content">@news.Content</p>
-    @*<span class="author">&copy; @Author.Nickname</span>*@
+    <span class="author">&copy; @Author.UserName</span>
     <span class="date">@news.Date</span>
     <p>
         @if (Role.Access_EditNews || news.AuthorId == user.Id)

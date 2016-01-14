@@ -141,12 +141,13 @@ div.main nav.menu ul li a{
 }
 
 div.main nav.menu ul li.user{
-    height: 40px;
-    line-height: 20px;
+    min-height: 20px;
 }
 
 div.main nav.menu ul li.user a{
         white-space: normal;
+    vertical-align: middle;
+    line-height: 20px;
 }
 
 .btn{
@@ -229,4 +230,9 @@ div.main nav.menu ul li.user a{
     overflow: hidden;
     text-indent: 20px;
     text-align: justify;
+}
+.news p.details-child::after{
+    display: table;
+    content: "";
+    clear: both;
 }
