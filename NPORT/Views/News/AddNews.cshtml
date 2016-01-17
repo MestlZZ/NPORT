@@ -4,7 +4,11 @@
     ViewBag.Title = "AddNews";
     var roles = NPORT.Database.XMLDatabase.Roles.GetList();
     var user = NPORT.Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
-    var Role = NPORT.Database.XMLDatabase.Roles.Find(user.Role);
+    NPORT.Models.Database.Role Role = null;
+    if (user != null)
+    {
+        Role = NPORT.Database.XMLDatabase.Roles.Find(user.Role);
+    }
 }
 <script src="../../Content/tinymce/js/tinymce/tinymce.min.js"></script>
 <script>tinymce.init({ selector:'.html-editor input[type="text"]' });</script>
