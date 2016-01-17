@@ -67,7 +67,11 @@ namespace NPORT.Controllers
         [HttpGet]
         public ActionResult Remove( string NewsId )
         {
-            if (Request.IsAuthenticated)
+            var user = Database.XMLDatabase.Users.Find( User.Identity.GetUserId() );
+            Models.Database.Role role = null;
+            if (user != null)
+                role = Database.XMLDatabase.Roles.Find( user.Role );
+            if (Request.IsAuthenticated && role.Access_RemoveNews)
             {
                 Database.JSONDatabase.NewsJson.Remove( NewsId );
                 return View();
