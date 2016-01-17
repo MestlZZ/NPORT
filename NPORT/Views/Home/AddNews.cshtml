@@ -1,14 +1,44 @@
 ﻿@model NPORT.Models.Database.News
 @{
     ViewBag.Title = "AddNews";
+    var roles = NPORT.Database.XMLDatabase.Roles.GetList();
 }
 <script src="../../Content/tinymce/js/tinymce/tinymce.min.js"></script>
-<script>tinymce.init({ selector:'input[type="text"]' });</script>
+<script>tinymce.init({ selector:'.html-editor input[type="text"]' });</script>
 @if (Request.IsAuthenticated)
 {
 <h2>AddNews</h2>
-<form method="post">
-@Html.EditorForModel()
+<form method="post" class="add-news">
+    @Html.EditorFor( m => m.Id )
+    @Html.EditorFor( m => m.Date )
+    @Html.EditorFor( m => m.AuthorId )
+
+    <p class="title">
+        @Html.LabelFor( m => m.Title )
+        @Html.EditorFor( m => m.Title )
+    </p>
+
+    <p class="html-editor">
+        @Html.LabelFor( m => m.ShortInfo )
+        @Html.EditorFor( m => m.ShortInfo )
+    </p>
+
+    <p class="html-editor">
+        @Html.LabelFor( m => m.Content )
+        @Html.EditorFor( m => m.Content )
+    </p>
+
+    <p class="visible-range">
+        @Html.LabelFor( m => m.VisibleRange )
+
+        <select name="VisibleRange" required="required">
+            <option selected value="500">All</option>
+            @foreach (var role in roles)
+            {
+                    <option value="@role.Id">@role.Name</option>
+            }
+        </select>
+    </p>
     <input class="btn" type="submit" />
 </form>
 }

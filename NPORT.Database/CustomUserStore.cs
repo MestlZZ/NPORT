@@ -45,6 +45,12 @@ namespace NPORT.Models
             return Task.Factory.StartNew( () => Users.Add( user ) );
         }
 
+        public void Create( ApplicationUser user )
+        {
+            Users.Add( user );
+            UpdateDb();
+        }
+
         public Task UpdateAsync( ApplicationUser user )
         {
             var task = FindByIdAsync( user.Id );
@@ -56,11 +62,30 @@ namespace NPORT.Models
             return Task.Factory.StartNew( () => CreateAsync( task.Result ) );
         }
 
+        public void Update( ApplicationUser user )
+        {
+            var task = FindById( user.Id );
+            Delete( task );
+            Create( user );
+            UpdateDb();
+        }
+
         public Task DeleteAsync( ApplicationUser user )
         {
             Users.Remove( user );
             UpdateDb();
             return Task.Factory.StartNew( () => Users.Remove( user ) );
+        }
+
+        public void Delete( ApplicationUser user )
+        {
+            Users.Remove( user );
+            UpdateDb();
+        }
+
+        public ApplicationUser FindById( string userId )
+        {
+            return Users.FirstOrDefault( u => u.Id == userId );
         }
 
         public Task<ApplicationUser> FindByIdAsync( string userId )
@@ -97,7 +122,6 @@ namespace NPORT.Models
 
         public Task ResetAccessFailedCountAsync( ApplicationUser user )
         {
-            int s = 0;
             return Task.Factory.StartNew( () => Nothing() );
         }
 

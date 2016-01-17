@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Home Page";
     var newsList = NewsJson.GetList();
+    var user = NPORT.Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
+    if (user == null)
+    {
+        user = new ApplicationUser();
+        user.Role = 5;
+    }
 }
 
 <h1>News</h1>
@@ -11,20 +17,23 @@
     foreach (var news in newsList)
     {
         var Author = NPORT.Database.XMLDatabase.Users.Find(news.AuthorId);
-    <div class="news">
-        <h2 class="title">@Html.Raw(news.Title)</h2>
-        <p class="content">@Html.Raw( news.Content )</p>
-        <p class="details-link">
-            @Html.ActionLink("Details", "Detailed", "Home", new { NewsId = news.Id }, new { @class = "btn" })<br />
-           
-        </p>
-        <span class="author">&copy;
-        @if (Author != null)
+        if (user.Role <= news.VisibleRange)
         {
-            @Author.UserName
+            <div class="news">
+                <h2 class="title">@Html.Raw( news.Title )</h2>
+                <p class="content">@Html.Raw( news.ShortInfo )</p>
+                <p class="details-link">
+                    @Html.ActionLink( "Details", "Detailed", "Home", new { NewsId = news.Id }, new { @class = "btn" } )<br />
+           
+                </p>
+                <span class="author">&copy;
+                @if (Author != null)
+                {
+                    @Author.UserName
+                }
+                </span>
+                <span class="date">@news.Date </span>
+            </div>
         }
-        </span>
-        <span class="date">@news.Date </span>
-    </div>
     }
 }

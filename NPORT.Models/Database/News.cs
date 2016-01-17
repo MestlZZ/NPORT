@@ -17,6 +17,12 @@ namespace NPORT.Models.Database
         public string Title { get; set; }
 
         [Required]
+        public string ShortInfo { get; set; }
+
+        [Required]
+        public int VisibleRange { get; set; }
+
+        [Required]
         public string Content { get; set; }
 
         [HiddenInput(DisplayValue = false)]

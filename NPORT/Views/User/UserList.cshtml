@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "UserList";
+}
+
+<h2>UserList</h2>
+<div class="user-list">
+<table>
+    <tr>
+        <th>Nickname</th>
+        <th>Role</th>
+        <th></th>
+    </tr>
+@foreach( ApplicationUser user in Model )
+{
+    <tr>
+        <td>@user.UserName</td>
+        <td>@user.GetRole()</td>
+        <td>@Html.ActionLink("Details", "Details", "User", new { id = user.Id }, new { @class = "btn" } )</td>
+    </tr>
+}
+</table>
+</div>

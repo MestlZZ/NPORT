@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace NPORT.Models
+namespace NPORT.Models.Manage
 {
     public class IndexViewModel
     {

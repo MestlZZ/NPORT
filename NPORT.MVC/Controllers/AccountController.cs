@@ -76,20 +76,6 @@ namespace NPORT.Controllers
                 return View( model );
             }
 
-            //var user = await UserManager.FindAsync( model.Login, model.Password );
-            //if (user != null)
-            //{
-            //    string[] roles = new string[1];
-            //    roles[0] = "Admin";
-            //    MyUserIdentity ident = new MyUserIdentity(user.Phone, "Basic authentication", true, user.Id );
-            //    HttpContext.User = new GenericPrincipal( ident, roles );
-            //    return RedirectToLocal( returnUrl );
-            //}
-            //else
-            //{
-            //    ModelState.AddModelError( "", "Неудачная попытка входа." );
-            //    return View( model );
-            //}
             var result = await SignInManager.PasswordSignInAsync(model.Login, model.Password, false, shouldLockout: false);
             switch (result)
             {
@@ -123,14 +109,28 @@ namespace NPORT.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser(model.NickName, model.Password, model.Phone, 4);
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (Database.XMLDatabase.Users.FindLogin( model.Phone ) == null)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    return RedirectToAction("Index", "Home");
+                    if (Database.XMLDatabase.Users.FindNickname( model.NickName ) == null)
+                    {
+                        var user = new ApplicationUser(model.NickName, model.Password, model.Phone, 4);
+                        var result = await UserManager.CreateAsync(user, model.Password);
+                        if (result.Succeeded)
+                        {
+                            await SignInManager.SignInAsync( user, isPersistent: false, rememberBrowser: false );
+                            return RedirectToAction( "Index", "Home" );
+                        }
+                        AddErrors( result );
+                    }
+                    else
+                    {
+                        ModelState.AddModelError( "", "Please, input another Nickname!" );
+                    }
                 }
-                AddErrors(result);
+                else
+                {
+                    ModelState.AddModelError( "", "Please, input another phone number!" );
+                }
             }
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы

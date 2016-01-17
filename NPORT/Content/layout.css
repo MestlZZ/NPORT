@@ -179,7 +179,8 @@ div.main nav.menu ul li.user a{
 }
 .news{
     width: 45%;
-    float: right;
+    float: left;
+    margin-left: 10px;
     padding: 0 10px;
     border: 1px dashed black;
     padding-bottom: 10px;
@@ -213,13 +214,7 @@ div.main nav.menu ul li.user a{
     float: left;
 }
 
-.news:nth-child(2n+1)::after{
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.news:nth-child(2n):last-child{
+.news:only-of-type{
     width: 666px;
 }
 
@@ -258,4 +253,12 @@ div.main nav.menu ul li.user a{
 }
 .news-detailed .btn-remove{
     float: right;
+}
+.news-detailed div, .news-detailed figure{
+    max-width: 680px;
+}
+
+.news figure, .news div{
+    width: 100%;
+    height: auto;
 }

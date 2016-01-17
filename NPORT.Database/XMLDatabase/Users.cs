@@ -40,6 +40,24 @@ namespace NPORT.Database.XMLDatabase
             return null;
         }
 
+        public static ApplicationUser FindLogin( string phone )
+        {
+            var users = GetList();
+            foreach (var user in users)
+                if (user.Phone == phone)
+                    return user;
+            return null;
+        }
+
+        public static ApplicationUser FindNickname( string nickname )
+        {
+            var users = GetList();
+            foreach (var user in users)
+                if (user.UserName == nickname)
+                    return user;
+            return null;
+        }
+
         public static void Update( List<ApplicationUser> users )
         {
             using (StreamWriter fs = new StreamWriter( Path ))
