@@ -722,9 +722,9 @@
       <Project>{27939827-6a6a-4495-8fbf-059c3c352e8c}</Project>
       <Name>NPORT.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NPORT.MVC\NPORT.MVC.csproj">
+    <ProjectReference Include="..\NPORT.MVC\NPORT.Mvc.csproj">
       <Project>{46970858-2842-40b8-84e9-cc811e02125d}</Project>
-      <Name>NPORT.MVC</Name>
+      <Name>NPORT.Mvc</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

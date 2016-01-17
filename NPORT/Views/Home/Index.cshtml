@@ -9,6 +9,8 @@
         user = new ApplicationUser();
         user.Role = 5;
     }
+    int i = 0;
+    string c;
 }
 
 <h1>News</h1>
@@ -16,10 +18,15 @@
 {
     foreach (var news in newsList)
     {
+        i++;
         var Author = NPORT.Database.XMLDatabase.Users.Find(news.AuthorId);
         if (user.Role <= news.VisibleRange)
         {
-            <div class="news">
+            if (i % 2 == 1)
+            { c = "left"; }
+            else
+            { c = "right"; }
+            <div class="news @c">
                 <h2 class="title">@Html.Raw( news.Title )</h2>
                 <p class="content">@Html.Raw( news.ShortInfo )</p>
                 <p class="details-link">

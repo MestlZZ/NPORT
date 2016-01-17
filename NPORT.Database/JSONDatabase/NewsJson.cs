@@ -25,7 +25,7 @@ namespace NPORT.Database.JSONDatabase
 
             file.Close();
 
-            items.Add( newNews );
+            items.Insert( 0 , newNews );
 
             StreamWriter file2 = new StreamWriter(Path);
 

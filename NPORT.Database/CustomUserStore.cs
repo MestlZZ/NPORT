@@ -66,6 +66,7 @@ namespace NPORT.Models
             var task = FindById( user.Id );
             Delete( task );
             Create( user );
+            Users.Sort( delegate(ApplicationUser u1, ApplicationUser u2) { if (u1.Role > u2.Role) { return 1; } else { if (String.Compare( u1.UserName , u2.UserName ) > 0) { return 1; } return -1; } } );
             UpdateDb();
         }
 
