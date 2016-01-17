@@ -1,13 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Serialization;
 using System.Web;
-using System.Security.Cryptography;
 using NPORT.Models.Database;
 
 namespace NPORT.Database.XMLDatabase
@@ -19,17 +13,6 @@ namespace NPORT.Database.XMLDatabase
 
         public static List<Role> GetList()
         {
-
-            //List<Role> roles = new List<Role>();
-            //var role = new Role { Id = 1, Name = "Admin", Access_AddNews = true, Access_EditNews = true, Access_RemoveNews = true };
-            //roles.Add( role );
-            //role = new Role { Id = 2, Name = "Editor", Access_AddNews = false, Access_EditNews = true, Access_RemoveNews = true };
-            //roles.Add( role );
-            //role = new Role { Id = 3, Name = "Correspondent", Access_AddNews = true, Access_EditNews = false, Access_RemoveNews = false };
-            //roles.Add( role );
-            //role = new Role { Id = 4, Name = "User", Access_AddNews = false, Access_EditNews = false, Access_RemoveNews = false };
-            //roles.Add( role );
-            //Update( roles );
             using (StreamReader fs = new StreamReader( Path ))
             {
                 var result = (List<Role>)formatter.Deserialize( fs );

@@ -118,11 +118,8 @@
   <ItemGroup>
     <Content Include="App_Data\RoleDatabase.xml" />
     <Content Include="App_Data\UserDatabase.xml" />
-    <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\img\site-icon.png" />
     <Content Include="Content\css\layout.css" />
-    <Content Include="Content\css\Site.css" />
     <Content Include="Content\tinymce\changelog.txt" />
     <Content Include="Content\tinymce\Gruntfile.js" />
     <Content Include="Content\tinymce\js\tinymce\classes\AddOnManager.js" />
@@ -629,10 +626,7 @@
     <Content Include="Content\tinymce\tools\tasks\bundle.js" />
     <Content Include="Content\tinymce\tools\tasks\moxiezip.js" />
     <Content Include="Content\tinymce\tools\tasks\skin.js" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Scripts\bootstrap.js" />
-    <Content Include="Content\Scripts\bootstrap.min.js" />
     <Content Include="Content\Scripts\modernizr-2.6.2.js" />
     <Content Include="App_Data\NewsDatabase.json" />
     <Content Include="Content\tinymce\.eslintrc" />
@@ -716,7 +710,9 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\fonts\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NPORT.Database\NPORT.Database.csproj">
       <Project>{d02acad4-5f8b-4905-8328-845735d22b2c}</Project>
@@ -735,29 +731,16 @@
     <Content Include="web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <Content Include="Content\Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\News\Detailed.cshtml" />
     <Content Include="Views\News\AddNews.cshtml" />
     <Content Include="Views\News\Edit.cshtml" />

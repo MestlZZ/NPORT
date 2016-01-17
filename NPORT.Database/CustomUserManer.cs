@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
 using System.Web;
-using System.IO;
-using System.Security.Principal;
 using System.Security.Cryptography;
-using NPORT.Models.Database;
 using NPORT.Models;
 using Microsoft.AspNet.Identity;
 
@@ -20,7 +12,7 @@ namespace NPORT
         public CustomUserManager( CustomUserStore store )
             : base( store )
         {
-            this.PasswordHasher = new CustomPasswordHasher();
+            PasswordHasher = new CustomPasswordHasher();
         }
 
         public static CustomUserManager Create()

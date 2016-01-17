@@ -102,7 +102,6 @@
     <Compile Include="Database\News.cs" />
     <Compile Include="Database\Role.cs" />
     <Compile Include="Database\ApplicationUser.cs" />
-    <Compile Include="ViewModels\Manage\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\Home\" />
+    <Folder Include="ViewModels\Manage\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

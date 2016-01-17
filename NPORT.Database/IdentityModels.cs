@@ -24,7 +24,7 @@ namespace NPORT
             buff = md.ComputeHash( buff );
 
             char[] chars = new char[buff.Length / sizeof(char)];
-            System.Buffer.BlockCopy( buff, 0, chars, 0, buff.Length );
+            Buffer.BlockCopy( buff, 0, chars, 0, buff.Length );
 
             PasswordHash = new string( chars );
 
