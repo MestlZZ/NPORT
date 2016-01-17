@@ -67,9 +67,15 @@ namespace NPORT.Controllers
         [HttpGet]
         public ActionResult Remove( string NewsId )
         {
-            Database.JSONDatabase.NewsJson.Remove( NewsId );
-
-            return View();
+            if (Request.IsAuthenticated)
+            {
+                Database.JSONDatabase.NewsJson.Remove( NewsId );
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         public void AddComment( Models.Database.Comment comment )
