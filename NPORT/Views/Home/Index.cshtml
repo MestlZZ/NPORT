@@ -1,7 +1,7 @@
 ﻿@using NPORT.Database.JSONDatabase;
 @using Microsoft.AspNet.Identity
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "News";
     var newsList = NewsJson.GetList();
     var user = NPORT.Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
     if (user == null)
@@ -23,7 +23,7 @@
                 <h2 class="title">@Html.Raw( news.Title )</h2>
                 <p class="content">@Html.Raw( news.ShortInfo )</p>
                 <p class="details-link">
-                    @Html.ActionLink( "Details", "Detailed", "Home", new { NewsId = news.Id }, new { @class = "btn" } )<br />
+                    @Html.ActionLink( "Details", "Detailed", "News", new { NewsId = news.Id }, new { @class = "btn" } )<br />
            
                 </p>
                 <span class="author">&copy;

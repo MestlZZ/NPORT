@@ -20,7 +20,7 @@ header h1::before{
     top: -30px;
     width: 100px;
     height: 100px;
-    background: url("img/site-icon.png") no-repeat;
+    background: url("../img/site-icon.png") no-repeat;
     background-size: contain;
     -webkit-transition: all 1s ease-out 0.2s;
      -moz-transition: all 1s ease-out 0.2s;

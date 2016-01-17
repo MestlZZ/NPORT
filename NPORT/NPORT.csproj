@@ -118,11 +118,11 @@
   <ItemGroup>
     <Content Include="App_Data\RoleDatabase.xml" />
     <Content Include="App_Data\UserDatabase.xml" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\img\site-icon.png" />
-    <Content Include="Content\layout.css" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\css\layout.css" />
+    <Content Include="Content\css\Site.css" />
     <Content Include="Content\tinymce\changelog.txt" />
     <Content Include="Content\tinymce\Gruntfile.js" />
     <Content Include="Content\tinymce\js\tinymce\classes\AddOnManager.js" />
@@ -629,11 +629,11 @@
     <Content Include="Content\tinymce\tools\tasks\bundle.js" />
     <Content Include="Content\tinymce\tools\tasks\moxiezip.js" />
     <Content Include="Content\tinymce\tools\tasks\skin.js" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Content\Scripts\bootstrap.js" />
+    <Content Include="Content\Scripts\bootstrap.min.js" />
+    <Content Include="Content\Scripts\modernizr-2.6.2.js" />
     <Content Include="App_Data\NewsDatabase.json" />
     <Content Include="Content\tinymce\.eslintrc" />
     <Content Include="Content\tinymce\.jscsrc" />
@@ -706,9 +706,9 @@
     <Content Include="Content\tinymce\tests\.eslintrc" />
     <Content Include="Content\tinymce\tests\.jshintrc" />
     <Content Include="Content\tinymce\tests\js\qunit\QUnit.LICENSE" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Content\Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Content\Scripts\jquery-1.10.2.js" />
+    <Content Include="Content\Scripts\jquery-1.10.2.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -735,11 +735,11 @@
     <Content Include="web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Content\Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
@@ -758,10 +758,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Home\Detailed.cshtml" />
-    <Content Include="Views\Home\AddNews.cshtml" />
-    <Content Include="Views\Home\Edit.cshtml" />
-    <Content Include="Views\Home\Remove.cshtml" />
+    <Content Include="Views\News\Detailed.cshtml" />
+    <Content Include="Views\News\AddNews.cshtml" />
+    <Content Include="Views\News\Edit.cshtml" />
+    <Content Include="Views\News\Remove.cshtml" />
     <Content Include="Views\User\UserList.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Remove.cshtml" />

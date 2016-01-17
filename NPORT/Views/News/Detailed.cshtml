@@ -35,11 +35,11 @@
     <p class="detailed-btn">
         @if (Role.Access_EditNews || news.AuthorId == user.Id)
         {
-            @Html.ActionLink( "Edit", "Edit", "Home", new { NewsId = news.Id }, new { @class = "btn btn-edit" } )
+            @Html.ActionLink( "Edit", "Edit", "News", new { NewsId = news.Id }, new { @class = "btn btn-edit" } )
         }
         @if (Role.Access_RemoveNews || news.AuthorId == user.Id)
         {
-            @Html.ActionLink("Remove", "Remove", "Home", new { NewsId = news.Id }, new { @class = "btn btn-remove" })
+            @Html.ActionLink("Remove", "Remove", "News", new { NewsId = news.Id }, new { @class = "btn btn-remove" })
         }
     </p>
 </div>
