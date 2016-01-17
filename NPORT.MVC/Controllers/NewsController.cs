@@ -71,7 +71,8 @@ namespace NPORT.Controllers
             Models.Database.Role role = null;
             if (user != null)
                 role = Database.XMLDatabase.Roles.Find( user.Role );
-            if (Request.IsAuthenticated && role.Access_RemoveNews)
+
+            if (user != null && role.Access_RemoveNews && Request.IsAuthenticated)
             {
                 Database.JSONDatabase.NewsJson.Remove( NewsId );
                 return View();
