@@ -4,21 +4,21 @@
     <Id>ca2fb8dc-c52d-4e27-8137-3b16ab8fe95f</Id>
     <UserName>Bogdan</UserName>
     <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
-    <Phone>+380930808372</Phone>
+    <Phone>+380123456789</Phone>
     <Role>1</Role>
   </ApplicationUser>
   <ApplicationUser>
     <Id>8136d584-4a3c-4f18-97c0-42881ef4650b</Id>
     <UserName>Vanya</UserName>
     <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
-    <Phone>+380930808373</Phone>
+    <Phone>+380111111111</Phone>
     <Role>2</Role>
   </ApplicationUser>
   <ApplicationUser>
     <Id>ce4a484c-4ccd-462e-964d-53fe081900f1</Id>
     <UserName>Mestl</UserName>
     <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
-    <Phone>+380930808321</Phone>
+    <Phone>+380987654321</Phone>
     <Role>3</Role>
   </ApplicationUser>
 </ArrayOfApplicationUser>
