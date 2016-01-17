@@ -72,7 +72,10 @@
                             <p class="author">@author.UserName</p>
                             <p class="text">@comment.Text</p>
                             <p class="date">@comment.Date</p>
-                            @Html.ActionLink( "Remove", "RemoveComment", "News", new { id = comment.Id, url = Request.Url.ToString() }, new { @class = "btn btn-comment-remove" } );
+                            @if (Request.IsAuthenticated && (user.Role<=1 || user.Id==comment.AuthorId))
+                            {                                
+                                @Html.ActionLink("Remove", "RemoveComment", "News", new { id = comment.Id, url = Request.Url.ToString() }, new { @class = "btn btn-comment-remove" });
+                            }
                         </div>
                     }
                 }
