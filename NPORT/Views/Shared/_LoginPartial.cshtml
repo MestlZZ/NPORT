@@ -9,7 +9,7 @@
         <li class="user">
             @Html.ActionLink("Hello, " + User.Identity.GetUserName() + "!", "Index", "User", routeValues: null, htmlAttributes: new { title = "User" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Exit</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
         @{ 
             var s = User.Identity.GetUserId();
             var roles = NPORT.Database.XMLDatabase.Roles.GetList();

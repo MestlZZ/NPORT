@@ -22,10 +22,10 @@
     <Role>3</Role>
   </ApplicationUser>
   <ApplicationUser>
-    <Id>8218cb10-58d8-4fb4-9834-eced547a32d3</Id>
+    <Id>8c899aa7-2f16-4369-834e-6f197ea1bc0d</Id>
     <UserName>Sasha</UserName>
     <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
-    <Phone>+311</Phone>
+    <Phone>+321321321321</Phone>
     <Role>4</Role>
   </ApplicationUser>
 </ArrayOfApplicationUser>
