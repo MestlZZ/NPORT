@@ -85,13 +85,25 @@ namespace NPORT.Controllers
 
         public void AddComment( Models.Database.Comment comment )
         {
-            Database.JSONDatabase.CommentsJson.Add( comment );
+            if (Request.IsAuthenticated)
+            {
+                Database.JSONDatabase.CommentsJson.Add(comment);
+            }
         }
 
         public ActionResult RemoveComment( int Id, string url )
         {
-            Database.JSONDatabase.CommentsJson.Remove( Id );
-            return Redirect( url + "#btn" );
+            if (Request.IsAuthenticated)
+            {
+                var user = Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
+                Models.Database.Comment comment = Database.JSONDatabase.CommentsJson.Find(Id);
+                if (user.Role <= 1 || user.Id == comment.AuthorId)
+                {
+                    Database.JSONDatabase.CommentsJson.Remove(Id);
+                    return Redirect(url + "#btn");                    
+                }
+            }
+            return RedirectToAction("Index");           
         }
     }
 }
