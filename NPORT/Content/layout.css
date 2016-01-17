@@ -232,6 +232,9 @@ div.main nav.menu ul li.user a{
     content: "";
     clear: both;
 }
+.news-detailed .title{
+    font-size: 35px;
+}
 .news-detailed .author{
     color: red;
     font-size: 20px;
