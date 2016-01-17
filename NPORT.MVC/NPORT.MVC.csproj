@@ -151,10 +151,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\NPORT.Business\NPORT.Business.csproj">
-      <Project>{2ead8ef9-6f4b-4938-9aa3-64301518b2f0}</Project>
-      <Name>NPORT.Business</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NPORT.Database\NPORT.Database.csproj">
       <Project>{d02acad4-5f8b-4905-8328-845735d22b2c}</Project>
       <Name>NPORT.Database</Name>
