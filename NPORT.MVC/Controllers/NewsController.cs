@@ -15,7 +15,7 @@ namespace NPORT.Controllers
         }
         [HttpPost]
         [ValidateInput( false )]
-        public ActionResult AddNews( NPORT.Models.Database.News news )
+        public ActionResult AddNews( Models.Database.News news )
         {
             if (ModelState.IsValid)
             {
@@ -32,6 +32,19 @@ namespace NPORT.Controllers
             ViewBag.Id = NewsId;
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Detailed( Models.Database.Comment comment, string NewsId )
+        {
+            comment.NewsId = NewsId;
+            comment.AuthorId = User.Identity.GetUserId();
+
+            AddComment( comment );
+
+            ViewBag.Id = NewsId;
+            return View();
+        }
+
         [HttpGet]
         public ActionResult Edit( string NewsId )
         {
@@ -41,7 +54,7 @@ namespace NPORT.Controllers
 
         [HttpPost]
         [ValidateInput( false )]
-        public ActionResult Edit( NPORT.Models.Database.News news )
+        public ActionResult Edit( Models.Database.News news )
         {
             if (ModelState.IsValid)
             {
@@ -54,9 +67,20 @@ namespace NPORT.Controllers
         [HttpGet]
         public ActionResult Remove( string NewsId )
         {
-            NPORT.Database.JSONDatabase.NewsJson.Remove( NewsId );
+            Database.JSONDatabase.NewsJson.Remove( NewsId );
+
             return View();
-            //return RedirectToAction("Index");
+        }
+
+        public void AddComment( Models.Database.Comment comment )
+        {
+            Database.JSONDatabase.CommentsJson.Add( comment );
+        }
+
+        public ActionResult RemoveComment( int Id, string url )
+        {
+            Database.JSONDatabase.CommentsJson.Remove( Id );
+            return Redirect( url + "#btn" );
         }
     }
 }

@@ -35,7 +35,7 @@
         <p class="content">@Html.Raw( news.Content )</p>
         <span class="author">&copy; @Author.UserName</span>
         <span class="date">@news.Date</span>
-        <p class="detailed-btn">
+        <p class="detailed-btn" id="btn">
             @if (Role.Access_EditNews || news.AuthorId == user.Id)
             {
                 @Html.ActionLink( "Edit", "Edit", "News", new { NewsId = news.Id }, new { @class = "btn btn-edit" } )
@@ -45,9 +45,41 @@
                 @Html.ActionLink( "Remove", "Remove", "News", new { NewsId = news.Id }, new { @class = "btn btn-remove" } )
             }
         </p>
-    }
-    else
-    {
+        if(Request.IsAuthenticated)
+        {
+            <form class="comment" method="post">
+                <textarea class="text" name="Text"></textarea>
+                <input class="btn" type="submit" value="Add" />
+            </form>
+        }
+        else
+        {
+            <p class="comment error">You must register for add comments!</p>
+        }
+        var list = NPORT.Database.JSONDatabase.CommentsJson.GetList();
+            if (list == null)
+            {
+                <p class="comment error">No comments!</p>
+            }
+            else
+            {
+                foreach (var comment in list)
+                {
+                    var author = NPORT.Database.XMLDatabase.Users.Find(comment.AuthorId);
+                    if (comment.NewsId == news.Id)
+                    {
+                        <div class="comment">
+                            <p class="author">@author.UserName</p>
+                            <p class="text">@comment.Text</p>
+                            <p class="date">@comment.Date</p>
+                            @Html.ActionLink( "Remove", "RemoveComment", "News", new { id = comment.Id, url = Request.Url.ToString() }, new { @class = "btn btn-comment-remove" } );
+                        </div>
+                    }
+                }
+            }
+            }
+            else
+            {
         <p class="error">You don't have premission to read this text!</p>
     }
 </div>

@@ -179,7 +179,6 @@ div.main nav.menu ul li.user a{
 }
 .news{
     width: 45%;
-    /*float: left;*/
     margin-left: 12px;
     padding: 0 10px;
     border: 1px dashed black;
@@ -217,11 +216,6 @@ div.main nav.menu ul li.user a{
     display: inline;
     clear: both;
 }
-/*
-.news:nth-child(2n){
-    float: left;
-}
-*/
 
 .news:only-of-type{
     width: 666px;
@@ -236,36 +230,44 @@ div.main nav.menu ul li.user a{
     text-indent: 20px;
     text-align: justify;
 }
+
 .news p.details-child::after{
     display: table;
     content: "";
     clear: both;
 }
+
 .news-detailed .title{
     font-size: 35px;
 }
+
 .news-detailed .author{
     color: red;
     font-size: 20px;
     font-weight: bold;
 }
+
 .news-detailed .date{
     float: right;
     font-weight: bold;
     font-size: 17px;
 }
+
 .news-detailed .date::after, .news-detailed .btn-remove::after{
     content: "";
     display:table;
     clear: both;
 }
+
 .news-detailed .btn-edit, .news-detailed .btn-remove{
     width: 100px;
     height: 20px;
 }
+
 .news-detailed .btn-remove{
     float: right;
 }
+
 .news-detailed div, .news-detailed figure{
     max-width: 680px;
 }
@@ -273,4 +275,39 @@ div.main nav.menu ul li.user a{
 .news figure, .news div{
     width: 100%;
     height: auto;
+}
+
+.news-detailed .comment textarea{
+    width: 100%;
+    max-width: 100%;
+    height: 60px;
+}
+.news-detailed .comment .text{
+    font-family: "";
+    font-style: italic;
+}
+.news-detailed div.comment .author{
+    float: none;
+    margin: 0px;
+}
+.news-detailed div.comment .date{
+    float: none;
+    margin: 0px;
+}
+.news-detailed div.comment .author,
+.news-detailed div.comment .date{
+    font-size: 15px;
+}
+.news-detailed div.comment{
+    border: 1px dashed black;
+    margin: 10px auto;
+    width: 55%;
+    padding: 10px;
+}
+.news-detailed div.comment:nth-of-type(2n){
+    text-align: right;
+    float: right;
+}
+.news-detailed div.comment:nth-of-type(2n - 1){
+    float: left;
 }

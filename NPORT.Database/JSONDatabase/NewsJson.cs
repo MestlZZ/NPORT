@@ -54,6 +54,7 @@ namespace NPORT.Database.JSONDatabase
 
             return items;
         }
+
         public static void Edit(Models.Database.News news)
         {
             List<Models.Database.News> bufferList = GetList();
@@ -70,8 +71,16 @@ namespace NPORT.Database.JSONDatabase
 
             file2.Close();
         }
+
         public static void Remove(string NewsId)
         {
+            var comments = CommentsJson.GetList();
+            foreach (var comment in comments)
+            {
+                if (comment.NewsId == NewsId)
+                    CommentsJson.Remove(comment.Id);
+            }
+
             List<Models.Database.News> bufferList = GetList();
             foreach (var news in bufferList)
                 if (news.Id == NewsId)

@@ -100,6 +100,7 @@
     <Compile Include="CustomUserManer.cs" />
     <Compile Include="CustomUserStore.cs" />
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="JSONDatabase\CommentsJson.cs" />
     <Compile Include="JSONDatabase\NewsJson.cs" />
     <Compile Include="MyUserIdentity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -80,6 +80,14 @@ namespace NPORT.Models
         public void Delete( ApplicationUser user )
         {
             Users.Remove( user );
+            var comments = NPORT.Database.JSONDatabase.CommentsJson.GetList();
+            foreach (var comment in comments)
+            {
+                if (comment.AuthorId == user.Id)
+                {
+                    NPORT.Database.JSONDatabase.CommentsJson.Remove( comment.Id );
+                }
+            }
             UpdateDb();
         }
 

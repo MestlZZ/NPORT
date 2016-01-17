@@ -700,6 +700,7 @@
     <Content Include="Content\tinymce\tests\.eslintrc" />
     <Content Include="Content\tinymce\tests\.jshintrc" />
     <Content Include="Content\tinymce\tests\js\qunit\QUnit.LICENSE" />
+    <Content Include="App_Data\CommentsDatabase.json" />
     <None Include="Content\Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\Scripts\jquery-1.10.2.js" />
     <Content Include="Content\Scripts\jquery-1.10.2.min.js" />
