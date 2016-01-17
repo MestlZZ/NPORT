@@ -26,7 +26,7 @@ namespace NPORT.Database.JSONDatabase
                 items = JsonConvert.DeserializeObject<List<Models.Database.Comment>>(json);
 
                 if (items.Count > 0)
-                    comment.Id = items[items.Count - 1].Id + 1;
+                    comment.Id = items[0].Id + 1;
                 else
                     items = new List<Models.Database.Comment>();
 
