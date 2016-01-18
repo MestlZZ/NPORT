@@ -1,7 +1,7 @@
 ﻿@using NPORT.Models.ViewModels.User
 @model DetailsViewModel
 
-@Model.Title = "Details";
+@{ ViewBag.Title = "Details"; }
 <h2>@Model.UserInBase.UserName</h2>
 
 <table class="user-info">

@@ -1,6 +1,6 @@
 ﻿@model NPORT.Models.ViewModels.News.DetailedViewModel
 @{
-    Model.Title = "Detailed page";
+    ViewBag.Title = "Detailed page";
 }
 
 <div class="news-detailed">
@@ -31,7 +31,7 @@
         {
             <p class="comment error">You must register for add comments!</p>
         }
-            if (Model.CommentsList == null)
+            if (Model.CommentsList == null || Model.CommentsList.Count <= 0)
             {
                 <p class="comment error">No comments!</p>
             }

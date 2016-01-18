@@ -1,8 +1,9 @@
 ﻿@using NPORT.Models.ViewModels.User
-@model UserListViewModel
+@{ 
+    var list = NPORT.Database.XMLDatabase.Users.GetList();
+}
 
-
-@Model.Title = "UserList"
+@{ ViewBag.Title = "UserList"; }
 <h2>UserList</h2>
 <div class="user-list">
 <table>
@@ -11,7 +12,7 @@
         <th>Role</th>
         <th></th>
     </tr>
-@foreach( var user in Model.UserList )
+@foreach( var user in list )
 {
     <tr>
         <td>@user.UserName</td>

@@ -78,6 +78,7 @@ namespace NPORT.Controllers
             model.CurrentNews = Database.JSONDatabase.NewsJson.Find( NewsId );
             model.CurrentNewsAuthorName = Users.Find( model.CurrentNews.AuthorId ).UserName;
             model.CommentsList = Database.JSONDatabase.CommentsJson.GetListForNewsId( NewsId );
+            if(model.CommentsList != null && model.CommentsList.Count > 0)
             model.UserListForComments = Database.JSONDatabase.CommentsJson.GetListAuthorNameForComments( model.CommentsList );
 
             return View( model );
