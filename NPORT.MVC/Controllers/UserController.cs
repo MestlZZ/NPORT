@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
 using NPORT.Models;
+using NPORT.Models.ViewModels.Shared;
+using NPORT.Models.ViewModels.User;
+using Microsoft.AspNet.Identity;
+
 
 namespace NPORT.MVC.Controllers
 {
@@ -18,7 +22,13 @@ namespace NPORT.MVC.Controllers
 
         public ActionResult Details( string Id )
         {
-            return View( Database.XMLDatabase.Users.Find(Id) );
+            DetailsViewModel model = new DetailsViewModel();
+            ApplicationUser user = NPORT.Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
+            model.CurrentUserRole = user.Role;
+            model.Roles = NPORT.Database.XMLDatabase.Roles.GetList();
+            model.Title = "Details";
+            model.UserInBase = Database.XMLDatabase.Users.Find(Id);
+            return View(  );
         }
 
         [HttpPost]
