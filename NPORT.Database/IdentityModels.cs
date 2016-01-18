@@ -46,6 +46,19 @@ namespace NPORT
             return roles.Name;
         }
 
+        public Models.Database.ApplicationUser ConvertUser()
+        {
+            var user = new Models.Database.ApplicationUser();
+
+            user.Id = Id;
+            user.PasswordHash = PasswordHash;
+            user.Phone = Phone;
+            user.Role = Role;
+            user.UserName = UserName;
+
+            return user;
+        }
+
         public string Id { get; set; }
 
         public string UserName { get; set; }
