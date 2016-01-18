@@ -30,7 +30,7 @@
                 <h2 class="title">@Html.Raw( news.Title )</h2>
                 <p class="content">@Html.Raw( news.ShortInfo )</p>
                 <p class="details-link">
-                    @Html.ActionLink( "Details", "Detailed", "News", new { NewsId = news.Id }, new { @class = "btn" } )<br />
+                    @Html.RouteLink( "Details", "News Details", new { NewsId = news.Id }, new { @class = "btn" } )<br />
            
                 </p>
                 <span class="author">&copy;

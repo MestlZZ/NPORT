@@ -38,11 +38,11 @@
         <p class="detailed-btn" id="btn">
             @if (Role.Access_EditNews || news.AuthorId == user.Id)
             {
-                @Html.ActionLink( "Edit", "Edit", "News", new { NewsId = news.Id }, new { @class = "btn btn-edit" } )
+                @Html.RouteLink( "Edit", "News Edit", new { NewsId = news.Id }, new { @class = "btn btn-edit" } )
             }
             @if (Role.Access_RemoveNews || news.AuthorId == user.Id)
             {
-                @Html.ActionLink( "Remove", "Remove", "News", new { NewsId = news.Id }, new { @class = "btn btn-remove" } )
+                @Html.RouteLink( "Remove", "News Remove", new { NewsId = news.Id }, new { @class = "btn btn-remove" } )
             }
         </p>
         if(Request.IsAuthenticated)

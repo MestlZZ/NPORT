@@ -22,9 +22,9 @@
                 <nav class="menu">
                     <h1>MENU</h1>
                     <ul class="left">
-                        <li>@Html.ActionLink( "Home page", "Index", "Home" )</li>
-                        <li>@Html.ActionLink( "About project", "About", "Home" )</li>
-                        <li>@Html.ActionLink( "Contacts", "Contact", "Home" )</li>
+                        <li>@Html.RouteLink( "Home page", "Home" )</li>
+                        <li>@Html.RouteLink( "About project", "About us" )</li>
+                        <li>@Html.RouteLink( "Contacts", "Contact info" )</li>
                     </ul>
                     @Html.Partial( "_LoginPartial" )
                 </nav>

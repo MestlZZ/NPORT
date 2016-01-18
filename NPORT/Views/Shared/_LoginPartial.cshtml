@@ -7,7 +7,7 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li class="user">
-            @Html.ActionLink("Hello, " + User.Identity.GetUserName() + "!", "Index", "User", routeValues: null, htmlAttributes: new { title = "User" })
+            @Html.RouteLink("Hello, " + User.Identity.GetUserName() + "!", "User panel", routeValues: null, htmlAttributes: new { title = "User" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
         @{ 
@@ -26,7 +26,7 @@
         }
         @if (role1.Access_AddNews)
         {
-            <li>@Html.ActionLink("Add news", "AddNews", "News")</li>
+            <li>@Html.ActionLink("Add news", "News Add")</li>
         }       
     </ul>
     }

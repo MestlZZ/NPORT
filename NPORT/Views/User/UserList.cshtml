@@ -15,7 +15,7 @@
     <tr>
         <td>@user.UserName</td>
         <td>@user.GetRole()</td>
-        <td>@Html.ActionLink("Details", "Details", "User", new { id = user.Id }, new { @class = "btn" } )</td>
+        <td>@Html.RouteLink("Details", "User details", new { id = user.Id }, new { @class = "btn" } )</td>
     </tr>
 }
 </table>

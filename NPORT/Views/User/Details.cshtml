@@ -52,7 +52,7 @@
     @if (user.Role <= 1)
     {
     <tr>
-       <td> @Html.ActionLink( "Remove User", "Remove", "User", new { id = Model.Id }, new { @class = "btn" } ) </td>
+       <td> @Html.RouteLink( "Remove User", "User remove", new { id = Model.Id }, new { @class = "btn" } ) </td>
     </tr>
     }
 </table>
