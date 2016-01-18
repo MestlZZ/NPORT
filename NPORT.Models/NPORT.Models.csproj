@@ -104,7 +104,6 @@
     <Compile Include="Database\Role.cs" />
     <Compile Include="Database\ApplicationUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\Shared\_TitleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
