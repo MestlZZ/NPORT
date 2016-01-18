@@ -1,8 +1,7 @@
-﻿@{
-    ViewBag.Title = "Control";
-}
+﻿@using NPORT.Models.ViewModels.User
+@model IndexViewModel
 
-<h2>@ViewBag.Title</h2>
+<h2>@Model.Title</h2>
 
 <div>
     @Html.ActionLink("Users", "UserList", "User", null, new { @class = "btn" } )
