@@ -1,18 +1,11 @@
-﻿@using Microsoft.AspNet.Identity
-@model NPORT.Models.Database.News
-@{
-    ViewBag.Title = "AddNews";
-    var roles = NPORT.Database.XMLDatabase.Roles.GetList();
-    var user = NPORT.Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
-    NPORT.Models.Database.Role Role = null;
-    if (user != null)
-    {
-        Role = NPORT.Database.XMLDatabase.Roles.Find(user.Role);
+﻿@model NPORT.Models.ViewModels.News.AddNewsViewModel
+    @{
+        Model.Title = "Add new news";
     }
-}
 <script src="../../Content/tinymce/js/tinymce/tinymce.min.js"></script>
 <script>tinymce.init({ selector:'.html-editor input[type="text"]' });</script>
-@if (Request.IsAuthenticated && Role.Access_AddNews)
+
+@if (Request.IsAuthenticated && Model.Access_AddNews)
 {
 <h2>AddNews</h2>
 <form method="post" class="add-news">
@@ -21,8 +14,8 @@
     @Html.EditorFor( m => m.AuthorId )
 
     <p class="title">
-        @Html.LabelFor( m => m.Title )
-        @Html.EditorFor( m => m.Title )
+        @Html.LabelFor( m => m.NewsTitle )
+        @Html.EditorFor( m => m.NewsTitle )
     </p>
 
     <p class="html-editor">
@@ -40,7 +33,7 @@
 
         <select name="VisibleRange" required="required">
             <option selected value="500">All</option>
-            @foreach (var role in roles)
+            @foreach (var role in Model.Roles)
             {
                     <option value="@role.Id">@role.Name</option>
             }
