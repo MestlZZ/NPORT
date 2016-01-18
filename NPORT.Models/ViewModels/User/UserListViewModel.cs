@@ -12,5 +12,6 @@ namespace NPORT.Models.ViewModels.User
     {
         public List<ApplicationUser> UserList { get; set; }
         public string UserRole { get; set; }
+        public 
     }
 }
