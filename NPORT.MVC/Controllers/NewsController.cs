@@ -1,7 +1,5 @@
 ﻿using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using NPORT.Models.ViewModels.News;
-using NPORT.Database.XMLDatabase;
 namespace NPORT.Controllers
 {
     public class NewsController : Controller
@@ -13,20 +11,7 @@ namespace NPORT.Controllers
 
         public ActionResult AddNews()
         {
-            var model = new AddNewsViewModel();
-
-            var currentUser = Users.Find( User.Identity.GetUserId() );
-
-            if (currentUser != null)
-            {
-                model.Access_AddNews = Roles.Find( currentUser.Role ).Access_AddNews;
-            }
-            else
-                model.Access_AddNews = false;
-
-            model.Roles = Roles.GetList();
-
-            return View( model );
+            return View();
         }
         [HttpPost]
         [ValidateInput( false )]
