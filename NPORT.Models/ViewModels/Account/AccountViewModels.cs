@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using NPORT.Models.ViewModels.Shared;
 
 namespace NPORT.Models
 {
-    public class LoginViewModel
+    public class LoginViewModel : _TitleViewModel
     {
         [Required]
         [Display(Name = "Phone number")]
@@ -14,7 +15,7 @@ namespace NPORT.Models
         public string Password { get; set; }
     }
 
-    public class RegisterViewModel
+    public class RegisterViewModel : _TitleViewModel
     {
         [Required(ErrorMessage = "Please fill 'Phone' field")]
         [Display(Name = "Phone number")]
