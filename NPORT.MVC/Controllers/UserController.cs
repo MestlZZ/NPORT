@@ -19,7 +19,10 @@ namespace NPORT.MVC.Controllers
 
         public ActionResult UserList()
         {
-            return View( );
+            UserListViewModel model = new UserListViewModel();
+            model.UserList = Database.XMLDatabase.Users.ConvertAndGetUsers();
+
+            return View( model);
         }        
 
         public ActionResult Details( string Id )
