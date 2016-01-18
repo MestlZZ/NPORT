@@ -55,8 +55,32 @@ namespace NPORT.Controllers
         [HttpGet]
         public ActionResult Detailed( string NewsId )
         {
-            ViewBag.Id = NewsId;
-            return View();
+            var model = new DetailedViewModel();
+
+            var user = Users.Find( User.Identity.GetUserId() );
+
+            if (user != null)
+            {
+                var userRole = Roles.Find( user.Role );
+                model.CurrentUserAccess_EditNews = userRole.Access_EditNews;
+                model.CurrentUserAccess_RemoveNews = userRole.Access_RemoveNews;
+                model.CurrentUserId = user.Id;
+                model.CurrentUserRoleId = user.Role;
+            }
+            else
+            {
+                model.CurrentUserAccess_EditNews = false;
+                model.CurrentUserAccess_RemoveNews = false;
+                model.CurrentUserId = "guest";
+                model.CurrentUserRoleId = 5;
+            }
+
+            model.CurrentNews = Database.JSONDatabase.NewsJson.Find( NewsId );
+            model.CurrentNewsAuthorName = Users.Find( model.CurrentNews.AuthorId ).UserName;
+            model.CommentsList = Database.JSONDatabase.CommentsJson.GetListForNewsId( NewsId );
+            model.UserListForComments = Database.JSONDatabase.CommentsJson.GetListAuthorNameForComments( model.CommentsList );
+
+            return View( model );
         }
 
         [HttpPost]
