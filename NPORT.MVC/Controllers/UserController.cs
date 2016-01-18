@@ -4,8 +4,7 @@ using NPORT.Models;
 using NPORT.Models.ViewModels.Shared;
 using NPORT.Models.ViewModels.User;
 using Microsoft.AspNet.Identity;
-using NPORT.Database.XMLDatabase;
-using System.Collections.Generic;
+
 
 namespace NPORT.MVC.Controllers
 {
@@ -19,10 +18,7 @@ namespace NPORT.MVC.Controllers
 
         public ActionResult UserList()
         {
-            UserListViewModel model = new UserListViewModel();
-            model.UserList = Database.XMLDatabase.Users.ConvertAndGetUsers();
-
-            return View( model);
+            return View( Database.XMLDatabase.Users.GetList() );
         }        
 
         public ActionResult Details( string Id )

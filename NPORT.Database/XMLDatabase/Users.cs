@@ -55,15 +55,5 @@ namespace NPORT.Database.XMLDatabase
                 fs.Close();
             }
         }
-        public static List<Models.Database.ApplicationUser> ConvertAndGetUsers()
-        {
-            var users = GetList();
-            List<Models.Database.ApplicationUser> newlist = new List<Models.Database.ApplicationUser>();
-            foreach (var user in users)
-            {
-                newlist.Add(user.ConvertUser());
-            }
-            return newlist;
-        }
     }
 }
