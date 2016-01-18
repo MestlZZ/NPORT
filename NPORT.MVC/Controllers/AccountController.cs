@@ -53,8 +53,9 @@ namespace NPORT.Controllers
         [AllowAnonymous]
         public ActionResult Login( string returnUrl )
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            var model = new LoginViewModel();
+            model.ReturnUrl = returnUrl;
+            return View( model );
         }
 
         //
