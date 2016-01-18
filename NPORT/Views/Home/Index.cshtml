@@ -1,19 +1,32 @@
-﻿@model NPORT.Models.ViewModels.Home.IndexViewModel
-@{ Model.Title = "News"; }
+﻿@using NPORT.Database.JSONDatabase;
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "News";
+    var newsList = NewsJson.GetList();
+    var user = NPORT.Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
+    if (user == null)
+    {
+        user = new ApplicationUser();
+        user.Role = 5;
+    }
+    int i = 0;
+    string c;
+}
 
 <h1>News</h1>
-@if (Model.NewsList != null)
+@if (newsList != null)
 {
-    foreach (var news in Model.NewsList)
+    foreach (var news in newsList)
     {
+        i++;
         var Author = NPORT.Database.XMLDatabase.Users.Find(news.AuthorId);
-        if (Model.CurrentUserRoleId <= news.VisibleRange)
+        if (user.Role <= news.VisibleRange)
         {
-            if (Model.newsClass == "right")
-            { Model.newsClass = "left"; }
+            if (i % 2 == 1)
+            { c = "left"; }
             else
-            { Model.newsClass = "right"; }
-            <div class="news @Model.newsClass">
+            { c = "right"; }
+            <div class="news @c">
                 <h2 class="title">@Html.Raw( news.Title )</h2>
                 <p class="content">@Html.Raw( news.ShortInfo )</p>
                 <p class="details-link">

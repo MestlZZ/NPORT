@@ -28,28 +28,17 @@ namespace NPORT.Controllers
 
             return View( model );
         }
-
         [HttpPost]
         [ValidateInput( false )]
-        public ActionResult AddNews( Models.ViewModels.News.AddNewsViewModel newsModel )
+        public ActionResult AddNews( Models.Database.News news )
         {
             if (ModelState.IsValid)
             {
-                var news = new Models.Database.News();
-
-                news.AuthorId = newsModel.AuthorId;
-                news.Content = newsModel.Content;
-                news.Date = newsModel.Date;
-                news.Id = newsModel.Id;
-                news.ShortInfo = newsModel.ShortInfo;
-                news.Title = newsModel.Title;
-                news.VisibleRange = newsModel.VisibleRange;
-
                 news.AuthorId = User.Identity.GetUserId();
                 NPORT.Database.JSONDatabase.NewsJson.Add( news );
                 return RedirectToAction( "Index" );
             }
-            return View( newsModel );
+            return View( news );
         }
 
         [HttpGet]
