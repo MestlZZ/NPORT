@@ -1,7 +1,8 @@
-﻿@{
-    ViewBag.Title = "UserList";
-}
+﻿@using NPORT.Models.ViewModels.User
+@model UserListViewModel
 
+
+@Model.Title = "UserList"
 <h2>UserList</h2>
 <div class="user-list">
 <table>
@@ -10,7 +11,7 @@
         <th>Role</th>
         <th></th>
     </tr>
-@foreach( ApplicationUser user in Model )
+@foreach( var user in Model.UserList )
 {
     <tr>
         <td>@user.UserName</td>
