@@ -12,8 +12,7 @@ namespace NPORT.MVC.Controllers
     {
         public ActionResult Index()
         {
-            IndexViewModel model = new IndexViewModel();
-            return View(model);
+            return View();
         }
 
         public ActionResult UserList()
@@ -27,10 +26,9 @@ namespace NPORT.MVC.Controllers
             ApplicationUser user = NPORT.Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
             model.CurrentUserRole = user.Role;
             model.Roles = NPORT.Database.XMLDatabase.Roles.GetList();
-            user = Database.XMLDatabase.Users.Find(Id);
-            model.UserInBase = user.ConvertUser();
-            model.UserInBaseRole = user.GetRole();
-            return View( model);
+            model.Title = "Details";
+            model.UserInBase = Database.XMLDatabase.Users.Find(Id);
+            return View(  );
         }
 
         [HttpPost]

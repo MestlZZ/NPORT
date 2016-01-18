@@ -1,36 +1,40 @@
-﻿@using NPORT.Models.ViewModels.User
-@model DetailsViewModel
+﻿@using Microsoft.AspNet.Identity
+@model ApplicationUser
+@{
+    ViewBag.Title = "Details";
+    var user = NPORT.Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
+    var roles = NPORT.Database.XMLDatabase.Roles.GetList();
+}
 
-@Model.Title = "Details";
-<h2>@Model.UserInBase.UserName</h2>
+<h2>@Model.UserName</h2>
 
 <table class="user-info">
     <tr>
         <td>ID</td>
-        <td>@Model.UserInBase.Id</td>
+        <td>@Model.Id</td>
     </tr>
-    @if (Model.CurrentUserRole <= 1)
+    @if (user.Role <= 1)
     {
     <tr>
         <td>Phone</td>
-        <td>@Model.UserInBase.Phone</td>
+        <td>@Model.Phone</td>
     </tr>
     }
     <tr>
         <td>Role</td>
-        @if (Model.CurrentUserRole > 1)
+        @if (user.Role > 1)
         {
-            <td>@Model.UserInBaseRole</td>
+            <td>@Model.GetRole()</td>
         }
         else
         {
             <td>
                 <form method="post">
-                    <input type="text" name="Id" value="@Model.UserInBase.Id" hidden="hidden"/>
+                    <input type="text" name="Id" value="@Model.Id" hidden="hidden"/>
                     <select name="role">
-                        @foreach (var role in Model.Roles)
+                        @foreach (var role in roles)
                         {
-                            if (role.Id == Model.UserInBase.Role)
+                            if (role.Id == Model.Role)
                             {
                                 <option selected value="@role.Id">@role.Name</option>
                             }
@@ -45,10 +49,10 @@
             </td>
         }
     </tr>
-    @if (Model.CurrentUserRole <= 1)
+    @if (user.Role <= 1)
     {
     <tr>
-       <td> @Html.ActionLink( "Remove User", "Remove", "User", new { id = Model.UserInBase.Id }, new { @class = "btn" } ) </td>
+       <td> @Html.ActionLink( "Remove User", "Remove", "User", new { id = Model.Id }, new { @class = "btn" } ) </td>
     </tr>
     }
 </table>

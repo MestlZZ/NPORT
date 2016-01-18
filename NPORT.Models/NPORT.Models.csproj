@@ -109,7 +109,6 @@
     <Compile Include="ViewModels\News\DetailedViewModel.cs" />
     <Compile Include="ViewModels\Shared\_TitleViewModel.cs" />
     <Compile Include="ViewModels\User\DetailsViewModel.cs" />
-    <Compile Include="ViewModels\User\IndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
