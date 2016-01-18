@@ -46,36 +46,6 @@ namespace NPORT.Database.JSONDatabase
             file2.Close();
         }
 
-        public static List<Models.Database.Comment> GetListForNewsId( string id )
-        {
-            var comments = GetList();
-
-            var result = new List<Models.Database.Comment>();
-
-            foreach ( var comment in comments )
-            {
-                if (comment.NewsId == id)
-                    result.Add( comment );
-            }
-
-            if (result.Count > 0)
-                return result;
-            else
-                return null;
-        }
-
-        public static List<string> GetListAuthorNameForComments( List<Models.Database.Comment> comments )
-        {
-            var names = new List<string>();
-
-            foreach( var comment in comments )
-            {
-                names.Add(XMLDatabase.Users.Find( comment.AuthorId ).UserName);
-            }
-
-            return names;
-        }
-
         public static Models.Database.Comment Find( int id )
         {
             var list = GetList();
