@@ -43,13 +43,6 @@ namespace NPORT.Models.Identity
             return role.Name;
         }
 
-        public ApplicationRole GetRole()
-        {
-            var role = RoleDb.Find(RoleId);
-
-            return role;
-        }
-
         public string Id { get; set; }
 
         public string UserName { get; set; }

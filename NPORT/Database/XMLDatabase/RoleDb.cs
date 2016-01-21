@@ -34,13 +34,5 @@ namespace NPORT.Database.XMLDatabase
 
             return null;
         }
-
-        public static void Update( List<ApplicationRole> roleList )
-        {
-            using (StreamWriter fileWithRoles = new StreamWriter( Path ))
-            {
-                formatter.Serialize( fileWithRoles, roleList );
-            }
-        }
     }
 }

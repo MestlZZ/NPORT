@@ -77,6 +77,7 @@ namespace NPORT.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Edit(string newsId)
         {
             var model = new EditViewModel();
@@ -95,6 +96,7 @@ namespace NPORT.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EditViewModel newsModel)
@@ -123,21 +125,8 @@ namespace NPORT.Controllers
         [Authorize(Roles = "Admin, Editor")]
         public ActionResult Remove(string newsId)
         {
-            var user = Database.XMLDatabase.UsersDb.Find(User.Identity.GetUserId());
-
-            ApplicationRole role = null;
-            if (user != null)
-                role = Database.XMLDatabase.RoleDb.Find(user.RoleId);
-
-            if (user != null)
-            {
                 NewsDb.Remove(newsId);
                 return View();
-            }
-            else
-            {
-                return RedirectToRoute("Home");
-            }
         }
 
         [Authorize]
