@@ -10,11 +10,11 @@
         <th>Role</th>
         <th></th>
     </tr>
-@foreach( ApplicationUser user in Model )
+@foreach( var user in Model )
 {
     <tr>
         <td>@user.UserName</td>
-        <td>@user.GetRole()</td>
+        <td>@user.GetRoleName()</td>
         <td>@Html.RouteLink("Details", "User details", new { id = user.Id }, new { @class = "btn" } )</td>
     </tr>
 }

@@ -5,7 +5,7 @@
     <UserName>Admin</UserName>
     <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
     <Phone>+380930808372</Phone>
-    <RoleId>165b2058-3776-4dd7-8d08-4ac7d846465a</RoleId>
+    <RoleId>9f210fe4-42c6-4f8e-9f14-fe1e01969d95</RoleId>
   </ApplicationUser>
   <ApplicationUser>
     <Id>85ed4e2e-9ccf-15as-a932-a9ac395c4d0d</Id>
@@ -15,17 +15,10 @@
     <RoleId>165b2058-3776-4dd7-8d08-4ac7d846465a</RoleId>
   </ApplicationUser>
   <ApplicationUser>
-    <Id>df674de5-9bd6-4216-be63-6c178a05788d</Id>
-    <UserName>Mestl</UserName>
-    <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
-    <Phone>+380987654321</Phone>
-    <RoleId>165b2058-3776-4dd7-8d08-4ac7d846465a</RoleId>
-  </ApplicationUser>
-  <ApplicationUser>
     <Id>cfed03f3-b339-417b-9fd5-b85e77bcae13</Id>
     <UserName>Mestl@1</UserName>
     <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
     <Phone>+380930808371</Phone>
-    <RoleId>dccb843b-82e8-4470-b4f8-2e3d38a4ba65</RoleId>
+    <RoleId>704a38c5-7aa9-46b2-8c28-2f8cdfaa8cb3</RoleId>
   </ApplicationUser>
 </ArrayOfApplicationUser>

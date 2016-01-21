@@ -1,34 +1,46 @@
 ﻿using System.Web.Mvc;
 using NPORT.Identity;
 using NPORT.Database.JSONDatabase;
+using NPORT.Models.ViewModels.User;
+using NPORT.Database.XMLDatabase;
 
 namespace NPORT.MVC.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public ActionResult UserList()
         {
             var userDb = new Database.XMLDatabase.UsersDb();
 
-            return View( userDb.GetList() );
-        }        
+            return View(userDb.GetList());
+        }
 
-        public ActionResult Details( string Id )
+        [HttpGet]
+        public ActionResult Details(string id)
         {
-            var userDb = new Database.XMLDatabase.UsersDb();
+            var userDb = new UsersDb();
+            var roleDb = new RoleDb();
 
-            return View( userDb.Find(Id) );
+            var model = new DetailsViewModel();
+
+            model.UserInfo = userDb.Find(id);
+            model.RoleList = roleDb.GetList();
+
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult Details( string Id, string Role )
+        public ActionResult Details(string Id, string Role)
         {
-            var userDb = new Database.XMLDatabase.UsersDb();
+            var userDb = new UsersDb();
 
             var user = userDb.Find(Id);
 
@@ -36,12 +48,14 @@ namespace NPORT.MVC.Controllers
 
             CustomUserStore store = new CustomUserStore();
 
-            store.Update( user );
+            store.Update(user);
 
             return RedirectToAction("UserList");
         }
 
-        public ActionResult Remove( string Id )
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Remove(string Id)
         {
             CustomUserStore store = new CustomUserStore();
 
