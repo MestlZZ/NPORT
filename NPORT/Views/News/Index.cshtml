@@ -1,0 +1,32 @@
+﻿@model NPORT.Models.ViewModels.News.IndexViewModel
+@{
+    ViewBag.Title = "News";
+    string blockClass = "right";
+}
+
+<h1>News</h1>
+@if (Model.NewsList != null)
+{
+    foreach (var news in Model.NewsList)
+    {
+        if (news.Visible || news.GetAuthorName() == User.Identity.Name || User.IsInRole("Admin") || User.IsInRole("Editor"))
+        {
+            if (blockClass == "right")
+            { blockClass = "left"; }
+            else
+            { blockClass = "right"; }
+
+            <div class="news @blockClass">
+                <h2 class="title">@Html.Raw( news.Title )</h2>
+                <p class="content">@Html.Raw( news.ShortInfo )</p>
+                <p class="details-link">@Html.RouteLink( "Details", "News Details", new { newsId = news.Id }, new { @class = "btn" } )</p>   
+                <span class="author">&copy; @news.GetAuthorName()</span>
+                <span class="date">@news.Date </span>
+            </div>
+        }
+    }
+}
+else
+{
+    <p class="no-news">We don't have news for you :c</p>
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfApplicationRole xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ApplicationRole>
+    <Id>c7247b7b-5ff1-4cbd-b44d-48c02c323bd9</Id>
+    <Name>Admin</Name>
+  </ApplicationRole>
+  <ApplicationRole>
+    <Id>13872e7e-d1f4-43ce-98a2-bb12484bce63</Id>
+    <Name>Editor</Name>
+  </ApplicationRole>
+  <ApplicationRole>
+    <Id>f17cf761-a8db-4425-bdc8-9bf5443305fa</Id>
+    <Name>Correspondent</Name>
+  </ApplicationRole>
+  <ApplicationRole>
+    <Id>52f3892b-5015-4340-8eb9-24ac319c8f74</Id>
+    <Name>User</Name>
+  </ApplicationRole>
+</ArrayOfApplicationRole>
