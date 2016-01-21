@@ -1,40 +1,37 @@
-﻿@using Microsoft.AspNet.Identity
-@model ApplicationUser
+﻿@model NPORT.Models.ViewModels.User.DetailsViewModel
 @{
     ViewBag.Title = "Details";
-    var user = NPORT.Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
-    var roles = NPORT.Database.XMLDatabase.Roles.GetList();
 }
 
-<h2>@Model.UserName</h2>
+<h2>@Model.UserInfo.UserName</h2>
 
 <table class="user-info">
     <tr>
         <td>ID</td>
-        <td>@Model.Id</td>
+        <td>@Model.UserInfo.Id</td>
     </tr>
-    @if (user.Role <= 1)
+    @if (User.IsInRole("Admin"))
     {
     <tr>
         <td>Phone</td>
-        <td>@Model.Phone</td>
+        <td>@Model.UserInfo.Phone</td>
     </tr>
     }
     <tr>
         <td>Role</td>
-        @if (user.Role > 1)
+        @if (!User.IsInRole( "Admin" ))
         {
-            <td>@Model.GetRole()</td>
+            <td>@Model.UserInfo.GetRoleName()</td>
         }
         else
         {
             <td>
                 <form method="post">
-                    <input type="text" name="Id" value="@Model.Id" hidden="hidden"/>
+                    <input type="text" name="Id" value="@Model.UserInfo.Id" hidden="hidden"/>
                     <select name="role">
-                        @foreach (var role in roles)
+                        @foreach (var role in Model.RoleList)
                         {
-                            if (role.Id == Model.Role)
+                            if (role.Id == Model.UserInfo.RoleId)
                             {
                                 <option selected value="@role.Id">@role.Name</option>
                             }
@@ -49,10 +46,10 @@
             </td>
         }
     </tr>
-    @if (user.Role <= 1)
+    @if (User.IsInRole( "Admin" ))
     {
     <tr>
-       <td> @Html.RouteLink( "Remove User", "User remove", new { id = Model.Id }, new { @class = "btn" } ) </td>
+       <td> @Html.RouteLink( "Remove User", "User remove", new { id = Model.UserInfo.Id }, new { @class = "btn" } ) </td>
     </tr>
     }
 </table>

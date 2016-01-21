@@ -2,41 +2,38 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using System.Web;
-using NPORT.Models.Database;
+using NPORT.Models.Identity;
+using NPORT.Database.Interfaces;
 
 namespace NPORT.Database.XMLDatabase
 {
-    public static class RoleDb
+    public class RoleDb : IRoleDatabase<ApplicationRole, string>
     {
-        private static string Path = HttpContext.Current.Server.MapPath( "/App_Data/RoleDatabase.xml" );
-        private static XmlSerializer formatter = new XmlSerializer(typeof(List<ApplicationRole>));
+        private string Path = HttpContext.Current.Server.MapPath("/App_Data/RoleDatabase.xml");
 
-        public static List<ApplicationRole> GetList()
+        private XmlSerializer formatter = new XmlSerializer(typeof(List<ApplicationRole>));
+
+        public List<ApplicationRole> GetList()
         {
-            using (StreamReader fileWithRole = new StreamReader( Path ))
+            List<ApplicationRole> roleList;
+
+            using (StreamReader fileWithRole = new StreamReader(Path))
             {
-                var roleList = (List<ApplicationRole>)formatter.Deserialize( fileWithRole );
-                fileWithRole.Close();
-                return roleList;
+                roleList = (List<ApplicationRole>)formatter.Deserialize(fileWithRole);
             }
+
+            return roleList;
         }
 
-        public static ApplicationRole Find( string Id )
+        public ApplicationRole Find(string Id)
         {
             var roleList = GetList();
+
             foreach (var role in roleList)
                 if (role.Id == Id)
                     return role;
-            return null;
-        }
 
-        public static void Update( List<ApplicationRole> roleList )
-        {
-            using (StreamWriter fs = new StreamWriter( Path ))
-            {
-                formatter.Serialize( fs, roleList );
-                fs.Close();
-            }
+            return null;
         }
     }
 }

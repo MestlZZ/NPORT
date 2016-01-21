@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using NPORT.Models.Identity;
+using NPORT.Database.JSONDatabase;
 
-namespace NPORT.Models
+namespace NPORT.Identity
 {
     public class CustomUserStore : IUserStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>, IUserLockoutStore<ApplicationUser, string>, IUserTwoFactorStore<ApplicationUser, string>
     {
-        private List<ApplicationUser> Users = NPORT.Database.XMLDatabase.UsersDb.GetList();
+        private List<ApplicationUser> Users;
 
         public CustomUserStore()
         {
+            var userDb = new Database.XMLDatabase.UsersDb();
+
+            Users = userDb.GetList();
         }
 
         public void Dispose()
@@ -34,7 +39,9 @@ namespace NPORT.Models
 
         private void UpdateDb()
         {
-            NPORT.Database.XMLDatabase.UsersDb.Update( Users );
+            var userDb = new Database.XMLDatabase.UsersDb();
+
+            userDb.Update( Users );
         }
 
         public void Create( ApplicationUser user )
@@ -67,12 +74,16 @@ namespace NPORT.Models
         public void Delete( ApplicationUser user )
         {
             Users.Remove( user );
-            var comments = NPORT.Database.JSONDatabase.CommentsDb.GetList();
+
+            var commentsDb = new CommentsDb();
+
+            var comments = commentsDb.GetList();
+
             foreach (var comment in comments)
             {
                 if (comment.AuthorId == user.Id)
                 {
-                    NPORT.Database.JSONDatabase.CommentsDb.Remove( comment.Id );
+                    commentsDb.Remove( comment.Id );
                 }
             }
             UpdateDb();

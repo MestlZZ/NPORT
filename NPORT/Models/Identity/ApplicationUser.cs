@@ -1,24 +1,25 @@
 ﻿using Microsoft.AspNet.Identity;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Text;
 using System;
 using System.Security.Claims;
+using NPORT.Models.Identity;
+using NPORT.Identity;
+using NPORT.Database.XMLDatabase;
 
-namespace NPORT
+namespace NPORT.Models.Identity
 {
     public class ApplicationUser : IUser<string>
     {
         public ApplicationUser()
         { }
 
-        public ApplicationUser( string name, string password, string phone, string roleId )
+        public ApplicationUser(string name, string password, string phone, string roleId)
         {
             Id = Guid.NewGuid().ToString();
+
             UserName = name;
 
-            CustomPasswordHasher hasher= new CustomPasswordHasher();
+            CustomPasswordHasher hasher = new CustomPasswordHasher();
             PasswordHash = hasher.HashPassword(password);
 
             Phone = phone;
@@ -26,23 +27,22 @@ namespace NPORT
             RoleId = roleId;
         }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync( CustomUserManager manager )
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(CustomUserManager manager)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            userIdentity.AddClaim( new Claim( ClaimTypes.MobilePhone, Phone ) );
+
+            userIdentity.AddClaim(new Claim(ClaimTypes.MobilePhone, Phone));
+
             return userIdentity;
         }
 
         public string GetRoleName()
         {
-            var role = Database.XMLDatabase.RoleDb.Find(RoleId);
-            return role.Name;
-        }
+            var roleDb = new RoleDb();
 
-        public ApplicationRole GetRole()
-        {
-            var role = Database.XMLDatabase.RoleDb.Find(RoleId);
-            return role;
+            var role = roleDb.Find(RoleId);
+
+            return role.Name;
         }
 
         public string Id { get; set; }

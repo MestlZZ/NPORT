@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using Newtonsoft.Json;
+using NPORT.Models.Database;
+using NPORT.Database.Interfaces;
 
 namespace NPORT.Database.JSONDatabase
 {
-    public static class NewsDb
+    public class NewsDb : INewsDatabase<News, string>
     {
-        private static string Path = HttpContext.Current.Server.MapPath( "/App_Data/NewsDatabase.json" );
+        private string Path = HttpContext.Current.Server.MapPath( "/App_Data/NewsDatabase.json" );
 
-        public static void Add( Models.Database.News newNews )
+        public void Add( News newNews )
         {
             newNews.Date = DateTime.UtcNow.ToString();
             newNews.Id = Guid.NewGuid().ToString();
@@ -22,11 +24,11 @@ namespace NPORT.Database.JSONDatabase
                 json = dbFile.ReadToEnd();
             }
 
-            List<Models.Database.News> items = JsonConvert.DeserializeObject<List<Models.Database.News>>(json);
+            List<News> items = JsonConvert.DeserializeObject<List<News>>(json);
 
             if (items == null)
             {
-                items = new List<Models.Database.News>();
+                items = new List<News>();
             }
 
             items.Insert(0 , newNews);
@@ -38,7 +40,7 @@ namespace NPORT.Database.JSONDatabase
 
         }
 
-        public static Models.Database.News Find(string id)
+        public News Find(string id)
         {
             var list = GetList();
 
@@ -49,7 +51,7 @@ namespace NPORT.Database.JSONDatabase
             return null;
         }
 
-        public static List<Models.Database.News> GetList()
+        public List<News> GetList()
         {
             string json;
 
@@ -61,9 +63,9 @@ namespace NPORT.Database.JSONDatabase
             return JsonConvert.DeserializeObject<List<Models.Database.News>>(json);
         }
 
-        public static void Edit(Models.Database.News news)
+        public void Edit(News news)
         {
-            List<Models.Database.News> bufferList = GetList();
+            List<News> bufferList = GetList();
 
             for (int i=0; i<bufferList.Count; i++)
             {
@@ -79,17 +81,19 @@ namespace NPORT.Database.JSONDatabase
             }
         }
 
-        public static void Remove(string NewsId)
+        public void Remove(string NewsId)
         {
-            var comments = CommentsDb.GetList();
+            var commentsDb = new CommentsDb();
+
+            var comments = commentsDb.GetList();
 
             foreach (var comment in comments)
             {
                 if (comment.NewsId == NewsId)
-                    CommentsDb.Remove(comment.Id);
+                    commentsDb.Remove(comment.Id);
             }
 
-            List<Models.Database.News> bufferList = GetList();
+            List<News> bufferList = GetList();
 
             foreach (var news in bufferList)
             {

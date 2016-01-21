@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace NPORT.Models.ViewModels.News
 {
@@ -13,7 +9,7 @@ namespace NPORT.Models.ViewModels.News
         public string Title { get; set; }
 
         [Required]
-        [StringLength( 250, ErrorMessage = "Maximum length of short info: 250 symbols", MinimumLength = 5 )]
+        [StringLength(250, ErrorMessage = "Maximum length of short info: 250 symbols", MinimumLength = 5 )]
         public string ShortInfo { get; set; }
 
         public bool Visible { get; set; }

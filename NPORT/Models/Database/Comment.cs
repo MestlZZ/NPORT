@@ -16,7 +16,9 @@ namespace NPORT.Models.Database
 
         public string GetAuthorName()
         {
-            return UsersDb.Find(AuthorId).UserName;
+            var userDb = new UsersDb();
+
+            return userDb.Find(AuthorId).UserName;
         }
     }
 }

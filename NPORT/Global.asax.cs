@@ -19,11 +19,16 @@ namespace NPORT
         {
             if (Context.User != null)
             {
-                string role = Database.XMLDatabase.UsersDb.FindNickname(Context.User.Identity.Name).GetRoleName();
+                var userDb = new Database.XMLDatabase.UsersDb();
+
+                string role = userDb.FindByUsername(Context.User.Identity.Name).GetRoleName();
+
                 string[] roles = new string[1];
+
                 roles[0] = role;
 
                 GenericPrincipal principal = new GenericPrincipal(Context.User.Identity, roles);
+
                 Context.User = principal;
             }
         }

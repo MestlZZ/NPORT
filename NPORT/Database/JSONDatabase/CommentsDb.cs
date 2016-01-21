@@ -3,36 +3,38 @@ using System.Collections.Generic;
 using System.Web;
 using Newtonsoft.Json;
 using System.IO;
+using NPORT.Database.Interfaces;
+using NPORT.Models.Database;
 
 namespace NPORT.Database.JSONDatabase
 {
-    public class CommentsDb
+    public class CommentsDb : ICommentDatabase<Comment, int, string>
     {
-        private static string Path = HttpContext.Current.Server.MapPath("/App_Data/CommentsDatabase.json");
+        private string Path = HttpContext.Current.Server.MapPath("/App_Data/CommentsDatabase.json");
 
-        public static void Add(Models.Database.Comment comment)
+        public void Add(Comment comment)
         {
             comment.Date = DateTime.UtcNow.ToString();
             comment.Id = 1;
 
-            List<Models.Database.Comment> items;
+            List<Comment> items;
 
             if (File.Exists(Path))
             {
                 using (StreamReader dbFile = new StreamReader(Path))
                 {
                     string json = dbFile.ReadToEnd();
-                    items = JsonConvert.DeserializeObject<List<Models.Database.Comment>>(json);
+                    items = JsonConvert.DeserializeObject<List<Comment>>(json);
                 }
 
                 if (items.Count > 0)
                     comment.Id = items[0].Id + 1;
                 else
-                    items = new List<Models.Database.Comment>();
+                    items = new List<Comment>();
             }
             else
             {
-                items = new List<Models.Database.Comment>();
+                items = new List<Comment>();
             }  
 
             items.Insert(0, comment);
@@ -43,7 +45,7 @@ namespace NPORT.Database.JSONDatabase
             }
         }
 
-        public static Models.Database.Comment Find(int id)
+        public Comment Find(int id)
         {
             var list = GetList();
 
@@ -54,11 +56,11 @@ namespace NPORT.Database.JSONDatabase
             return null;
         }
 
-        public static List<Models.Database.Comment> GetListForNews(string id)
+        public List<Comment> GetListForNews(string id)
         {
             var list = GetList();
 
-            var listForNews = new List<Models.Database.Comment>();
+            var listForNews = new List<Comment>();
 
             foreach (var comment in list)
                 if (comment.NewsId == id)
@@ -67,7 +69,7 @@ namespace NPORT.Database.JSONDatabase
             return listForNews;
         }
 
-        public static List<Models.Database.Comment> GetList()
+        public List<Comment> GetList()
         {
             string json;
 
@@ -76,14 +78,14 @@ namespace NPORT.Database.JSONDatabase
                 json = file.ReadToEnd();                
             }
 
-            List<Models.Database.Comment> items = JsonConvert.DeserializeObject<List<Models.Database.Comment>>(json);
+            List<Comment> items = JsonConvert.DeserializeObject<List<Comment>>(json);
 
             return items;
         }
 
-        public static void Remove(int Id)
+        public void Remove(int Id)
         {
-            List<Models.Database.Comment> bufferList = GetList();
+            List<Comment> bufferList = GetList();
 
             foreach (var comment in bufferList)
                 if (comment.Id == Id)

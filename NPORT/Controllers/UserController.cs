@@ -1,39 +1,61 @@
-﻿using System;
-using System.Web.Mvc;
-using NPORT.Models;
+﻿using System.Web.Mvc;
+using NPORT.Identity;
+using NPORT.Database.JSONDatabase;
+using NPORT.Models.ViewModels.User;
+using NPORT.Database.XMLDatabase;
 
 namespace NPORT.MVC.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public ActionResult UserList()
         {
-            return View( Database.XMLDatabase.UsersDb.GetList() );
-        }        
+            var userDb = new Database.XMLDatabase.UsersDb();
 
-        public ActionResult Details( string Id )
+            return View(userDb.GetList());
+        }
+
+        [HttpGet]
+        public ActionResult Details(string id)
         {
-            return View( Database.XMLDatabase.UsersDb.Find(Id) );
+            var userDb = new UsersDb();
+            var roleDb = new RoleDb();
+
+            var model = new DetailsViewModel();
+
+            model.UserInfo = userDb.Find(id);
+            model.RoleList = roleDb.GetList();
+
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult Details( string Id, string Role )
+        public ActionResult Details(string Id, string Role)
         {
-            var user = Database.XMLDatabase.UsersDb.Find(Id);
-            user.RoleId =  Role ;
+            var userDb = new UsersDb();
+
+            var user = userDb.Find(Id);
+
+            user.RoleId = Role ;
+
             CustomUserStore store = new CustomUserStore();
 
-            store.Update( user );
+            store.Update(user);
 
             return RedirectToAction("UserList");
         }
 
-        public ActionResult Remove( string Id )
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Remove(string Id)
         {
             CustomUserStore store = new CustomUserStore();
 
@@ -41,12 +63,14 @@ namespace NPORT.MVC.Controllers
 
             store.Delete( user );
 
-            var news = Database.JSONDatabase.NewsDb.GetList();
+            var newsDb = new NewsDb();
+
+            var news = newsDb.GetList();
 
             foreach(var item in news)
             {
                 if (item.AuthorId == Id)
-                    Database.JSONDatabase.NewsDb.Remove( item.Id );
+                    newsDb.Remove( item.Id );
             }
 
             return View();

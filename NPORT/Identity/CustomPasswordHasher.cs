@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using Microsoft.AspNet.Identity;
 
-namespace NPORT
+namespace NPORT.Identity
 {
     public class CustomPasswordHasher : PasswordHasher
     {
