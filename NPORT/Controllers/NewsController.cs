@@ -27,28 +27,28 @@ namespace NPORT.Controllers
         }
 
         [HttpGet]
-        public ActionResult Detailed( string NewsId )
+        public ActionResult Detailed( string newsId )
         {
-            ViewBag.Id = NewsId;
+            ViewBag.Id = newsId;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Detailed( Models.Database.Comment comment, string NewsId )
+        public ActionResult Detailed( Models.Database.Comment comment, string newsId )
         {
-            comment.NewsId = NewsId;
+            comment.NewsId = newsId;
             comment.AuthorId = User.Identity.GetUserId();
 
             AddComment( comment );
 
-            ViewBag.Id = NewsId;
+            ViewBag.Id = newsId;
             return View();
         }
 
         [HttpGet]
-        public ActionResult Edit( string NewsId )
+        public ActionResult Edit( string newsId )
         {
-            var model = NPORT.Database.JSONDatabase.NewsJson.Find(NewsId);
+            var model = NPORT.Database.JSONDatabase.NewsJson.Find(newsId);
             return View( model );
         }
 
@@ -65,7 +65,7 @@ namespace NPORT.Controllers
         }
 
         [HttpGet]
-        public ActionResult Remove( string NewsId )
+        public ActionResult Remove( string newsId )
         {
             var user = Database.XMLDatabase.Users.Find( User.Identity.GetUserId() );
             Models.Database.Role role = null;
@@ -74,7 +74,7 @@ namespace NPORT.Controllers
 
             if (user != null && role.Access_RemoveNews && Request.IsAuthenticated)
             {
-                Database.JSONDatabase.NewsJson.Remove( NewsId );
+                Database.JSONDatabase.NewsJson.Remove( newsId );
                 return View();
             }
             else
@@ -91,15 +91,15 @@ namespace NPORT.Controllers
             }
         }
 
-        public ActionResult RemoveComment( int Id, string url )
+        public ActionResult RemoveComment( int id, string url )
         {
             if (Request.IsAuthenticated)
             {
                 var user = Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
-                Models.Database.Comment comment = Database.JSONDatabase.CommentsJson.Find(Id);
+                Models.Database.Comment comment = Database.JSONDatabase.CommentsJson.Find(id);
                 if (user.Role <= 1 || user.Id == comment.AuthorId)
                 {
-                    Database.JSONDatabase.CommentsJson.Remove(Id);
+                    Database.JSONDatabase.CommentsJson.Remove(id);
                     return Redirect(url + "#btn");                    
                 }
             }
