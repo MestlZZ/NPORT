@@ -9,13 +9,35 @@ namespace NPORT.Controllers
     public class NewsController : Controller
     {
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string sortBy = "none")
         {
             IndexViewModel model = new IndexViewModel();
 
             var newsDb = new NewsDb();
 
             model.NewsList = newsDb.GetList();
+
+            if (sortBy == "Title")
+                model.NewsList.Sort((u1, u2) => 
+                    {
+                        if (string.Compare(u1.Title, u2.Title) >= 0)
+                        {
+                            return 1;
+                        }
+                        return -1;
+                    } 
+                );
+
+            if (sortBy == "Date")
+                model.NewsList.Sort( ( u1, u2 ) =>
+                {
+                    if (u1.Date.CompareTo(u2.Date) >= 0)
+                    {
+                        return 1;
+                    }
+                    return -1;
+                }
+                );
 
             return View(model);
         }

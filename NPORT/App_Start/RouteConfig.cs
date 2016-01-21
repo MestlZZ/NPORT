@@ -97,8 +97,8 @@ namespace NPORT
 
             routes.MapRoute(
                 name: "Home",
-                url: "news",
-                defaults: new { controller = "News", action = "Index" }
+                url: "news/{id}",
+                defaults: new { controller = "News", action = "Index", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
