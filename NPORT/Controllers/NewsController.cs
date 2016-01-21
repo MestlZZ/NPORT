@@ -151,7 +151,7 @@ namespace NPORT.Controllers
             var user = Database.XMLDatabase.UsersDb.Find(User.Identity.GetUserId());
             Models.Database.Comment comment = CommentsDb.Find(id);
 
-            if (user.Id == comment.AuthorId)
+            if (user.Id == comment.AuthorId || user.GetRoleName() == "Admin")
             {
                 CommentsDb.Remove(id);
                 return Redirect(url);                    

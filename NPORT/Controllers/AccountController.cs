@@ -101,7 +101,7 @@ namespace NPORT.Controllers
                 {
                     if (Database.XMLDatabase.UsersDb.FindNickname( model.NickName ) == null)
                     {
-                        var user = new ApplicationUser(model.NickName, model.Password, model.Phone, "");
+                        var user = new ApplicationUser(model.NickName, model.Password, model.Phone, "dccb843b-82e8-4470-b4f8-2e3d38a4ba65");
                         var result = await UserManager.CreateAsync(user, model.Password);
                         if (result.Succeeded)
                         {
