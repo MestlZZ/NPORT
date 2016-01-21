@@ -3,6 +3,7 @@ using NPORT.Identity;
 using NPORT.Database.JSONDatabase;
 using NPORT.Models.ViewModels.User;
 using NPORT.Database.XMLDatabase;
+using Microsoft.AspNet.Identity;
 
 namespace NPORT.MVC.Controllers
 {
@@ -18,7 +19,7 @@ namespace NPORT.MVC.Controllers
         [HttpGet]
         public ActionResult UserList()
         {
-            var userDb = new Database.XMLDatabase.UsersDb();
+            var userDb = new UsersDb();
 
             return View(userDb.GetList());
         }
@@ -38,11 +39,11 @@ namespace NPORT.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Details(string Id, string Role)
+        public ActionResult Details(string id, string Role)
         {
             var userDb = new UsersDb();
 
-            var user = userDb.Find(Id);
+            var user = userDb.Find(id);
 
             user.RoleId = Role ;
 
@@ -55,25 +56,30 @@ namespace NPORT.MVC.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public ActionResult Remove(string Id)
+        public ActionResult Remove(string id)
         {
-            CustomUserStore store = new CustomUserStore();
-
-            var user = store.FindById(Id);
-
-            store.Delete( user );
-
-            var newsDb = new NewsDb();
-
-            var news = newsDb.GetList();
-
-            foreach(var item in news)
+            if (User.Identity.GetUserId() != id)
             {
-                if (item.AuthorId == Id)
-                    newsDb.Remove( item.Id );
+                CustomUserStore store = new CustomUserStore();
+
+                var user = store.FindById(id);
+
+                store.Delete( user );
+
+                var newsDb = new NewsDb();
+
+                var news = newsDb.GetList();
+
+                foreach (var item in news)
+                {
+                    if (item.AuthorId == id)
+                        newsDb.Remove( item.Id );
+                }
+
+                return View();
             }
 
-            return View();
+            return RedirectToRoute("User list");
         }
     }
 }

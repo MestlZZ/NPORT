@@ -7,9 +7,13 @@
 <h1>News</h1>
 @if (Model.NewsList != null)
 {
+    @Html.RouteLink( "Sort by title", "Home", new { sortBy = "Title" }, new { @class = "btn" } );
+    @Html.RouteLink( "Sort by date", "Home", new { sortBy = "Date" }, new { @class = "btn" } );
+    <br />
+
     foreach (var news in Model.NewsList)
     {
-        if (news.Visible || news.GetAuthorName() == User.Identity.Name || User.IsInRole("Admin") || User.IsInRole("Editor"))
+        if (news.Visible || news.GetAuthorName() == User.Identity.Name || User.IsInRole( "Admin" ) || User.IsInRole( "Editor" ))
         {
             if (blockClass == "right")
             { blockClass = "left"; }
