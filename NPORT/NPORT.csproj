@@ -781,6 +781,7 @@
     <Compile Include="Database\XMLDatabase\RoleDb.cs" />
     <Compile Include="Database\XMLDatabase\UsersDb.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Transliteration\Transliteration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -789,7 +790,9 @@
     <Folder Include="Content\fonts\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="packages.config" />

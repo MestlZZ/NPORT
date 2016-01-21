@@ -4,6 +4,7 @@ using NPORT.Models.ViewModels.News;
 using NPORT.Database.JSONDatabase;
 using PagedList;
 using NPORT.Models.Identity;
+using Transliteration;
 
 namespace NPORT.Controllers
 {
@@ -87,13 +88,13 @@ namespace NPORT.Controllers
 
                 newsDb.Add(news);
 
-                return RedirectToRoute("News Details", new { newsId = news.Id });
+                return RedirectToRoute("Home");
             }
             return View(newsModel);
         }
 
         [HttpGet]
-        public ActionResult Detailed( string newsId )
+        public ActionResult Detailed( string newsTitle, string newsId )
         {
             DetailedViewModel model = new DetailedViewModel();
 
@@ -109,14 +110,14 @@ namespace NPORT.Controllers
         }
 
         [HttpPost]
-        public ActionResult Detailed(Models.Database.Comment comment, string newsId)
+        public ActionResult Detailed(Models.Database.Comment comment,string newsTitle, string newsId)
         {
             comment.NewsId = newsId;
             comment.AuthorId = User.Identity.GetUserId();
 
             AddComment( comment );
-            
-            return RedirectToRoute("News Details", new { newsId = newsId } );
+
+            return RedirectToRoute("News Details", new { newsTitle = newsTitle, newsId = newsId } );
         }
 
         [HttpGet]
