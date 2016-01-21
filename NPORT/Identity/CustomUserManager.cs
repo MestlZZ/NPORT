@@ -1,9 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web;
-using NPORT.Models;
 using Microsoft.AspNet.Identity;
 using NPORT.Models.Identity;
-using NPORT.Identity;
 
 namespace NPORT.Identity
 {

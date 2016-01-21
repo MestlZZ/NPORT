@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using NPORT.Models.Identity;
-using NPORT.Identity;
 
 namespace NPORT.Identity
 {

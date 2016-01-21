@@ -3,7 +3,6 @@ using Microsoft.AspNet.Identity;
 using NPORT.Models.ViewModels.News;
 using NPORT.Database.JSONDatabase;
 using NPORT.Models.Identity;
-using NPORT.Identity;
 
 namespace NPORT.Controllers
 {

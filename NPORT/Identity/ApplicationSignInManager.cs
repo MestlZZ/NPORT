@@ -4,7 +4,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using NPORT.Models.Identity;
-using NPORT.Identity;
 
 namespace NPORT.Identity
 {
