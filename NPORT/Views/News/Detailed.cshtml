@@ -1,50 +1,24 @@
 ﻿@using Microsoft.AspNet.Identity
+@model NPORT.Models.ViewModels.News.DetailedViewModel
 @{
     ViewBag.Title = "Detailed Page";
-    var news = NPORT.Database.JSONDatabase.NewsJson.Find(ViewBag.Id);
-    ApplicationUser Author = NPORT.Database.XMLDatabase.Users.Find(news.AuthorId);
-    NPORT.Models.Database.Role Role = null;
-    var user = NPORT.Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
-    var role = NPORT.Database.XMLDatabase.Roles.GetList();
-    if (user == null)
-    {
-        Role = new NPORT.Models.Database.Role();
-        Role.Access_AddNews = false;
-        Role.Access_EditNews = false;
-        Role.Access_RemoveNews = false;
-        user = new ApplicationUser();
-        user.Id = "Guest";
-        user.Role = 5;
-    }
-    else
-    {
-        foreach (var rol in role)
-        {
-            if (user.Role == rol.Id)
-            {
-                Role = rol;
-            }
-        }
-    }
 }
 
 <div class="news-detailed">
-    @if (news.VisibleRange >= user.Role)
+    @if (Model.News.Visible || Model.News.GetAuthorName() == User.Identity.Name || User.IsInRole( "Admin" ) || User.IsInRole( "Editor" ))
     {
-        <h2 class="title">@Html.Raw( news.Title )</h2>
-        <p class="content">@Html.Raw( news.Content )</p>
-        <span class="author">&copy; @Author.UserName</span>
-        <span class="date">@news.Date</span>
+        <h2 class="title">@Html.Raw( Model.News.Title )</h2>
+        <p class="content">@Html.Raw( Model.News.Content )</p>
+        <span class="author">&copy; @Model.News.GetAuthorName()</span>
+        <span class="date">@Model.News.Date</span>
         <p class="detailed-btn" id="btn">
-            @if (Role.Access_EditNews || news.AuthorId == user.Id)
+            @if (User.IsInRole( "Admin" ) || User.IsInRole( "Editor" ) || Model.News.AuthorId == User.Identity.GetUserId())
             {
-                @Html.RouteLink( "Edit", "News Edit", new { NewsId = news.Id }, new { @class = "btn btn-edit" } )
-            }
-            @if (Role.Access_RemoveNews || news.AuthorId == user.Id)
-            {
-                @Html.RouteLink( "Remove", "News Remove", new { NewsId = news.Id }, new { @class = "btn btn-remove" } )
+                @Html.RouteLink( "Edit", "News Edit", new { newsId = Model.News.Id }, new { @class = "btn btn-edit" } )
+                @Html.RouteLink( "Remove", "News Remove", new { newsId = Model.News.Id }, new { @class = "btn btn-remove" } )
             }
         </p>
+
         if(Request.IsAuthenticated)
         {
             <form class="comment" method="post">
@@ -56,33 +30,29 @@
         {
             <p class="comment error">You must register for add comments!</p>
         }
-        var list = NPORT.Database.JSONDatabase.CommentsJson.GetList();
-            if (list == null)
+
+        if (Model.CommentList.Count <= 0)
+        {
+            <p class="comment error">No comments!</p>
+        }
+        else
+        {
+            foreach (var comment in Model.CommentList)
             {
-                <p class="comment error">No comments!</p>
-            }
-            else
-            {
-                foreach (var comment in list)
-                {
-                    var author = NPORT.Database.XMLDatabase.Users.Find(comment.AuthorId);
-                    if (comment.NewsId == news.Id)
-                    {
-                        <div class="comment">
-                            <p class="author">@author.UserName</p>
-                            <p class="text">@comment.Text</p>
-                            <p class="date">@comment.Date</p>
-                            @if (Request.IsAuthenticated && (user.Role<=1 || user.Id==comment.AuthorId))
-                            {                                
-                                @Html.ActionLink("Remove", "RemoveComment", "News", new { id = comment.Id, url = Request.Url.ToString() }, new { @class = "btn btn-comment-remove" });
-                            }
-                        </div>
+                <div class="comment">
+                    <p class="author">@comment.GetAuthorName()</p>
+                    <p class="text">@comment.Text</p>
+                    <p class="date">@comment.Date</p>
+                    @if (User.IsInRole("Admin") || User.Identity.GetUserId() == comment.AuthorId)
+                    {                                
+                        @Html.ActionLink("Remove", "RemoveComment", "News", new { id = comment.Id, url = Request.Url.ToString() }, new { @class = "btn btn-comment-remove" });
                     }
-                }
+                </div>
             }
-            }
-            else
-            {
+        }
+    }
+    else
+    {
         <p class="error">You don't have permission to read this text!</p>
     }
 </div>

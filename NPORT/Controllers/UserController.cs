@@ -13,18 +13,18 @@ namespace NPORT.MVC.Controllers
 
         public ActionResult UserList()
         {
-            return View( Database.XMLDatabase.Users.GetList() );
+            return View( Database.XMLDatabase.UsersDb.GetList() );
         }        
 
         public ActionResult Details( string Id )
         {
-            return View( Database.XMLDatabase.Users.Find(Id) );
+            return View( Database.XMLDatabase.UsersDb.Find(Id) );
         }
 
         [HttpPost]
         public ActionResult Details( string Id, string Role )
         {
-            var user = Database.XMLDatabase.Users.Find(Id);
+            var user = Database.XMLDatabase.UsersDb.Find(Id);
             user.RoleId =  Role ;
             CustomUserStore store = new CustomUserStore();
 
@@ -41,12 +41,12 @@ namespace NPORT.MVC.Controllers
 
             store.Delete( user );
 
-            var news = Database.JSONDatabase.NewsJson.GetList();
+            var news = Database.JSONDatabase.NewsDb.GetList();
 
             foreach(var item in news)
             {
                 if (item.AuthorId == Id)
-                    Database.JSONDatabase.NewsJson.Remove( item.Id );
+                    Database.JSONDatabase.NewsDb.Remove( item.Id );
             }
 
             return View();

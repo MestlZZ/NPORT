@@ -8,7 +8,7 @@ namespace NPORT.Models
 {
     public class CustomUserStore : IUserStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>, IUserLockoutStore<ApplicationUser, string>, IUserTwoFactorStore<ApplicationUser, string>
     {
-        private List<ApplicationUser> Users = NPORT.Database.XMLDatabase.Users.GetList();
+        private List<ApplicationUser> Users = NPORT.Database.XMLDatabase.UsersDb.GetList();
 
         public CustomUserStore()
         {
@@ -34,7 +34,7 @@ namespace NPORT.Models
 
         private void UpdateDb()
         {
-            NPORT.Database.XMLDatabase.Users.Update( Users );
+            NPORT.Database.XMLDatabase.UsersDb.Update( Users );
         }
 
         public void Create( ApplicationUser user )
@@ -67,12 +67,12 @@ namespace NPORT.Models
         public void Delete( ApplicationUser user )
         {
             Users.Remove( user );
-            var comments = NPORT.Database.JSONDatabase.CommentsJson.GetList();
+            var comments = NPORT.Database.JSONDatabase.CommentsDb.GetList();
             foreach (var comment in comments)
             {
                 if (comment.AuthorId == user.Id)
                 {
-                    NPORT.Database.JSONDatabase.CommentsJson.Remove( comment.Id );
+                    NPORT.Database.JSONDatabase.CommentsDb.Remove( comment.Id );
                 }
             }
             UpdateDb();

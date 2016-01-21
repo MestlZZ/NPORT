@@ -19,7 +19,7 @@ namespace NPORT
         {
             if (Context.User != null)
             {
-                string role = Database.XMLDatabase.Users.FindNickname(Context.User.Identity.Name).GetRoleName();
+                string role = Database.XMLDatabase.UsersDb.FindNickname(Context.User.Identity.Name).GetRoleName();
                 string[] roles = new string[1];
                 roles[0] = role;
 

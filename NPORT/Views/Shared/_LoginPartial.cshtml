@@ -12,7 +12,7 @@
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
         @{ 
             var s = User.Identity.GetUserId();
-            var user = NPORT.Database.XMLDatabase.Users.Find( User.Identity.GetUserId() );
+            var user = NPORT.Database.XMLDatabase.UsersDb.Find( User.Identity.GetUserId() );
         }
         @if (true)
         {
@@ -24,7 +24,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Registration", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("LogIn", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.RouteLink("Registration", "User Register", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.RouteLink("LogIn", "User Login", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

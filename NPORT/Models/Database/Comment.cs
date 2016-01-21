@@ -1,4 +1,5 @@
-﻿
+﻿using NPORT.Database.XMLDatabase;
+
 namespace NPORT.Models.Database
 {
     public class Comment
@@ -12,5 +13,10 @@ namespace NPORT.Models.Database
         public string Date { get; set; }
 
         public string NewsId { get; set; }
+
+        public string GetAuthorName()
+        {
+            return UsersDb.Find(AuthorId).UserName;
+        }
     }
 }

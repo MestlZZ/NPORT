@@ -94,13 +94,13 @@ namespace NPORT
             routes.MapRoute(
                 name: "Home",
                 url: "news",
-                defaults: new { controller = "Home", action = "Index" }
+                defaults: new { controller = "News", action = "Index" }
             );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "News", action = "Index", id = UrlParameter.Optional }
             );
 
         }

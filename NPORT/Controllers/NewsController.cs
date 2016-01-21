@@ -1,109 +1,163 @@
 ﻿using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using NPORT.Models.ViewModels.News;
+using NPORT.Database.JSONDatabase;
+
 namespace NPORT.Controllers
 {
     public class NewsController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Home");
+            IndexViewModel model = new IndexViewModel();
+
+            model.NewsList = NewsDb.GetList();
+
+            return View(model);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Admin, Correspondent")]
         public ActionResult AddNews()
         {
-            return View();
+            var model = new AddNewsViewModel();
+
+            model.Visible = true;
+
+            return View(model);
         }
+
         [HttpPost]
         [ValidateInput( false )]
-        public ActionResult AddNews( Models.Database.News news )
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Correspondent")]
+        public ActionResult AddNews( AddNewsViewModel newsModel )
         {
             if (ModelState.IsValid)
             {
-                news.AuthorId = User.Identity.GetUserId();
-                NPORT.Database.JSONDatabase.NewsJson.Add( news );
-                return RedirectToAction( "Index" );
+                var news = new Models.Database.News
+                {
+                    AuthorId = User.Identity.GetUserId(),
+                    Content = newsModel.Content,
+                    ShortInfo = newsModel.ShortInfo,
+                    Title = newsModel.Title,
+                    Visible = newsModel.Visible
+                };
+
+                NewsDb.Add(news);
+
+                return RedirectToRoute("News Details", new { newsId = news.Id });
             }
-            return View( news );
+            return View(newsModel);
         }
 
         [HttpGet]
         public ActionResult Detailed( string newsId )
         {
-            ViewBag.Id = newsId;
-            return View();
+            DetailedViewModel model = new DetailedViewModel();
+
+            model.News = NewsDb.Find(newsId);
+
+            model.CommentList = CommentsDb.GetListForNews(newsId);
+
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult Detailed( Models.Database.Comment comment, string newsId )
+        public ActionResult Detailed(Models.Database.Comment comment, string newsId)
         {
             comment.NewsId = newsId;
             comment.AuthorId = User.Identity.GetUserId();
 
             AddComment( comment );
-
-            ViewBag.Id = newsId;
-            return View();
+            
+            return RedirectToRoute("News Details", new { newsId = newsId } );
         }
 
         [HttpGet]
-        public ActionResult Edit( string newsId )
+        public ActionResult Edit(string newsId)
         {
-            var model = NPORT.Database.JSONDatabase.NewsJson.Find(newsId);
-            return View( model );
+            var model = new EditViewModel();
+
+            var news = NewsDb.Find(newsId);
+
+            model.Id = news.Id;
+            model.ShortInfo = news.ShortInfo;
+            model.Title = news.Title;
+            model.Visible = news.Visible;
+            model.AuthorId = news.AuthorId;
+            model.Content = news.Content;
+            model.Date = news.Date;
+
+            return View(model);
         }
 
         [HttpPost]
-        [ValidateInput( false )]
-        public ActionResult Edit( Models.Database.News news )
+        [ValidateInput(false)]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EditViewModel newsModel)
         {
             if (ModelState.IsValid)
             {
-                NPORT.Database.JSONDatabase.NewsJson.Edit( news );
-                return RedirectToAction( "Index" );
+                var news = new Models.Database.News();
+
+                news.Id = newsModel.Id;
+                news.ShortInfo = newsModel.ShortInfo;
+                news.Title = newsModel.Title;
+                news.Visible = newsModel.Visible;
+                news.AuthorId = newsModel.AuthorId;
+                news.Content = newsModel.Content;
+                news.Date = newsModel.Date;
+
+                NewsDb.Edit(news);
+
+                return RedirectToRoute("Home");
             }
-            return View( news );
+
+            return View(newsModel);
         }
 
         [HttpGet]
-        public ActionResult Remove( string newsId )
+        [Authorize(Roles = "Admin, Editor")]
+        public ActionResult Remove(string newsId)
         {
-            var user = Database.XMLDatabase.Users.Find( User.Identity.GetUserId() );
+            var user = Database.XMLDatabase.UsersDb.Find(User.Identity.GetUserId());
+
             ApplicationRole role = null;
             if (user != null)
-                role = Database.XMLDatabase.RoleDb.Find( user.RoleId );
+                role = Database.XMLDatabase.RoleDb.Find(user.RoleId);
 
             if (user != null)
             {
-                Database.JSONDatabase.NewsJson.Remove( newsId );
+                NewsDb.Remove(newsId);
                 return View();
             }
             else
             {
-                return RedirectToAction("Index");
+                return RedirectToRoute("Home");
             }
         }
 
-        public void AddComment( Models.Database.Comment comment )
+        [Authorize]
+        public void AddComment(Models.Database.Comment comment)
         {
-            if (Request.IsAuthenticated)
-            {
-                Database.JSONDatabase.CommentsJson.Add(comment);
-            }
+                CommentsDb.Add(comment);
         }
 
-        public ActionResult RemoveComment( int id, string url )
+        [Authorize]
+        public ActionResult RemoveComment(int id, string url)
         {
-            if (Request.IsAuthenticated)
+            var user = Database.XMLDatabase.UsersDb.Find(User.Identity.GetUserId());
+            Models.Database.Comment comment = CommentsDb.Find(id);
+
+            if (user.Id == comment.AuthorId)
             {
-                var user = Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
-                Models.Database.Comment comment = Database.JSONDatabase.CommentsJson.Find(id);
-                if (user.Id == comment.AuthorId)
-                {
-                    Database.JSONDatabase.CommentsJson.Remove(id);
-                    return Redirect(url + "#btn");                    
-                }
+                CommentsDb.Remove(id);
+                return Redirect(url);                    
             }
-            return RedirectToAction("Index");           
+
+            return RedirectToRoute("Home");           
         }
     }
 }

@@ -5,7 +5,7 @@ using System.IO;
 
 namespace NPORT.Database.XMLDatabase
 {
-    public static class Users
+    public static class UsersDb
     {
         private static string Path = HttpContext.Current.Server.MapPath( "/App_Data/UserDatabase.xml" );
         private static XmlSerializer formatter = new XmlSerializer(typeof(List<ApplicationUser>));

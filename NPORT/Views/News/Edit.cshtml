@@ -1,42 +1,45 @@
-﻿@model NPORT.Models.Database.News
+﻿@using Microsoft.AspNet.Identity;
+@model NPORT.Models.ViewModels.News.EditViewModel
 @{
     ViewBag.Title = "Редактирование";
-    var roles = NPORT.Database.XMLDatabase.Roles.GetList();
 }
-<script src="../../Content/tinymce/js/tinymce/tinymce.min.js"></script>
+
+<script src="~/Content/tinymce/js/tinymce/tinymce.min.js"></script>
 <script>tinymce.init({ selector:'.html-editor input[type="text"]' });</script>
 
-<form method="post" class="edit-news">
-    @Html.EditorFor( m => m.Id )
-    @Html.EditorFor( m => m.Date )
-    @Html.EditorFor( m => m.AuthorId )
+@if (User.IsInRole( "Admin" ) || User.IsInRole( "Editor" ) || Model.AuthorId == User.Identity.GetUserId())
+{
+    <form method="post" class="edit-news">
+        @Html.AntiForgeryToken()
 
-    <p class="title">
-        @Html.LabelFor( m => m.Title )
-        @Html.EditorFor( m => m.Title )
-    </p>
+        @Html.EditorFor( m => m.AuthorId )
+        @Html.EditorFor( m => m.Date )
+        @Html.EditorFor( m => m.Id )
 
-    <p class="html-editor">
-        @Html.LabelFor( m => m.ShortInfo )
-        @Html.EditorFor( m => m.ShortInfo )
-    </p>
+        <p class="error-list">
+            @Html.ValidationSummary()
+        </p>
 
-    <p class="html-editor">
-        @Html.LabelFor( m => m.Content )
-        @Html.EditorFor( m => m.Content )
-    </p>
+        <p class="title">
+            @Html.LabelFor( m => m.Title )
+            @Html.EditorFor( m => m.Title )
+        </p>
 
-    <p class="visible-range">
-        @Html.LabelFor( m => m.VisibleRange )
+        <p class="html-editor">
+            @Html.LabelFor( m => m.ShortInfo )
+            @Html.EditorFor( m => m.ShortInfo )
+        </p>
 
-        <select name="VisibleRange" required="required">
-            <option selected value="500">All</option>
-            @foreach (var role in roles)
-            {
-                <option value="@role.Id">@role.Name</option>
-            }
-        </select>
-    </p>
-    <input class="btn" type="submit" />
-</form>
+        <p class="html-editor">
+            @Html.LabelFor( m => m.Content )
+            @Html.EditorFor( m => m.Content )
+        </p>
 
+        <p class="visible">
+            @Html.LabelFor( m => m.Visible )
+            @Html.EditorFor( m => m.Visible )
+        </p>
+
+        <input class="btn" type="submit" />
+    </form>
+}

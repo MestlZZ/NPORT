@@ -748,8 +748,8 @@
     <Compile Include="Identity\CustomPasswordHasher.cs" />
     <Compile Include="Identity\CustomUserManager.cs" />
     <Compile Include="Identity\CustomUserStore.cs" />
-    <Compile Include="Database\JSONDatabase\CommentsJson.cs" />
-    <Compile Include="Database\JSONDatabase\NewsJson.cs" />
+    <Compile Include="Database\JSONDatabase\CommentsDb.cs" />
+    <Compile Include="Database\JSONDatabase\NewsDb.cs" />
     <Compile Include="Models\Identity\ApplicationRole.cs" />
     <Compile Include="Models\Identity\MyUserIdentity.cs" />
     <Compile Include="Global.asax.cs">
@@ -761,9 +761,13 @@
     <Compile Include="Models\Identity\ApplicationUser.cs" />
     <Compile Include="Models\ViewModels\Account\RegisterViewModel.cs" />
     <Compile Include="Models\ViewModels\Account\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModels\News\AddNewsViewModel.cs" />
+    <Compile Include="Models\ViewModels\News\DetailedViewModel.cs" />
+    <Compile Include="Models\ViewModels\News\EditViewModel.cs" />
+    <Compile Include="Models\ViewModels\News\IndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Database\XMLDatabase\RoleDb.cs" />
-    <Compile Include="Database\XMLDatabase\Users.cs" />
+    <Compile Include="Database\XMLDatabase\UsersDb.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -777,7 +781,7 @@
   <ItemGroup>
     <Content Include="web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
     <Content Include="packages.config" />
     <Content Include="Content\Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
