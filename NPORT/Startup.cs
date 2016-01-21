@@ -13,7 +13,7 @@ namespace NPORT
         public void Configuration(IAppBuilder app)
         {
             // Настройка контекста базы данных, диспетчера пользователей и диспетчера входа для использования одного экземпляра на запрос
-            app.CreatePerOwinContext<CustomUserManager>( CustomUserManager.Create );
+            app.CreatePerOwinContext( CustomUserManager.Create );
             app.CreatePerOwinContext<ApplicationSignInManager>( ApplicationSignInManager.Create );
 
             // Включение использования файла cookie, в котором приложение может хранить информацию для пользователя, выполнившего вход,

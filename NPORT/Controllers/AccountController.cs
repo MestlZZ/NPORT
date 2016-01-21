@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using NPORT.Models;
+using NPORT.Models.ViewModels.Account;
 
 namespace NPORT.Controllers
 {

@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Start.cs" Inherits="NPORT.MVC.Start, NPORT.MVC" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="NPORT.MvcApplication" Language="C#" %>

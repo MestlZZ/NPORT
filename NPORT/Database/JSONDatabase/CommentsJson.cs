@@ -49,9 +49,11 @@ namespace NPORT.Database.JSONDatabase
         public static Models.Database.Comment Find( int id )
         {
             var list = GetList();
+
             foreach (var comment in list)
                 if (comment.Id == id)
                     return comment;
+
             return null;
         }
 
@@ -70,14 +72,18 @@ namespace NPORT.Database.JSONDatabase
         public static void Remove( int Id )
         {
             List<Models.Database.Comment> bufferList = GetList();
+
             foreach (var comment in bufferList)
                 if (comment.Id == Id)
                 {
                     bufferList.Remove( comment );
                     break;
                 }
+
             StreamWriter file2 = new StreamWriter(Path);
+
             file2.Write( JsonConvert.SerializeObject( bufferList ) );
+
             file2.Close();
         }
     }

@@ -87,7 +87,7 @@ namespace NPORT
 
             routes.MapRoute(
                name: "User remove",
-               url: "user/remove",
+               url: "user/remove/{id}",
                defaults: new { controller = "User", action = "Remove", id = UrlParameter.Optional }
            );
 
