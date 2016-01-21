@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Transliteration;
 
 namespace NPORT
 {
@@ -15,8 +16,11 @@ namespace NPORT
 
             routes.MapRoute(
                name: "News Details",
-               url: "news/item/{id}",
-               defaults: new { controller = "News", action = "Detailed", id = UrlParameter.Optional }
+               url: "news/item/{newsTitle}/{newsId}",
+               defaults: new
+               {
+                   controller = "News", action = "Detailed", newsTitle = UrlParameter.Optional, newsId = UrlParameter.Optional
+               }
            );
 
             routes.MapRoute(
@@ -51,8 +55,8 @@ namespace NPORT
 
             routes.MapRoute(
                name: "News Edit",
-               url: "news/edit/{id}",
-               defaults: new { controller = "News", action = "Edit", id = UrlParameter.Optional }
+               url: "news/edit/{newsId}",
+               defaults: new { controller = "News", action = "Edit", newsId = UrlParameter.Optional }
            );
 
             routes.MapRoute(

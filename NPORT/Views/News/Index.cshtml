@@ -3,7 +3,7 @@
     ViewBag.Title = "News";
     string blockClass = "right";
 }
-
+@using Transliteration;
 <h1>News</h1>
 @if (Model.NewsList != null)
 {
@@ -19,7 +19,7 @@
             <div class="news @blockClass">
                 <h2 class="title">@Html.Raw( news.Title )</h2>
                 <p class="content">@Html.Raw( news.ShortInfo )</p>
-                <p class="details-link">@Html.RouteLink( "Details", "News Details", new { newsId = news.Id }, new { @class = "btn" } )</p>   
+                <p class="details-link">@Html.RouteLink( "Details", "News Details", new { newsTitle = Transliteration.Front(news.Title), newsId = news.Id  }, new { @class = "btn" } )</p>   
                 <span class="author">&copy; @news.GetAuthorName()</span>
                 <span class="date">@news.Date </span>
             </div>

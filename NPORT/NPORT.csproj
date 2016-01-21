@@ -769,6 +769,7 @@
     <Compile Include="Database\XMLDatabase\RoleDb.cs" />
     <Compile Include="Database\XMLDatabase\UsersDb.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Transliteration\Transliteration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
