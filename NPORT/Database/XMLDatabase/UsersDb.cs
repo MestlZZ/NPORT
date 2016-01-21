@@ -8,52 +8,60 @@ namespace NPORT.Database.XMLDatabase
 {
     public static class UsersDb
     {
-        private static string Path = HttpContext.Current.Server.MapPath( "/App_Data/UserDatabase.xml" );
+        private static string Path = HttpContext.Current.Server.MapPath("/App_Data/UserDatabase.xml");
+
         private static XmlSerializer formatter = new XmlSerializer(typeof(List<ApplicationUser>));
 
         public static List<ApplicationUser> GetList()
         {
-            using (StreamReader fs = new StreamReader( Path ))
+            List<ApplicationUser> result;
+
+            using (StreamReader fileWithUsers = new StreamReader(Path))
             {
-                var result = (List<ApplicationUser>)formatter.Deserialize( fs );
-                fs.Close();
-                return result;
+                result = (List<ApplicationUser>)formatter.Deserialize(fileWithUsers);
             }
+
+            return result;
         }
 
-        public static ApplicationUser Find( string Id )
+        public static ApplicationUser Find(string Id)
         {
             var users = GetList();
+
             foreach (var user in users)
                 if (user.Id == Id)
                     return user;
+
             return null;
         }
 
-        public static ApplicationUser FindLogin( string phone )
+        public static ApplicationUser FindByLogin(string phone)
         {
             var users = GetList();
+
             foreach (var user in users)
                 if (user.Phone == phone)
                     return user;
+
             return null;
         }
 
-        public static ApplicationUser FindNickname( string nickname )
+        public static ApplicationUser FindByUsername(string nickname)
         {
             var users = GetList();
+
             foreach (var user in users)
                 if (user.UserName == nickname)
                     return user;
+
             return null;
         }
 
-        public static void Update( List<ApplicationUser> users )
+        public static void Update(List<ApplicationUser> users)
         {
-            using (StreamWriter fs = new StreamWriter( Path ))
+            using (StreamWriter fileWithUsers = new StreamWriter(Path))
             {
-                formatter.Serialize( fs, users );
-                fs.Close();
+                formatter.Serialize(fileWithUsers, users);
             }
         }
     }
