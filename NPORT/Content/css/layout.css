@@ -167,6 +167,16 @@ div.main nav.menu ul li.user a{
      
 }
 
+.btn.right{
+    float: right;
+}
+
+.btn.right::after{
+    display: table;
+    content: '';
+    clear: both;
+}
+
 .btn:hover{
     background-color: #70707a;
     transform: scale(1.1);
@@ -314,4 +324,10 @@ div.main nav.menu ul li.user a{
 }
 .news-detailed div.comment:nth-of-type(2n - 1){
     float: left;
+}
+
+span.pager::before{
+    display: table;
+    content: '';
+    clear: both;
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using NPORT.Models.ViewModels.News;
 using NPORT.Database.JSONDatabase;
+using PagedList;
 using NPORT.Models.Identity;
 using Transliteration;
 
@@ -10,37 +11,49 @@ namespace NPORT.Controllers
     public class NewsController : Controller
     {
         [HttpGet]
-        public ActionResult Index(string sortBy = "none")
+        public ActionResult Index(int? page, string sortOrder = "none")
         {
             IndexViewModel model = new IndexViewModel();
 
             var newsDb = new NewsDb();
 
-            model.NewsList = newsDb.GetList();
+            var newsList = newsDb.GetList();
 
-            if (sortBy == "Title")
-                model.NewsList.Sort((u1, u2) => 
-                    {
-                        if (string.Compare(u1.Title, u2.Title) >= 0)
+            switch(sortOrder)
+            {
+                case "Title":
+
+                    newsList.Sort((u1, u2) =>
                         {
-                            return 1;
+                            if (string.Compare(u1.Title, u2.Title) >= 0)
+                            {
+                                return 1;
+                            }
+                            return -1;
                         }
-                        return -1;
-                    } 
-                );
+                    );
 
-            if (sortBy == "Date")
-                model.NewsList.Sort( ( u1, u2 ) =>
-                {
-                    if (u1.Date.CompareTo(u2.Date) >= 0)
-                    {
-                        return 1;
-                    }
-                    return -1;
-                }
-                );
+                    break;
 
-            return View(model);
+                case "Date":
+
+                    newsList.Sort((u1, u2) =>
+                        {
+                            if (u1.Date.CompareTo(u2.Date) >= 0)
+                            {
+                                return 1;
+                            }
+                            return -1;
+                        }
+                    );
+
+                    break;
+
+                default:
+                    break;
+            }
+
+            return View(newsList.ToPagedList( page ?? 1, 3 ));
         }
 
         [HttpGet]
