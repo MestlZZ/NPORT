@@ -13,7 +13,9 @@ namespace NPORT.Controllers
         {
             IndexViewModel model = new IndexViewModel();
 
-            model.NewsList = NewsDb.GetList();
+            var newsDb = new NewsDb();
+
+            model.NewsList = newsDb.GetList();
 
             return View(model);
         }
@@ -46,7 +48,9 @@ namespace NPORT.Controllers
                     Visible = newsModel.Visible
                 };
 
-                NewsDb.Add(news);
+                var newsDb = new NewsDb();
+
+                newsDb.Add(news);
 
                 return RedirectToRoute("News Details", new { newsId = news.Id });
             }
@@ -58,9 +62,13 @@ namespace NPORT.Controllers
         {
             DetailedViewModel model = new DetailedViewModel();
 
-            model.News = NewsDb.Find(newsId);
+            var newsDb = new NewsDb();
 
-            model.CommentList = CommentsDb.GetListForNews(newsId);
+            model.News = newsDb.Find(newsId);
+
+            var commentsDb = new CommentsDb();
+
+            model.CommentList = commentsDb.GetListForNews(newsId);
 
             return View(model);
         }
@@ -82,7 +90,9 @@ namespace NPORT.Controllers
         {
             var model = new EditViewModel();
 
-            var news = NewsDb.Find(newsId);
+            var newsDb = new NewsDb();
+
+            var news = newsDb.Find(newsId);
 
             model.Id = news.Id;
             model.ShortInfo = news.ShortInfo;
@@ -113,7 +123,9 @@ namespace NPORT.Controllers
                 news.Content = newsModel.Content;
                 news.Date = newsModel.Date;
 
-                NewsDb.Edit(news);
+                var newsDb = new NewsDb();
+
+                newsDb.Edit(news);
 
                 return RedirectToRoute("Home");
             }
@@ -125,25 +137,35 @@ namespace NPORT.Controllers
         [Authorize(Roles = "Admin, Editor")]
         public ActionResult Remove(string newsId)
         {
-                NewsDb.Remove(newsId);
-                return View();
+            var newsDb = new NewsDb();
+
+            newsDb.Remove(newsId);
+
+            return View();
         }
 
         [Authorize]
         public void AddComment(Models.Database.Comment comment)
         {
-                CommentsDb.Add(comment);
+            var commentsDb = new CommentsDb();
+
+            commentsDb.Add(comment);
         }
 
         [Authorize]
         public ActionResult RemoveComment(int id, string url)
         {
-            var user = Database.XMLDatabase.UsersDb.Find(User.Identity.GetUserId());
-            Models.Database.Comment comment = CommentsDb.Find(id);
+            var userDb = new Database.XMLDatabase.UsersDb();
+
+            var user = userDb.Find(User.Identity.GetUserId());
+
+            var commentsDb = new CommentsDb();
+
+            Models.Database.Comment comment = commentsDb.Find(id);
 
             if (user.Id == comment.AuthorId || user.GetRoleName() == "Admin")
             {
-                CommentsDb.Remove(id);
+                commentsDb.Remove(id);
                 return Redirect(url);                    
             }
 

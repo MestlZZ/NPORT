@@ -97,11 +97,13 @@ namespace NPORT.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            var userDb = new Database.XMLDatabase.UsersDb();
+
             if (ModelState.IsValid)
             {
-                if (Database.XMLDatabase.UsersDb.FindByLogin( model.Phone ) == null)
+                if (userDb.FindByLogin( model.Phone ) == null)
                 {
-                    if (Database.XMLDatabase.UsersDb.FindByUsername( model.NickName ) == null)
+                    if (userDb.FindByUsername( model.NickName ) == null)
                     {
                         var user = new ApplicationUser(model.NickName, model.Password, model.Phone, "dccb843b-82e8-4470-b4f8-2e3d38a4ba65");
                         var result = await UserManager.CreateAsync(user, model.Password);

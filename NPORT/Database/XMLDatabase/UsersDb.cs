@@ -3,16 +3,17 @@ using System.Xml.Serialization;
 using System.Web;
 using System.IO;
 using NPORT.Models.Identity;
+using NPORT.Database.Interfaces;
 
 namespace NPORT.Database.XMLDatabase
 {
-    public static class UsersDb
+    public class UsersDb : IUserDatabase<ApplicationUser, string>
     {
-        private static string Path = HttpContext.Current.Server.MapPath("/App_Data/UserDatabase.xml");
+        private string Path = HttpContext.Current.Server.MapPath("/App_Data/UserDatabase.xml");
 
-        private static XmlSerializer formatter = new XmlSerializer(typeof(List<ApplicationUser>));
+        private XmlSerializer formatter = new XmlSerializer(typeof(List<ApplicationUser>));
 
-        public static List<ApplicationUser> GetList()
+        public List<ApplicationUser> GetList()
         {
             List<ApplicationUser> result;
 
@@ -24,7 +25,7 @@ namespace NPORT.Database.XMLDatabase
             return result;
         }
 
-        public static ApplicationUser Find(string Id)
+        public ApplicationUser Find(string Id)
         {
             var users = GetList();
 
@@ -35,7 +36,7 @@ namespace NPORT.Database.XMLDatabase
             return null;
         }
 
-        public static ApplicationUser FindByLogin(string phone)
+        public ApplicationUser FindByLogin(string phone)
         {
             var users = GetList();
 
@@ -46,7 +47,7 @@ namespace NPORT.Database.XMLDatabase
             return null;
         }
 
-        public static ApplicationUser FindByUsername(string nickname)
+        public ApplicationUser FindByUsername(string nickname)
         {
             var users = GetList();
 
@@ -57,7 +58,7 @@ namespace NPORT.Database.XMLDatabase
             return null;
         }
 
-        public static void Update(List<ApplicationUser> users)
+        public void Update(List<ApplicationUser> users)
         {
             using (StreamWriter fileWithUsers = new StreamWriter(Path))
             {

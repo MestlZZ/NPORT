@@ -736,7 +736,12 @@
     <Content Include="Content\Scripts\jquery-1.10.2.min.js" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Database\Interfaces\ICommentDatabase.cs" />
+    <Compile Include="Database\Interfaces\INewsDatabase.cs" />
+    <Compile Include="Database\Interfaces\IRoleDatabase.cs" />
+    <Compile Include="Database\Interfaces\IUserDatabase.cs" />
     <Compile Include="Identity\ApplicationSignInManager.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />

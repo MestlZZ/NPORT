@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using NPORT.Identity;
+using NPORT.Database.JSONDatabase;
 
 namespace NPORT.MVC.Controllers
 {
@@ -12,19 +13,27 @@ namespace NPORT.MVC.Controllers
 
         public ActionResult UserList()
         {
-            return View( Database.XMLDatabase.UsersDb.GetList() );
+            var userDb = new Database.XMLDatabase.UsersDb();
+
+            return View( userDb.GetList() );
         }        
 
         public ActionResult Details( string Id )
         {
-            return View( Database.XMLDatabase.UsersDb.Find(Id) );
+            var userDb = new Database.XMLDatabase.UsersDb();
+
+            return View( userDb.Find(Id) );
         }
 
         [HttpPost]
         public ActionResult Details( string Id, string Role )
         {
-            var user = Database.XMLDatabase.UsersDb.Find(Id);
-            user.RoleId =  Role ;
+            var userDb = new Database.XMLDatabase.UsersDb();
+
+            var user = userDb.Find(Id);
+
+            user.RoleId = Role ;
+
             CustomUserStore store = new CustomUserStore();
 
             store.Update( user );
@@ -40,12 +49,14 @@ namespace NPORT.MVC.Controllers
 
             store.Delete( user );
 
-            var news = Database.JSONDatabase.NewsDb.GetList();
+            var newsDb = new NewsDb();
+
+            var news = newsDb.GetList();
 
             foreach(var item in news)
             {
                 if (item.AuthorId == Id)
-                    Database.JSONDatabase.NewsDb.Remove( item.Id );
+                    newsDb.Remove( item.Id );
             }
 
             return View();

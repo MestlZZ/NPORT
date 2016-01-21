@@ -10,11 +10,7 @@
             @Html.RouteLink("Hello, " + User.Identity.GetUserName() + "!", "User panel", routeValues: null, htmlAttributes: new { title = "User" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
-        @{ 
-            var s = User.Identity.GetUserId();
-            var user = NPORT.Database.XMLDatabase.UsersDb.Find( User.Identity.GetUserId() );
-        }
-        @if (true)
+        @if (User.IsInRole("Admin") || User.IsInRole("Correspondent"))
         {
             <li>@Html.RouteLink("Add news", "News Add")</li>
         }       

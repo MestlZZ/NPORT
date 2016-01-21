@@ -18,7 +18,9 @@
 
         public string GetAuthorName()
         {
-            return NPORT.Database.XMLDatabase.UsersDb.Find(AuthorId).UserName;
+            var userDb = new NPORT.Database.XMLDatabase.UsersDb();
+
+            return userDb.Find(AuthorId).UserName;
         }
     }
 }

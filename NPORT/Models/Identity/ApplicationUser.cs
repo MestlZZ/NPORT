@@ -38,7 +38,9 @@ namespace NPORT.Models.Identity
 
         public string GetRoleName()
         {
-            var role = RoleDb.Find(RoleId);
+            var roleDb = new RoleDb();
+
+            var role = roleDb.Find(RoleId);
 
             return role.Name;
         }
