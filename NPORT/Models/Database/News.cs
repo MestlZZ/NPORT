@@ -1,5 +1,4 @@
-﻿
-namespace NPORT.Models.Database
+﻿namespace NPORT.Models.Database
 {
     public class News
     {

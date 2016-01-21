@@ -2,6 +2,8 @@
 using System.Xml.Serialization;
 using System.Web;
 using System.IO;
+using NPORT.Models.Identity;
+using NPORT.Identity;
 
 namespace NPORT.Database.XMLDatabase
 {
@@ -12,22 +14,6 @@ namespace NPORT.Database.XMLDatabase
 
         public static List<ApplicationUser> GetList()
         {
-            //List<ApplicationRole> roles = new List<ApplicationRole>();
-            //ApplicationRole rol = new ApplicationRole("Admin");
-            //roles.Add( rol );
-            //rol = new ApplicationRole( "Editor" );
-            //roles.Add( rol );
-            //rol = new ApplicationRole( "Correspondent" );
-            //roles.Add( rol );
-            //rol = new ApplicationRole( "User" );
-            //roles.Add( rol );
-            //RoleDb.Update( roles );
-
-            //List<ApplicationUser> users = new List<ApplicationUser>();
-            //var user = new ApplicationUser("Admin", "123456", "+380930808372", "");
-            //users.Add( user );
-            //Update( users );
-
             using (StreamReader fs = new StreamReader( Path ))
             {
                 var result = (List<ApplicationUser>)formatter.Deserialize( fs );

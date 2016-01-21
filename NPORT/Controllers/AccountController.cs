@@ -5,6 +5,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using NPORT.Models.ViewModels.Account;
+using NPORT.Models.Identity;
+using NPORT.Identity;
 
 namespace NPORT.Controllers
 {

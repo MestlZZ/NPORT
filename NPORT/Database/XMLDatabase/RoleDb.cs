@@ -3,6 +3,8 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Web;
 using NPORT.Models.Database;
+using NPORT.Models.Identity;
+using NPORT.Identity;
 
 namespace NPORT.Database.XMLDatabase
 {

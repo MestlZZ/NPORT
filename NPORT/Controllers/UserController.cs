@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
 using NPORT.Models;
+using NPORT.Models.Identity;
+using NPORT.Identity;
 
 namespace NPORT.MVC.Controllers
 {

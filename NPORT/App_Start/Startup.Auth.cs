@@ -4,6 +4,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
+using NPORT.Models.Identity;
+using NPORT.Identity;
+
 namespace NPORT
 {
     public partial class Startup

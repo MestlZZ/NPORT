@@ -1,15 +1,19 @@
 ﻿using System.Security.Principal;
 
-namespace NPORT
+namespace NPORT.Models.Identity
 {
     public class MyUserIdentity : IIdentity
     {
-        public MyUserIdentity( string name, string authenticationType, bool isAuthenticated, string userId, string role )
+        public MyUserIdentity(string name, string authenticationType, bool isAuthenticated, string userId, string role)
         {
             Name = name;
+
             AuthenticationType = authenticationType;
+
             IsAuthenticated = isAuthenticated;
+
             UserId = userId;
+
             Role = role;
         }
 
