@@ -1,5 +1,4 @@
-﻿@using NPORT.Models
-@model NPORT.Models.ViewModels.Account.LoginViewModel
+﻿@model NPORT.Models.ViewModels.Account.LoginViewModel
 @{
     ViewBag.Title = "Sign in";
 }
@@ -8,9 +7,10 @@
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("Login", "Account", new { }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
+                @Html.EditorFor(m => m.ReturnUrl)
                 <h4>Use the local account for login.</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <p>
-                    @Html.ActionLink("Register new user", "Register", new { } ,new { @class = "btn btn-login" })
+                    @Html.RouteLink("Register new user", "User Register", new { } ,new { @class = "btn btn-login" })
                 </p>
             }
         </section>

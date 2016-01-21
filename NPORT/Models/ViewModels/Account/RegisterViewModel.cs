@@ -11,7 +11,7 @@ namespace NPORT.Models.ViewModels.Account
 
         [Required(ErrorMessage = "Please fill 'Nickname' field")]
         [StringLength(20, ErrorMessage = "Nickname must have not less than {2} symbols and not more than 20", MinimumLength = 3)]
-        [Display( Name = "Nickname" )]
+        [Display(Name = "Nickname")]
         public string NickName { get; set; }
 
         [Required(ErrorMessage = "Please fill 'Password' field")]

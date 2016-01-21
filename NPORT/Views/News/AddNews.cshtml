@@ -13,7 +13,7 @@
     @Html.AntiForgeryToken()
 
     <p class="error-list">
-        @Html.ValidationSummary()
+        @Html.ValidationSummary( true, "", new { @class = "text-danger" } )
     </p>
 
     <p class="title">

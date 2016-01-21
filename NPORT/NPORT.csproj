@@ -775,8 +775,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\" />
-    <Folder Include="Models\ViewModels\Home\" />
-    <Folder Include="Models\ViewModels\Manage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />

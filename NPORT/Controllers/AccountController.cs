@@ -18,7 +18,7 @@ namespace NPORT.Controllers
         {
         }
 
-        public AccountController( CustomUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(CustomUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -48,53 +48,48 @@ namespace NPORT.Controllers
             }
         }
 
-        //
-        // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login( string returnUrl )
+        public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            var model = new LoginViewModel();
+
+            model.ReturnUrl = returnUrl;
+
+            return View(model);
         }
 
-        //
-        // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login( LoginViewModel model, string returnUrl )
+        public async Task<ActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View( model );
+                return View(model);
             }
 
             var result = await SignInManager.PasswordSignInAsync(model.Login, model.Password, false, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal( returnUrl );
+                    return RedirectToLocal( model.ReturnUrl );
                 case SignInStatus.LockedOut:
-                    return View( "Lockout" );
+                    return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction( "SendCode", new { ReturnUrl = returnUrl, RememberMe = false } );
+                    return RedirectToAction("SendCode", new { ReturnUrl = model.ReturnUrl, RememberMe = false });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError( "", "Неудачная попытка входа." );
-                    return View( model );
+                    ModelState.AddModelError("", "Неудачная попытка входа.");
+                    return View(model);
             }
         }
 
-        //
-        // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
 
-        //
-        // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -111,7 +106,7 @@ namespace NPORT.Controllers
                         if (result.Succeeded)
                         {
                             await SignInManager.SignInAsync( user, isPersistent: false, rememberBrowser: false );
-                            return RedirectToAction( "Index", "Home" );
+                            return RedirectToRoute( "Home" );
                         }
                         AddErrors( result );
                     }
@@ -126,7 +121,6 @@ namespace NPORT.Controllers
                 }
             }
 
-            // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
         }
        
@@ -136,7 +130,7 @@ namespace NPORT.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToRoute( "Home" );
         }
 
         protected override void Dispose(bool disposing)
@@ -184,7 +178,7 @@ namespace NPORT.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToRoute("Home");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
