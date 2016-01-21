@@ -9,8 +9,8 @@
 <h1>News</h1>
 @if (Model != null)
 {
-    @Html.RouteLink( "Sort by title", "Home", new { sortBy = "Title" }, new { @class = "btn" } );
-    @Html.RouteLink( "Sort by date", "Home", new { sortBy = "Date" }, new { @class = "btn right" } );
+    @Html.RouteLink( "Sort by title", "Home", new { sortOrder = "Title" }, new { @class = "btn" } );
+    @Html.RouteLink( "Sort by date", "Home", new { sortOrder = "Date" }, new { @class = "btn right" } );
     <br />
 
     foreach (var news in Model)
@@ -37,7 +37,7 @@
     <span class="pager">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
 
     @Html.PagedListPager( Model, page => Url.Action( "Index",
-     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } ) )
+     new { page, sortOrder = TempData["OrderBy"] } ) )
 
     </div>
 }

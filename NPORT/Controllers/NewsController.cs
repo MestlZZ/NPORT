@@ -41,9 +41,9 @@ namespace NPORT.Controllers
                         {
                             if (u1.Date.CompareTo(u2.Date) >= 0)
                             {
-                                return 1;
+                                return -1;
                             }
-                            return -1;
+                            return 1;
                         }
                     );
 
@@ -52,6 +52,8 @@ namespace NPORT.Controllers
                 default:
                     break;
             }
+
+            TempData["OrderBy"] = sortOrder;
 
             return View(newsList.ToPagedList( page ?? 1, 3 ));
         }
