@@ -12,7 +12,6 @@ namespace NPORT
         {
             app.CreatePerOwinContext<CustomUserManager>( CustomUserManager.Create );
             app.CreatePerOwinContext<ApplicationSignInManager>( ApplicationSignInManager.Create );
-            app.CreatePerOwinContext<CustomRoleManager>( CustomRoleManager.Create );
 
             app.UseCookieAuthentication( new CookieAuthenticationOptions
             {

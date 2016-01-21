@@ -96,7 +96,7 @@ namespace NPORT.Controllers
             if (Request.IsAuthenticated)
             {
                 var user = Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
-                Models.Database.Comment comment = Database.JSONDatabase.CommentsJson.Find(Id);
+                Models.Database.Comment comment = Database.JSONDatabase.CommentsJson.Find(id);
                 if (user.Id == comment.AuthorId)
                 {
                     Database.JSONDatabase.CommentsJson.Remove(id);

@@ -746,8 +746,6 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Identity\CustomPasswordHasher.cs" />
-    <Compile Include="Identity\CustomRoleManager.cs" />
-    <Compile Include="Identity\CustomRoleStore.cs" />
     <Compile Include="Identity\CustomUserManager.cs" />
     <Compile Include="Identity\CustomUserStore.cs" />
     <Compile Include="Database\JSONDatabase\CommentsJson.cs" />

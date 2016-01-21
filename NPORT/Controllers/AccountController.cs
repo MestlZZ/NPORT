@@ -13,17 +13,15 @@ namespace NPORT.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private CustomUserManager _userManager;
-        private CustomRoleManager _roleManager;
 
         public AccountController()
         {
         }
 
-        public AccountController( CustomUserManager userManager, ApplicationSignInManager signInManager, CustomRoleManager roleManager )
+        public AccountController( CustomUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
-            RoleManager = roleManager;
         }
 
         public ApplicationSignInManager SignInManager
@@ -47,18 +45,6 @@ namespace NPORT.Controllers
             private set
             {
                 _userManager = value;
-            }
-        }
-
-        public CustomRoleManager RoleManager
-        {
-            get
-            {
-                return _roleManager ?? HttpContext.GetOwinContext().Get<CustomRoleManager>();
-            }
-            private set
-            {
-                _roleManager = value;
             }
         }
 
