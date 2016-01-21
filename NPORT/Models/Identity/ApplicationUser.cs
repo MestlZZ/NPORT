@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Text;
 using System;
 using System.Security.Claims;
@@ -12,38 +13,36 @@ namespace NPORT
         public ApplicationUser()
         { }
 
-        public ApplicationUser( string name, string password, string phone, int role )
+        public ApplicationUser( string name, string password, string phone, string roleId )
         {
             Id = Guid.NewGuid().ToString();
             UserName = name;
 
-            var md = MD5.Create();
-            Encoding u8 = Encoding.UTF8;
-
-            byte[] buff = u8.GetBytes(password);
-            buff = md.ComputeHash( buff );
-
-            char[] chars = new char[buff.Length / sizeof(char)];
-            Buffer.BlockCopy( buff, 0, chars, 0, buff.Length );
-
-            PasswordHash = new string( chars );
+            CustomPasswordHasher hasher= new CustomPasswordHasher();
+            PasswordHash = hasher.HashPassword(password);
 
             Phone = phone;
 
-            Role = role;
+            RoleId = roleId;
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync( CustomUserManager manager )
         {
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            userIdentity.AddClaim( new Claim( ClaimTypes.MobilePhone, this.Phone ) );
+            userIdentity.AddClaim( new Claim( ClaimTypes.MobilePhone, Phone ) );
             return userIdentity;
         }
 
-        public string GetRole()
+        public string GetRoleName()
         {
-            var roles = Database.XMLDatabase.Roles.Find(Role);
-            return roles.Name;
+            var role = Database.XMLDatabase.RoleDb.Find(RoleId);
+            return role.Name;
+        }
+
+        public ApplicationRole GetRole()
+        {
+            var role = Database.XMLDatabase.RoleDb.Find(RoleId);
+            return role;
         }
 
         public string Id { get; set; }
@@ -54,6 +53,6 @@ namespace NPORT
 
         public string Phone { get; set; }
 
-        public int Role { get; set; }
+        public string RoleId { get; set; }
     }
 }

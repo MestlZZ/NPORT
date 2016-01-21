@@ -68,11 +68,11 @@ namespace NPORT.Controllers
         public ActionResult Remove( string NewsId )
         {
             var user = Database.XMLDatabase.Users.Find( User.Identity.GetUserId() );
-            Models.Database.Role role = null;
+            ApplicationRole role = null;
             if (user != null)
-                role = Database.XMLDatabase.Roles.Find( user.Role );
+                role = Database.XMLDatabase.RoleDb.Find( user.RoleId );
 
-            if (user != null && role.Access_RemoveNews && Request.IsAuthenticated)
+            if (user != null)
             {
                 Database.JSONDatabase.NewsJson.Remove( NewsId );
                 return View();
@@ -97,7 +97,7 @@ namespace NPORT.Controllers
             {
                 var user = Database.XMLDatabase.Users.Find(User.Identity.GetUserId());
                 Models.Database.Comment comment = Database.JSONDatabase.CommentsJson.Find(Id);
-                if (user.Role <= 1 || user.Id == comment.AuthorId)
+                if (user.Id == comment.AuthorId)
                 {
                     Database.JSONDatabase.CommentsJson.Remove(Id);
                     return Redirect(url + "#btn");                    

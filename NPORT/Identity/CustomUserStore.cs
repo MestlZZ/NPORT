@@ -37,44 +37,31 @@ namespace NPORT.Models
             NPORT.Database.XMLDatabase.Users.Update( Users );
         }
 
-        public Task CreateAsync( ApplicationUser user )
-        {
-            Users.Add( user );
-            UpdateDb();
-            return Task.Factory.StartNew( () => Users.Add( user ) );
-        }
-
         public void Create( ApplicationUser user )
         {
             Users.Add( user );
             UpdateDb();
         }
 
-        public Task UpdateAsync( ApplicationUser user )
-        {
-            var task = FindByIdAsync( user.Id );
-            task.Start();
-            DeleteAsync( task.Result );
-            CreateAsync(user);
-            UpdateDb();
-
-            return Task.Factory.StartNew( () => CreateAsync( task.Result ) );
-        }
-
         public void Update( ApplicationUser user )
         {
             var task = FindById( user.Id );
-            Delete( task );
-            Create( user );
-            Users.Sort( delegate(ApplicationUser u1, ApplicationUser u2) { if (u1.Role > u2.Role) { return 1; } else { if (String.Compare( u1.UserName , u2.UserName ) > 0) { return 1; } return -1; } } );
-            UpdateDb();
-        }
 
-        public Task DeleteAsync( ApplicationUser user )
-        {
-            Users.Remove( user );
+            Delete( task );
+
+            Create( user );
+
+            Users.Sort( 
+                delegate(ApplicationUser u1, ApplicationUser u2) 
+                {
+                    if (String.Compare( u1.UserName , u2.UserName ) > 0)
+                        return 1;
+                    else
+                        return -1;
+                }  
+            );
+
             UpdateDb();
-            return Task.Factory.StartNew( () => Users.Remove( user ) );
         }
 
         public void Delete( ApplicationUser user )
@@ -103,62 +90,67 @@ namespace NPORT.Models
 
         public Task<ApplicationUser> FindByNameAsync( string userName )
         {
-            var user = Users.FirstOrDefault( u => u.Phone == userName );
             return Task<ApplicationUser>.Factory.StartNew( () => Users.FirstOrDefault( u => u.Phone == userName ) );
+        }
+
+        public Task CreateAsync( ApplicationUser user )
+        {
+            return Task.Run( () => Create( user ) );
+        }
+
+        public Task UpdateAsync( ApplicationUser user )
+        {
+            return Task.Run( () => Update( user ) );
+        }
+
+        public Task DeleteAsync( ApplicationUser user )
+        {
+            return Task.Run( () => Delete( user ) );
         }
 
         public Task<DateTimeOffset> GetLockoutEndDateAsync( ApplicationUser user )
         {
-            DateTime date = new DateTime(2000, 03, 23);
-            return Task<DateTimeOffset>.Factory.StartNew( () => date );
+            return Task.FromResult( DateTimeOffset.UtcNow );
         }
 
         public Task SetLockoutEndDateAsync( ApplicationUser user, DateTimeOffset lockoutEnd )
         {
-            return Task.Factory.StartNew( () => Nothing() );
+            return Task.Run( () => { } );
         }
-
-        private void Nothing()
-        { }
-
 
         public Task<int> IncrementAccessFailedCountAsync( ApplicationUser user )
         {
-            int s = 1;
-            return Task<int>.Factory.StartNew( () => s );
+            return Task.FromResult( 1 );
         }
 
         public Task ResetAccessFailedCountAsync( ApplicationUser user )
         {
-            return Task.Factory.StartNew( () => Nothing() );
+            return Task.Run( () => { } );
         }
 
         public Task<int> GetAccessFailedCountAsync( ApplicationUser user )
         {
-            int s = 0;
-            return Task<int>.Factory.StartNew( () => s );
+            return Task.FromResult( 0 );
         }
 
         public Task<bool> GetLockoutEnabledAsync( ApplicationUser user )
         {
-            bool s = false;
-            return Task<bool>.Factory.StartNew( () => s );
+            return Task.FromResult(false);
         }
 
         public Task SetLockoutEnabledAsync( ApplicationUser user, bool enabled )
         {
-            return Task.Factory.StartNew( () => Nothing() );
+            return Task.Run( () => { } );
         }
 
         public Task SetTwoFactorEnabledAsync( ApplicationUser user, bool enabled )
         {
-            return Task.Factory.StartNew( () => Nothing() );
+            return Task.Run( () => { } );
         }
 
         public Task<bool> GetTwoFactorEnabledAsync( ApplicationUser user )
         {
-            bool s = false;
-            return Task<bool>.Factory.StartNew( () => s );
+            return Task.FromResult( false );
         }
     }
 }

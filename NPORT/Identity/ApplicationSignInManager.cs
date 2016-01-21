@@ -6,7 +6,6 @@ using Microsoft.Owin.Security;
 
 namespace NPORT
 {
-    // Настройка диспетчера входа для приложения.
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
     {
         public ApplicationSignInManager( CustomUserManager userManager, IAuthenticationManager authenticationManager)

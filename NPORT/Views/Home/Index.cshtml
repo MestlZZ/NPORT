@@ -7,7 +7,6 @@
     if (user == null)
     {
         user = new ApplicationUser();
-        user.Role = 5;
     }
     int i = 0;
     string c;
@@ -20,7 +19,7 @@
     {
         i++;
         var Author = NPORT.Database.XMLDatabase.Users.Find(news.AuthorId);
-        if (user.Role <= news.VisibleRange)
+        if (true)
         {
             if (i % 2 == 1)
             { c = "left"; }

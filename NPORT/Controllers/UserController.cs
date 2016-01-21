@@ -25,7 +25,7 @@ namespace NPORT.MVC.Controllers
         public ActionResult Details( string Id, string Role )
         {
             var user = Database.XMLDatabase.Users.Find(Id);
-            user.Role = Convert.ToInt32( Role );
+            user.RoleId =  Role ;
             CustomUserStore store = new CustomUserStore();
 
             store.Update( user );

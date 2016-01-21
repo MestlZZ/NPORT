@@ -12,19 +12,9 @@
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
         @{ 
             var s = User.Identity.GetUserId();
-            var roles = NPORT.Database.XMLDatabase.Roles.GetList();
             var user = NPORT.Database.XMLDatabase.Users.Find( User.Identity.GetUserId() );
-            NPORT.Models.Database.Role role1 = null;
-            foreach ( var role in roles )
-            {
-                if (user.Role == role.Id)
-                {
-                    role1 = role;
-                }
-
-            }
         }
-        @if (role1.Access_AddNews)
+        @if (true)
         {
             <li>@Html.RouteLink("Add news", "News Add")</li>
         }       

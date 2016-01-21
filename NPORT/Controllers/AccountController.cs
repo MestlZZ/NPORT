@@ -13,15 +13,17 @@ namespace NPORT.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private CustomUserManager _userManager;
+        private CustomRoleManager _roleManager;
 
         public AccountController()
         {
         }
 
-        public AccountController( CustomUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController( CustomUserManager userManager, ApplicationSignInManager signInManager, CustomRoleManager roleManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
         }
 
         public ApplicationSignInManager SignInManager
@@ -45,6 +47,18 @@ namespace NPORT.Controllers
             private set
             {
                 _userManager = value;
+            }
+        }
+
+        public CustomRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<CustomRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
             }
         }
 
@@ -106,7 +120,7 @@ namespace NPORT.Controllers
                 {
                     if (Database.XMLDatabase.Users.FindNickname( model.NickName ) == null)
                     {
-                        var user = new ApplicationUser(model.NickName, model.Password, model.Phone, 4);
+                        var user = new ApplicationUser(model.NickName, model.Password, model.Phone, "");
                         var result = await UserManager.CreateAsync(user, model.Password);
                         if (result.Succeeded)
                         {
