@@ -326,7 +326,11 @@ div.main nav.menu ul li.user a{
     float: left;
 }
 
-span.pager::before{
+div.pager{
+    margin: 0 auto;
+}
+
+div.pager span.pager::before{
     display: table;
     content: '';
     clear: both;

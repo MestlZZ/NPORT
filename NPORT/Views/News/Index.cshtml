@@ -33,10 +33,13 @@
     }
 
     <br />
+    <div class="pager">
     <span class="pager">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
 
     @Html.PagedListPager( Model, page => Url.Action( "Index",
      new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } ) )
+
+    </div>
 }
 else
 {
