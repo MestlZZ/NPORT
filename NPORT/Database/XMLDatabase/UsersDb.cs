@@ -9,9 +9,10 @@ namespace NPORT.Database.XMLDatabase
 {
     public class UsersDb : IUserDatabase<ApplicationUser, string>
     {
-        private string Path = HttpContext.Current.Server.MapPath("/App_Data/UserDatabase.xml");
+        private static string Path = HttpContext.Current.Server.MapPath("/App_Data/UserDatabase.xml");
 
         private XmlSerializer formatter = new XmlSerializer(typeof(List<ApplicationUser>));
+
 
         public List<ApplicationUser> GetList()
         {
