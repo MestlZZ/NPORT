@@ -6,8 +6,8 @@
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
-        <li class="user">
-            @Html.RouteLink("Hello, " + User.Identity.GetUserName() + "!", "User panel", routeValues: null, htmlAttributes: new { title = "User" })
+        <li class="user user-hello">
+            @Html.RouteLink("Hello, " + User.Identity.GetUserName() + "!" + "\nClick here for control panel", "User panel", routeValues: null, htmlAttributes: new { title = "User" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
         @if (User.IsInRole("Admin") || User.IsInRole("Correspondent"))

@@ -12,6 +12,7 @@
 <form method="post" class="add-news">
     @Html.AntiForgeryToken()
 
+    @Html.ValidationSummary("", new { @class = "text-danger" })
     <p class="error-list">
         @Html.ValidationSummary( true, "", new { @class = "text-danger" } )
     </p>

@@ -133,6 +133,7 @@ namespace Transliteration
             gost.Add(" ", "-");
             gost.Add(":", "-");
             gost.Add(".", "");
+            gost.Add("?", "-");
 
             iso.Add("Є", "YE");
             iso.Add("І", "I");
@@ -214,7 +215,7 @@ namespace Transliteration
             iso.Add(" ", "-");
             iso.Add(":", "-");
             iso.Add(".", "");
-            
+            iso.Add("?", "-");
         }
     }
 }

@@ -116,12 +116,12 @@ namespace NPORT.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError( "", "Please, input another Nickname!" );
+                        ModelState.AddModelError( "", "This Nickname used by another user.Please, input another Nickname!" );
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError( "", "Please, input another phone number!" );
+                    ModelState.AddModelError( "", "This phone number used by another user.Please, input another phone number!");
                 }
             }
 

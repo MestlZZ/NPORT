@@ -143,8 +143,14 @@ div.main nav.menu ul li a{
 div.main nav.menu ul li.user{
     min-height: 20px;
 }
-
+div.main nav.menu ul li.user-hello {
+    height: 40px;
+    text-align:center;
+    padding:5px;
+    width: 150px;
+}
 div.main nav.menu ul li.user a{
+    display:block;
         white-space: normal;
     vertical-align: middle;
     line-height: 20px;

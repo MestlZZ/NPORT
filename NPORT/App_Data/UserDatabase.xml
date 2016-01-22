@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfApplicationUser xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ArrayOfApplicationUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ApplicationUser>
     <Id>85ed4e2e-9ccf-469d-a932-a9ac395c4d0d</Id>
     <UserName>Admin</UserName>
@@ -15,17 +15,17 @@
     <RoleId>165b2058-3776-4dd7-8d08-4ac7d846465a</RoleId>
   </ApplicationUser>
   <ApplicationUser>
-    <Id>cfed03f3-b339-417b-9fd5-b85e77bcae13</Id>
-    <UserName>Mestl@1</UserName>
-    <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
-    <Phone>+380930808371</Phone>
-    <RoleId>704a38c5-7aa9-46b2-8c28-2f8cdfaa8cb3</RoleId>
-  </ApplicationUser>
-  <ApplicationUser>
     <Id>afda54cd-b08d-44f8-b02f-b3403779d647</Id>
     <UserName>lololol</UserName>
     <PasswordHash>꺩泜畒躭댖</PasswordHash>
     <Phone>+380666666666</Phone>
     <RoleId>dccb843b-82e8-4470-b4f8-2e3d38a4ba65</RoleId>
+  </ApplicationUser>
+  <ApplicationUser>
+    <Id>cfed03f3-b339-417b-9fd5-b85e77bcae13</Id>
+    <UserName>Mestl@1</UserName>
+    <PasswordHash>ૡ㧜멉ꭙ嚾埠࿲㺈</PasswordHash>
+    <Phone>+380930808371</Phone>
+    <RoleId>704a38c5-7aa9-46b2-8c28-2f8cdfaa8cb3</RoleId>
   </ApplicationUser>
 </ArrayOfApplicationUser>
