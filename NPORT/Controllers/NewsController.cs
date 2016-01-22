@@ -172,11 +172,14 @@ namespace NPORT.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin, Editor")]
+        [Authorize(Roles = "Admin, Editor, Correspondent")]
         public ActionResult Remove(string newsId)
         {
             var newsDb = new NewsDb();
-
+            var userDb = new Database.XMLDatabase.UsersDb();
+            var user = userDb.Find(User.Identity.GetUserId());
+            if (User.IsInRole("Correspondent") && user.Id != newsDb.Find(newsId).AuthorId)
+                return View();
             newsDb.Remove(newsId);
 
             return View();

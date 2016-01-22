@@ -15,11 +15,8 @@
             @if (User.IsInRole( "Admin" ) || User.IsInRole( "Editor" ) || Model.News.AuthorId == User.Identity.GetUserId())
             {
                 @Html.RouteLink( "Edit", "News Edit", new { newsId = Model.News.Id }, new { @class = "btn btn-edit" } )
-
-                if (User.IsInRole( "Admin" ) || User.IsInRole( "Editor" ))
-                {
-                    @Html.RouteLink( "Remove", "News Remove", new { newsId = Model.News.Id }, new { @class = "btn btn-remove" } )
-                }
+                
+                @Html.RouteLink( "Remove", "News Remove", new { newsId = Model.News.Id }, new { @class = "btn btn-remove" } )
             }
         </p>
 
