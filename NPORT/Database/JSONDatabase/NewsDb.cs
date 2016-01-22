@@ -17,6 +17,27 @@ namespace NPORT.Database.JSONDatabase
             newNews.Date = DateTime.UtcNow.ToString();
             newNews.Id = Guid.NewGuid().ToString();
 
+            List<News> items = GetAllNews() ?? new List<News>();            
+
+            items.Insert(0, newNews);
+
+            using (StreamWriter dbFile = new StreamWriter(Path))
+            {
+                dbFile.Write(JsonConvert.SerializeObject(items));
+            }
+
+        }
+
+        private List<News> GetAllNews()
+        {
+            string json = ReadJson();
+
+            List<News> items = JsonConvert.DeserializeObject<List<News>>(json);
+            return items;
+        }
+
+        private string ReadJson()
+        {
             string json;
 
             using (StreamReader dbFile = new StreamReader(Path))
@@ -24,20 +45,7 @@ namespace NPORT.Database.JSONDatabase
                 json = dbFile.ReadToEnd();
             }
 
-            List<News> items = JsonConvert.DeserializeObject<List<News>>(json);
-
-            if (items == null)
-            {
-                items = new List<News>();
-            }
-
-            items.Insert(0 , newNews);
-
-            using (StreamWriter dbFile = new StreamWriter(Path))
-            {
-                dbFile.Write(JsonConvert.SerializeObject(items));
-            }
-
+            return json;
         }
 
         public News Find(string id)

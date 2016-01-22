@@ -3,7 +3,7 @@
 namespace NPORT.Models.Database
 {
     public class Comment
-    {
+    {             
         public int Id { get; set; }
 
         public string AuthorId { get; set; }
