@@ -1,8 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 @model NPORT.Models.ViewModels.News.DetailedViewModel
-@{
-    ViewBag.Title = "Detailed Page";
-}
+
+@section Title { Detailed page }
 
 <div class="news-detailed">
     @if (Model.News.Visible || Model.News.GetAuthorName() == User.Identity.Name || User.IsInRole( "Admin" ) || User.IsInRole( "Editor" ))

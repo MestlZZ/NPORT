@@ -1,11 +1,13 @@
 ﻿@model PagedList.IPagedList<NPORT.Models.Database.News>
+@section Title { News }
 @using PagedList.Mvc;
-@Styles.Render( "~/Content/css/PagedList.css" )
+@using Transliteration;
 @{
-    ViewBag.Title = "News";
     string blockClass = "right";
 }
-@using Transliteration;
+
+@Styles.Render( "~/Content/css/PagedList.css" )
+
 <h1>News</h1>
 @if (Model != null)
 {
@@ -36,8 +38,7 @@
     <div class="pager">
     <span class="pager">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
 
-    @Html.PagedListPager( Model, page => Url.Action( "Index",
-     new { page, sortOrder = TempData["OrderBy"] } ) )
+    @Html.PagedListPager( Model, page => Url.Action( "Index", new { page, sortOrder = TempData["OrderBy"] } ) )
 
     </div>
 }

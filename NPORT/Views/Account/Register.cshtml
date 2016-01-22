@@ -1,9 +1,8 @@
 ﻿@model NPORT.Models.ViewModels.Account.RegisterViewModel
-@{
-    ViewBag.Title = "Registration";
-}
 
-<h2>@ViewBag.Title.</h2>
+@section Title { Registration }
+
+<h2>Registration.</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
