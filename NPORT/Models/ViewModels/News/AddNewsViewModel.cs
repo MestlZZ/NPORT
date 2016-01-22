@@ -9,13 +9,13 @@ namespace NPORT.Models.ViewModels.News
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Please fill 'ShortInfo' field")]
-        [StringLength(400,ErrorMessage = "ShortInfo must have less than 400")]
+        [StringLength(400,ErrorMessage = "ShortInfo must have less than 400 symbols")]
         public string ShortInfo { get; set; }
 
         public bool Visible { get; set; }
 
         [Required(ErrorMessage = "Please fill 'Content' field")]
-        [StringLength(30000,ErrorMessage = "Content must have less than 10000 ")]
+        [StringLength(30000,ErrorMessage = "Content must have less than 10000 symbols")]
         public string Content { get; set; }
     }
 }

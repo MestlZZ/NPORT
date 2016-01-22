@@ -25,14 +25,23 @@ namespace NPORT.Database.XMLDatabase
             return roleList;
         }
 
-        public ApplicationRole Find(string Id)
+        public ApplicationRole Find(string id)
         {
             var roleList = GetList();
 
             foreach (var role in roleList)
-                if (role.Id == Id)
+                if (role.Id == id)
                     return role;
 
+            return null;
+        }
+        public ApplicationRole FindByName(string name)
+        {
+            var roleList = GetList();
+
+            foreach (var role in roleList)
+                if (role.Name == name)
+                    return role;
             return null;
         }
     }

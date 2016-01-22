@@ -7,7 +7,7 @@ using Microsoft.Owin.Security;
 using NPORT.Models.ViewModels.Account;
 using NPORT.Models.Identity;
 using NPORT.Identity;
-
+using NPORT.Database.XMLDatabase;
 namespace NPORT.Controllers
 {
     [Authorize]
@@ -81,7 +81,7 @@ namespace NPORT.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = model.ReturnUrl, RememberMe = false });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Неудачная попытка входа.");
+                    ModelState.AddModelError("", "Wrong password or phone number!");
                     return View(model);
             }
         }
@@ -105,7 +105,8 @@ namespace NPORT.Controllers
                 {
                     if (userDb.FindByUsername( model.NickName ) == null)
                     {
-                        var user = new ApplicationUser(model.NickName, model.Password, model.Phone, "dccb843b-82e8-4470-b4f8-2e3d38a4ba65");
+                        var roleDb = new Database.XMLDatabase.RoleDb();
+                        var user = new ApplicationUser(model.NickName, model.Password, model.Phone, roleDb.FindByName("User").Id);
                         var result = await UserManager.CreateAsync(user, model.Password);
                         if (result.Succeeded)
                         {
